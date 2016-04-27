@@ -1,6 +1,10 @@
 package dataaccess;
 
+import Dominio.Item;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  *
@@ -8,8 +12,11 @@ import java.util.List;
  * @author Francisco Gerardo Mares Solano
  */
 public interface ItemDAO {
-    public List<ItemDAO> buscarItem();
+    
+    
+    public List<Item> buscarItem(String codigoBarras, ArrayList listaItems, String tipoItem, String filtroBusqueda) throws SQLException;
     public boolean actualizarItem();
     public boolean eliminarItem();
-    public List<ItemDAO> regresarTodo();
+    public boolean agregarItem(Item item);
+    public List<dataaccess.ItemDAO> regresarTodo();
 }
