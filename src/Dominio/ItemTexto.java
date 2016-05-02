@@ -8,13 +8,12 @@ import java.util.List;
  * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
  */
-public class ItemTexto implements Item {
+public class ItemTexto extends Item {
     private String fecha;
     private String titulo;
     private String fechaAdicion;
     private String id;
 
-    @Override
     public List<ItemDAO> buscarItem() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

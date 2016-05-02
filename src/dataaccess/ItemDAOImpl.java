@@ -33,7 +33,7 @@ public class ItemDAOImpl implements ItemDAO{
             resultados = consulta.executeQuery("select * from tabla where nombre like ? ");
             while(resultados.next()){
                 ItemDAO item = new ItemDAOImpl();
-                item.setCodigoBarras(resultados.getCodigoBarras());
+                item.setCodigoBarras(resultados.codigoBarras);
                 items.add((Item) item);
             }
         }
