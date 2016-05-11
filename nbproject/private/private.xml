@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/dataaccess/Conexion.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/dataaccess/ItemDAOImpl.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/Dominio/Item.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/dataaccess/ItemDAO.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/test/dataaccess/ItemDAOImplTest.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/Dominio/Libro.java</file>
+        </group>
     </open-files>
 </project-private>

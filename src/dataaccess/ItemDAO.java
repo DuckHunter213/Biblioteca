@@ -14,7 +14,7 @@ import java.util.List;
 public interface ItemDAO {
     
     
-    public List<Item> buscarItem(String codigoBarras, ArrayList listaItems, String tipoItem, String filtroBusqueda) throws SQLException;
+    public List<Item> buscarItem(String identificador) throws SQLException;
     public boolean actualizarItem();
     public boolean eliminarItem();
     public boolean agregarItem(Item item);
