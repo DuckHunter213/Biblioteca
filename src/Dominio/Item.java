@@ -23,8 +23,9 @@ public abstract class Item {
     public List<Item> buscarItem(String codigoBarras, ArrayList listaItems, String tipoItem, String filtroBusqueda){
         return null;
     }
-    public boolean actualizarItem(){return false;}
-    public boolean eliminarItem(){return false;}
+    public boolean eliminarItem(String identificador){
+        return false;
+    }
     
     private boolean existeItem(ArrayList<Item> items){        return false;    }
     public boolean agregarItem(Item item){        return true;    }

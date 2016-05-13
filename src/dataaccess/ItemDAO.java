@@ -15,8 +15,9 @@ public interface ItemDAO {
     
     
     public List<Item> buscarItem(String identificador) throws SQLException;
-    public boolean actualizarItem();
-    public boolean eliminarItem();
-    public boolean agregarItem(Item item);
-    public List<dataaccess.ItemDAO> regresarTodo();
+    public int quitarItemDeReservacion(String identificador);
+    public int reservarItem(Item item,String matricula, String folio) throws SQLException;
+    public int quitarItemDePrestamo(String identificador);
+    public int prestarItem(Item item,String matricula, String folio);
+    public List<Item>  regresarTodo();
 }

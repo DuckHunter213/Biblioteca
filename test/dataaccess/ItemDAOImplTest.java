@@ -23,13 +23,22 @@ import static org.junit.Assert.*;
  * @author gerar
  */
 public class ItemDAOImplTest {
+    Item item = new Libro();
+    List<Item> items = new ArrayList<>();
+    String matricula = "S140111131";
+    String matriculaErronea = "bloodDrops";
+    String identificador = "S140111132";
+    String folio = "teardrops";
+    String folioErroneo = "sandDrops";
+    Item item2 = new Libro();
+    List<Item> items2 = new ArrayList<>();
+    ItemDAOImpl instance = new ItemDAOImpl();
     
     public ItemDAOImplTest() {
     }
     
     @BeforeClass
-    public static void setUpClass() {
-        
+    public static void setUpClass() {        
     }
     
     @AfterClass
@@ -38,6 +47,25 @@ public class ItemDAOImplTest {
     
     @Before
     public void setUp() {
+        
+        item.setIdentificador("S140111132");
+        item.setTitulo("Como volver a comer lo que ya comiste");
+        item.setAutor("Waffles");
+        item.setCostoMulta(10);
+        item.setFechaAdquisicion(2016,0,13);
+        item.setFechaPublicación(2012,0,13);
+        item.setTiempoPrestamo(10);        
+        items.add(item);
+        
+        item2.setIdentificador("S140111132");
+        item2.setTitulo("100 galletas de waffles");
+        item2.setAutor("Pedro");
+        item2.setCostoMulta(10);
+        item2.setFechaAdquisicion(2016,0,13);
+        item2.setFechaPublicación(2012,0,13);
+        item2.setTiempoPrestamo(10);
+        items2.add(item2);
+        
     }
     
     @After
@@ -49,81 +77,55 @@ public class ItemDAOImplTest {
      */
     @Test
     public void testBuscarItem() throws Exception {
-        
-        Item item = new Libro();
-        item.setIdentificador("S140111132");
-        item.setTitulo("Matatenas");
-        item.setAutor("Pedro");
-        item.setCostoMulta(10);
-        item.setFechaAdquisicion(2016,0,13);
-        item.setFechaPublicación(2012,0,13);
-        item.setTiempoPrestamo(10);
-        List<Item> items = new ArrayList<>();
-        items.add(item);        
-        
-        String identificador = "S140111132";
-        ItemDAOImpl instance = new ItemDAOImpl();
         List<Item> expResult = items;
-        List<Item> result = instance.buscarItem(identificador);
+        List<Item> result = instance.buscarItem(item.getIdentificador());
         assertEquals(expResult, result);
     }
+    
     @Test
     public void testBuscarItemInexistente() throws Exception {
-        List<Item> items = new ArrayList();
-        String identificador = "S140111131";
-        ItemDAOImpl instance = new ItemDAOImpl();
         List<Item> expResult = items;
         List<Item> result = instance.buscarItem(identificador);
         assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of actualizarItem method, of class ItemDAOImpl.
-     */
-    @Test
-    public void testActualizarItem() {
-        System.out.println("actualizarItem");
-        ItemDAOImpl instance = new ItemDAOImpl();
-        boolean expResult = false;
-        boolean result = instance.actualizarItem();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of eliminarItem method, of class ItemDAOImpl.
-     */
-    @Test
-    public void testEliminarItem() {
-        System.out.println("eliminarItem");
-        ItemDAOImpl instance = new ItemDAOImpl();
-        boolean expResult = false;
-        boolean result = instance.eliminarItem();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of agregarItem method, of class ItemDAOImpl.
      */
     @Test
-    public void testAgregarItem() {
-        
-        Item item = new Libro();
-        item.setIdentificador("S14011618");
-        item.setTitulo("100 galletas de waffles");
-        item.setAutor("Waffles");
-        item.setCostoMulta(10);
-        item.setFechaAdquisicion(2016,0,13);
-        item.setFechaPublicación(2012,0,13);
-        item.setTiempoPrestamo(10);
-        
-        System.out.println("agregarItem");
-        ItemDAOImpl instance = new ItemDAOImpl();
-        boolean expResult = true;
-        boolean result = instance.agregarItem(item);
+    public void testReservarItemFallido() {
+        int expResult = 0;
+        int result = instance.reservarItem(item, matriculaErronea,folio);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of agregarItem method, of class ItemDAOImpl.
+     */
+    @Test
+    public void testReservarItemExitoso() {
+        int expResult = 1;
+        int result = instance.reservarItem(item2, matricula,folio);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of eliminarItem method, of class ItemDAOImpl.
+     */
+    @Test
+    public void testquitarItemDeReservacionExitoso() {
+        int expResult = 1;
+        int result = instance.quitarItemDeReservacion(folio);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of eliminarItem method, of class ItemDAOImpl.
+     */
+    @Test
+    public void testquitarItemDeReservacionFallido() {
+        int expResult = 0;
+        int result = instance.quitarItemDeReservacion(folioErroneo);
         assertEquals(expResult, result);
     }
 
@@ -132,13 +134,47 @@ public class ItemDAOImplTest {
      */
     @Test
     public void testRegresarTodo() {
-        System.out.println("regresarTodo");
-        ItemDAOImpl instance = new ItemDAOImpl();
-        List<ItemDAO> expResult = null;
-        List<ItemDAO> result = instance.regresarTodo();
+        List<Item> expResult = items;
+        List<Item> result = instance.regresarTodo();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+    /**
+     * Test of prestarItem method, of class ItemDAOImpl.
+     */
+    @Test
+    public void testPrestarItemExitoso() {
+        int expResult = 1;
+        int result = instance.prestarItem(item2, matricula,folio);
+        assertEquals(expResult, result);
+    }
+    /**
+     * Test of prestarItem method, of class ItemDAOImpl.
+     */
+    @Test
+    public void testPrestarItemFallido() {
+        int expResult = 0;
+        int result = instance.prestarItem(item2, matriculaErronea,folio);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of quitarItemDePrestamo method, of class ItemDAOImpl.
+     */
+    @Test
+    public void testQuitarItemDePrestamo() {
+        int expResult = 1;
+        int result = instance.quitarItemDePrestamo(folio);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of quitarItemDePrestamo method, of class ItemDAOImpl.
+     */
+    @Test
+    public void testQuitarItemDePrestamoFallido() {
+        int expResult = 0;
+        int result = instance.quitarItemDePrestamo(folioErroneo);
+        assertEquals(expResult, result);
     }
     
 }
