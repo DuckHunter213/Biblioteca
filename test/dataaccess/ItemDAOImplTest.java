@@ -28,7 +28,8 @@ public class ItemDAOImplTest {
     String matricula = "S140111131";
     String matriculaErronea = "bloodDrops";
     String identificador = "S140111132";
-    String folio = "teardrops";
+    String folioPrestamo = "teardrops";
+    String folioDevolucion = "Dark horse";
     String folioErroneo = "sandDrops";
     Item item2 = new Libro();
     List<Item> items2 = new ArrayList<>();
@@ -57,7 +58,7 @@ public class ItemDAOImplTest {
         item.setTiempoPrestamo(10);        
         items.add(item);
         
-        item2.setIdentificador("S140111132");
+        item2.setIdentificador("S140111131");
         item2.setTitulo("100 galletas de waffles");
         item2.setAutor("Pedro");
         item2.setCostoMulta(10);
@@ -95,7 +96,7 @@ public class ItemDAOImplTest {
     @Test
     public void testReservarItemFallido() {
         int expResult = 0;
-        int result = instance.reservarItem(item, matriculaErronea,folio);
+        int result = instance.reservarItem(item, matriculaErronea,folioPrestamo);
         assertEquals(expResult, result);
     }
     
@@ -105,17 +106,17 @@ public class ItemDAOImplTest {
     @Test
     public void testReservarItemExitoso() {
         int expResult = 1;
-        int result = instance.reservarItem(item2, matricula,folio);
+        int result = instance.reservarItem(item, matricula,folioPrestamo);
         assertEquals(expResult, result);
     }
 
-    /**
+    /** 
      * Test of eliminarItem method, of class ItemDAOImpl.
      */
     @Test
     public void testquitarItemDeReservacionExitoso() {
         int expResult = 1;
-        int result = instance.quitarItemDeReservacion(folio);
+        int result = instance.quitarItemDeReservacion(folioPrestamo);
         assertEquals(expResult, result);
     }
 
@@ -144,7 +145,7 @@ public class ItemDAOImplTest {
     @Test
     public void testPrestarItemExitoso() {
         int expResult = 1;
-        int result = instance.prestarItem(item2, matricula,folio);
+        int result = instance.prestarItem(item, matricula,folioPrestamo,folioDevolucion);
         assertEquals(expResult, result);
     }
     /**
@@ -153,7 +154,7 @@ public class ItemDAOImplTest {
     @Test
     public void testPrestarItemFallido() {
         int expResult = 0;
-        int result = instance.prestarItem(item2, matriculaErronea,folio);
+        int result = instance.prestarItem(item2, matriculaErronea,folioPrestamo,folioDevolucion);
         assertEquals(expResult, result);
     }
 
@@ -161,9 +162,9 @@ public class ItemDAOImplTest {
      * Test of quitarItemDePrestamo method, of class ItemDAOImpl.
      */
     @Test
-    public void testQuitarItemDePrestamo() {
+    public void testQuitarItemDePrestamoExitoso() {
         int expResult = 1;
-        int result = instance.quitarItemDePrestamo(folio);
+        int result = instance.quitarItemDePrestamo(folioPrestamo);
         assertEquals(expResult, result);
     }
     

@@ -8,7 +8,6 @@ package dataaccess;
 import Dominio.Item;
 import Dominio.Libro;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +16,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -127,20 +128,27 @@ public class ItemDAOImpl implements ItemDAO{
      * @return
      */
     @Override
-    public int prestarItem(Item item,String matricula, String folio){
+    public int prestarItem(Item item,String matricula, String folioPrestamo, String folioDevolucion){
         int resultadoDeAgregacion = 0;
-        Calendar calendario = Calendar.getInstance();
-        DateFormat formato  = new SimpleDateFormat("aaa-mm-dd");
-        Date fechaConclusionPrestamo = new Date(calendario.getTimeInMillis());
+        Calendar calendario = GregorianCalendar.getInstance();
+        Date fechaPrestamo = new Date();
+        fechaPrestamo.setTime(calendario.getTimeInMillis());
+        calendario.add(Calendar.DAY_OF_WEEK_IN_MONTH, item.getTiempoPrestamo());
+        Date fechaFinPrestamo = new Date();
+        fechaFinPrestamo.setTime(calendario.getTimeInMillis());
+        java.sql.Date fechaPrestamoMili = new java.sql.Date(fechaPrestamo.getTime());
+        java.sql.Date fechaFinPrestamoMili = new java.sql.Date(fechaFinPrestamo.getTime());
         
         try{
             connection = conexion.obtenerConexion();
-            if (ItemEstadoDisponibilidad(folio)== false){
-                PreparedStatement sentenciaSQL  = connection.prepareStatement("INSERT INTO prestamos VALUES ('CURRENT_TIME()',?,?,?,?)");
-                sentenciaSQL.setString(1,folio);
-                sentenciaSQL.setDate(2, (Date) fechaConclusionPrestamo);
-                sentenciaSQL.setString(3,item.getIdentificador());
-                sentenciaSQL.setString(4,matricula);
+            if (ItemEstadoDisponibilidad(folioPrestamo)== false){
+                PreparedStatement sentenciaSQL  = connection.prepareStatement("INSERT INTO prestamos VALUES (?,?,?,?,?,?)");
+                sentenciaSQL.setDate(1, fechaPrestamoMili);
+                sentenciaSQL.setString(2, folioPrestamo);
+                sentenciaSQL.setString(3, folioDevolucion);
+                sentenciaSQL.setDate(4, fechaFinPrestamoMili);
+                sentenciaSQL.setString(5,item.getIdentificador());
+                sentenciaSQL.setString(6,matricula);
                 resultadoDeAgregacion = sentenciaSQL.executeUpdate();           
             }            
         } catch (SQLException ex) {
