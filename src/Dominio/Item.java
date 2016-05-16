@@ -20,118 +20,86 @@ public abstract class Item {
     private NumberFormat costoMulta = NumberFormat.getInstance();
     private int tiempoPrestamo;
     
-    public List<Item> buscarItem(String codigoBarras, ArrayList listaItems, String tipoItem, String filtroBusqueda){
-        return null;
-    }
+    public List<Item> buscarItem(String codigoBarras, ArrayList listaItems, String tipoItem, String filtroBusqueda){return null;}
     public boolean actualizarItem(){return false;}
     public boolean eliminarItem(){return false;}
     
-    private boolean existeItem(ArrayList<Item> items){        return false;    }
-    public boolean agregarItem(Item item){        return true;    }
+    private boolean existeItem(ArrayList<Item> items){return false;}
+    public boolean agregarItem(Item item){return true;}
     public List<dataaccess.ItemDAO> regresarTodo(){return null;}
-
-    /**
-     * @return the autor
-     */
+    //<editor-fold defaultstate="collapsed" desc=" Get´s & Set´s ">
+    
     public String getAutor() {
         return autor;
     }
-
-    /**
-     * @param autor the autor to set
-     */
+    
     public void setAutor(String autor) {
         this.autor = autor;
     }
-
-    /**
-     * @return the titulo
-     */
+    
     public String getTitulo() {
         return titulo;
     }
-
-    /**
-     * @param titulo the titulo to set
-     */
+    
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
     /**
-     * @return the identificador
+     * @return El identificador con formato ?????????? donde los ? son numeros
      */
     public String getIdentificador() {
         return identificador;
     }
 
     /**
-     * @param identificador the identificador to set
+     * @param identificador  con formato ?????????? donde los ? son numeros
      */
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
     }
 
-    /**
-     * @return the fechaAdquisicion
-     */
     public Calendar getFechaAdquisicion() {
         return fechaAdquisicion;
     }
 
-    /**
-     * @param anio
-     * @param mes
-     * @param dia
-     */
     public void setFechaAdquisicion(int anio, int mes, int dia) {
         this.fechaAdquisicion.set(2013,0,13);
     }
 
-    /**
-     * @return the fechaPublicación
-     */
     public Calendar getFechaPublicación() {
         return fechaPublicación;
     }
 
-    /**
-     * @param anio
-     * @param mes
-     * @param dia
-     */
     public void setFechaPublicación(int anio, int mes, int dia) {
         this.fechaAdquisicion.set(anio, mes, dia);
     }
 
     /**
-     * @return the costoMulta
+     * @return Regresa el valor unitario de precio de multa
      */
     public NumberFormat getCostoMulta() {
         return costoMulta;
     }
 
     /**
-     * @param precio
+     * @param precio Asigna el valor de multa
      */
     public void setCostoMulta(int precio) {
         this.costoMulta.format(precio);
     }
 
-    /**
-     * @return the tiempoPrestamo
-     */
     public int getTiempoPrestamo() {
         return tiempoPrestamo;
     }
-
-    /**
-     * @param tiempoPrestamo the tiempoPrestamo to set
-     */
+    
     public void setTiempoPrestamo(int dias) {
         this.tiempoPrestamo = dias;
     }
+    
+    //</editor-fold>
     @Override
+    
     public int hashCode() {
 	final int prime = 31;
 	int result = 1;
