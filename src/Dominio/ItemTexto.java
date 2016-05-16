@@ -19,12 +19,7 @@ public class ItemTexto extends Item {
     }
 
     @Override
-    public boolean actualizarItem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean eliminarItem() {
+    public boolean eliminarItem(String identificador) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
