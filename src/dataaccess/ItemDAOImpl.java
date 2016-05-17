@@ -75,9 +75,10 @@ public class ItemDAOImpl implements ItemDAO{
      * @param matricula
      * @param folio
      * @return
+     * @throws java.lang.Exception
      */
     @Override
-    public int reservarItem(Item item,String matricula, String folio){
+    public int reservarItem(Item item,String matricula, String folio) throws Exception{
         int resultadoDeAgregacion = 0;
         try{
             connection = conexion.obtenerConexion();
@@ -86,13 +87,14 @@ public class ItemDAOImpl implements ItemDAO{
                 sentenciaSQL.setString(1,folio);
                 sentenciaSQL.setString(2,matricula);
                 sentenciaSQL.setString(3,item.getIdentificador());
-                resultadoDeAgregacion = sentenciaSQL.executeUpdate();           
+                resultadoDeAgregacion = sentenciaSQL.executeUpdate();         
             }
             
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(ItemDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } catch (IllegalStateException ex) {            
+            throw new IllegalStateException("El item está repetido en la BD"); 
+        } catch (SQLException ex) {            
+            throw new SQLException("Error al conectar con la base de datos"); 
+        } finally{
             conexion.desconecta();
         }
         return resultadoDeAgregacion;
@@ -106,7 +108,7 @@ public class ItemDAOImpl implements ItemDAO{
     @Override
     public int quitarItemDeReservacion(String folioDeReserva ){
         int resultadoDeLaEliminacion=0;
-        try{
+        try{ 
             connection = conexion.obtenerConexion();
             PreparedStatement sentenciaSQL  = connection.prepareStatement("DELETE FROM reservados WHERE folio = ?");
             sentenciaSQL.setString(1,folioDeReserva);
@@ -131,7 +133,7 @@ public class ItemDAOImpl implements ItemDAO{
     public int prestarItem(Item item,String matricula, String folioPrestamo, String folioDevolucion){
         int resultadoDeAgregacion = 0;
         Calendar calendario = GregorianCalendar.getInstance();
-        Date fechaPrestamo = new Date();
+        Date fechaPrestamo = new Date(); 
         fechaPrestamo.setTime(calendario.getTimeInMillis());
         calendario.add(Calendar.DAY_OF_WEEK_IN_MONTH, item.getTiempoPrestamo());
         Date fechaFinPrestamo = new Date();
