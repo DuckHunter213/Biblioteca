@@ -113,10 +113,10 @@ public class ItemDAOImplTestInsertarDatos {
      * Test of agregarItem method, of class ItemDAOImpl.
      * @throws java.lang.Exception
      */
-    /**@Test (expected = SQLException.class)
+    @Test (expected = SQLException.class)
     public void testReservarItemFallidoRepetido() throws Exception {
         int expResult = 1;
         int result = instance.reservarItem(item, matricula,folioPrestamo);
         assertEquals(expResult, result);
-    }**/
+    }
 }

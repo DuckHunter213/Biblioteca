@@ -84,11 +84,8 @@ public class ItemDAOImpl implements ItemDAO{
                 sentenciaSQL.setString(3,item.getIdentificador());
                 resultadoDeAgregacion = sentenciaSQL.executeUpdate();         
             }
-            
-        } catch (IllegalStateException ex) {            
-            throw new IllegalStateException("El item está repetido en la BD"); 
-        } catch (SQLException ex) {            
-            throw new SQLException("Error al conectar con la base de datos"); 
+        } catch (SQLException | IllegalStateException ex) {
+            ex.getCause();
         } finally{
             conexion.desconecta();
         }
