@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import Dominio.Item;
@@ -17,10 +12,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author gerar
+ * Pruebas de borrado
+ * @author Luis Fernando Gomez Alejandre
  */
 public class ItemDAOImplTestBorrarRegistros {
+    
+    //<editor-fold defaultstate="collapse" desc="Definicion de variables">
     Item item = new Libro();
     List<Item> items = new ArrayList<>();
     String matricula = "S140111131";
@@ -31,10 +28,12 @@ public class ItemDAOImplTestBorrarRegistros {
     String folioErroneo = "sandDrops";
     ItemDAOImpl instance = new ItemDAOImpl();
     int resultado;
+    //</editor-fold>
     
     public ItemDAOImplTestBorrarRegistros() {
     }
     
+    //<editor-fold defaultstate="collapse" desc="Opciones de la prueba">
     @BeforeClass
     public static void setUpClass() {
     }
@@ -62,46 +61,34 @@ public class ItemDAOImplTestBorrarRegistros {
         int result = instance.quitarItemDeReservacion(folioPrestamo);
         result = instance.quitarItemDePrestamo(folioPrestamo);
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
+    //</editor-fold>
     
-    /**
-     * Test of quitarItemDePrestamo method, of class ItemDAOImpl.
-     */
+    //<editor-fold defaultstate="collapse" desc="Pruebas de unidad">
     @Test
     public void testQuitarItemDePrestamoExitoso() {
         int expResult = 1;
         int result = instance.quitarItemDePrestamo(folioPrestamo);
         assertEquals(expResult, result);
-    }
+    }    
     
-    /**
-     * Test of quitarItemDePrestamo method, of class ItemDAOImpl.
-     */
     @Test
     public void testQuitarItemDePrestamoFallido() {
         int expResult = 0;
         int result = instance.quitarItemDePrestamo(folioErroneo);
     }
-
-    /** 
-     * Test of eliminarItem method, of class ItemDAOImpl.
-     */
+    
     @Test
     public void testquitarItemDeReservacionExitoso() {
         int expResult = 1;
         int result = instance.quitarItemDeReservacion(folioPrestamo);
         assertEquals(expResult, result);
     }
-
-    /**
-     * Test of eliminarItem method, of class ItemDAOImpl.
-     */
+    
     @Test
     public void testquitarItemDeReservacionFallido() {
         int expResult = 0;
         int result = instance.quitarItemDeReservacion(folioErroneo);
         assertEquals(expResult, result);
     }
+    //</editor-fold>
 }

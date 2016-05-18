@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import Dominio.Item;
@@ -18,10 +13,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author gerar
+ * Pruebas de la inserción de datos
+ * @author Francisco Gerardo Mares Solano
  */
 public class ItemDAOImplTestInsertarDatos {
+    
+    //<editor-fold defaultstate="collapse" desc="Declaración de varaibles">   
     Item item = new Libro();
     List<Item> items = new ArrayList<>();
     String matricula = "S140111131";
@@ -34,10 +31,12 @@ public class ItemDAOImplTestInsertarDatos {
     List<Item> items2 = new ArrayList<>();
     ItemDAOImpl instance = new ItemDAOImpl();
     int resultado;
+    //</editor-fold>
     
     public ItemDAOImplTestInsertarDatos() {
     }
     
+    //<editor-fold defaultstate="collapse" desc="Opciones de la prueba">
     @BeforeClass
     public static void setUpClass() {
     }
@@ -63,60 +62,43 @@ public class ItemDAOImplTestInsertarDatos {
         resultado = instance.quitarItemDePrestamo(folioPrestamo);
         resultado = instance.quitarItemDeReservacion(folioPrestamo);
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-        
-    /**
-     * Test of agregarItem method, of class ItemDAOImpl.
-     * @throws java.lang.Exception
-     */
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapse" desc="Pruebas">    
     @Test
     public void testReservarItemExitoso() throws Exception {
         int expResult = 1;
         int result = instance.reservarItem(item, matricula,folioPrestamo);
         assertEquals(expResult, result);
-    } 
-
-    /**
-     * Test of prestarItem method, of class ItemDAOImpl.
-     */
+    }
+    
     @Test
     public void testPrestarItemExitoso() {
         int expResult = 1;
         int result = instance.prestarItem(item, matricula,folioPrestamo,folioDevolucion);
         assertEquals(expResult, result);
     }
-    /**
-     * Test of agregarItem method, of class ItemDAOImpl.
-     * @throws java.lang.Exception
-     */
+    
     @Test (expected = SQLException.class)
     public void testReservarItemFallidoSQL() throws Exception {
         int expResult = 0;
         int result = instance.reservarItem(item, matriculaErronea,folioPrestamo);
         assertEquals(expResult, result);
     }
-
-    /**
-     * Test of prestarItem method, of class ItemDAOImpl.
-     */
+    
     @Test
     public void testPrestarItemFallido() {
         int expResult = 0;
         int result = instance.prestarItem(item2, matriculaErronea,folioPrestamo,folioDevolucion);
         assertEquals(expResult, result);
     }
-   
-    /**
-     * Test of agregarItem method, of class ItemDAOImpl.
-     * @throws java.lang.Exception
-     */
+    
     @Test (expected = SQLException.class)
     public void testReservarItemFallidoRepetido() throws Exception {
         int expResult = 1;
         int result = instance.reservarItem(item, matricula,folioPrestamo);
         assertEquals(expResult, result);
     }
+    //</editor-fold>
 }

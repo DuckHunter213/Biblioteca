@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import Dominio.Item;
@@ -19,10 +14,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author gerar
+ * Pruebas de la implementacion de Item
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
  */
 public class ItemDAOImplTest {
+    
+    //<editor-fold defaultstate="collapse" desc="Definicion de variables">
     Item item = new Libro();
     List<Item> items = new ArrayList<>();
     String matricula = "S140111131";
@@ -31,10 +29,12 @@ public class ItemDAOImplTest {
     String folioPrestamo = "teardrops";
     String folioDevolucion = "Dark horse";
     ItemDAOImpl instance = new ItemDAOImpl();
+    //</editor-fold>
     
     public ItemDAOImplTest() {
     }
     
+    //<editor-fold defaultstate="collapse" desc="Opciones de la prueba">
     @BeforeClass
     public static void setUpClass() {        
     }
@@ -52,18 +52,15 @@ public class ItemDAOImplTest {
         item.setFechaAdquisicion(2016,0,13);
         item.setFechaPublicación(2012,0,13);
         item.setTiempoPrestamo(10);        
-        items.add(item); 
-           
+        items.add(item);  
     }
     
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of buscarItem method, of class ItemDAOImpl.
-     * @throws java.lang.Exception
-     */
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapse" desc="Pruebas">
     @Test
     public void testBuscarItem() throws Exception {
         List<Item> expResult = items;
@@ -78,13 +75,11 @@ public class ItemDAOImplTest {
         assertEquals(expResult, result);
     }
     
-    /**
-     * Test of regresarTodo method, of class ItemDAOImpl.
-     */
     @Test
     public void testRegresarTodo() {
         List<Item> expResult = items;
         List<Item> result = instance.regresarTodo();
         assertEquals(expResult, result);
     }
+    //</editor-fold>
 }

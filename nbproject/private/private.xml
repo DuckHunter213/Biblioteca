@@ -5,14 +5,13 @@
         <group>
             <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/test/dataaccess/ItemDAOImplTest.java</file>
             <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/dataaccess/ItemDAO.java</file>
+            <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/test/dataaccess/ItemDAOImplTestBorrarRegistros.java</file>
             <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/dataaccess/ItemDAOImpl.java</file>
+            <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/test/dataaccess/ItemDAOImplTestInsertarDatos.java</file>
             <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/Dominio/Prestamo.java</file>
             <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/Dominio/Item.java</file>
             <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/test/dataaccess/ConexionTest.java</file>
             <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/dataaccess/Conexion.java</file>
-            <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/Dominio/ItemTexto.java</file>
-            <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/Dominio/Devolucion.java</file>
-            <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/Dominio/Usuario.java</file>
             <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/Dominio/Libro.java</file>
             <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/demoDAO/Main.java</file>
         </group>

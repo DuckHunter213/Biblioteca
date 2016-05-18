@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *  Clase 
  * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
  */
@@ -36,9 +36,10 @@ public class ItemDAOImpl implements ItemDAO{
     }
 
     /**
-     *
-     * @param identificador
-     * @return
+     *  
+     * 
+     * @param identificador 
+     * @return Se regresa una lista de items 
      * @throws SQLException
      */
     @Override
@@ -65,15 +66,19 @@ public class ItemDAOImpl implements ItemDAO{
     }
     
     /**
-     *
-     * @param item
-     * @param matricula
-     * @param folio
-     * @return
-     * @throws java.lang.Exception
+     *  Funcion que pone un item en reservación asociado a un usuario
+     * 
+     * @param item Recibe un objeto de tipo item
+     * @param matricula Recibe la matricula del usuario que va a pedir la reservación
+     * @param folio Recibe un folio generado automaticamente por el sistema
+     * @return retorna un valor de retroaliemntación falso o verdadero en caso
+     * de no haber podido capturar el item
+     * @throws java.lang.Exception 
      */
     @Override
-    public int reservarItem(Item item,String matricula, String folio) throws Exception{
+    //TODO se debe hacer por metodos booleanos
+    //TODO esto se debe validar para 
+    public int reservarItem(Item item,String matricula, String folio) throws SQLException{
         int resultadoDeAgregacion = 0;
         try{
             connection = conexion.obtenerConexion();
@@ -84,8 +89,8 @@ public class ItemDAOImpl implements ItemDAO{
                 sentenciaSQL.setString(3,item.getIdentificador());
                 resultadoDeAgregacion = sentenciaSQL.executeUpdate();         
             }
-        } catch (SQLException | IllegalStateException ex) {
-            ex.getCause();
+        } catch (SQLException ex) {
+            //TODO se debe manejar la excepción
         } finally{
             conexion.desconecta();
         }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- *
+ * Clase abstracta por facilidad de extender una funcionalidad
  * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
  */
@@ -98,8 +98,8 @@ public abstract class Item {
     }
     
     //</editor-fold>
-    @Override
     
+    @Override
     public int hashCode() {
 	final int prime = 31;
 	int result = 1;

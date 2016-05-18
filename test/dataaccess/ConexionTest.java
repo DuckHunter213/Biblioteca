@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import java.sql.Connection;
@@ -15,8 +10,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author gerar
+ *  Clase de prueba de conexión a la base de datos
+ * @author Francisco Gerardo Mares Solano
  */
 public class ConexionTest {
     
@@ -26,6 +21,7 @@ public class ConexionTest {
     
     private final Conexion conexion;
     
+    //<editor-fold defaultstate="collapse" desc="Opciones de la prueba">
     @BeforeClass
     public static void setUpClass() {
     }
@@ -41,7 +37,9 @@ public class ConexionTest {
     @After
     public void tearDown() {
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapse" desc="Pruebas">
     @Test
     public void pruebaConexionExitosa() throws SQLException {
         Connection connection = conexion.obtenerConexion();
@@ -54,5 +52,5 @@ public class ConexionTest {
         conexion.desconecta();
         assertTrue(connection.isClosed());
     }
-    
+    //</editor-fold>
 }
