@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -72,8 +71,8 @@ public class ItemDAOImpl implements ItemDAO{
      * @param matricula Recibe la matricula del usuario que va a pedir la reservación
      * @param folio Recibe un folio generado automaticamente por el sistema
      * @return retorna un valor de retroaliemntación falso o verdadero en caso
-     * de no haber podido capturar el item
-     * @throws java.lang.Exception 
+     * de no haber podido capturar el item 
+     * @throws java.sql.SQLException 
      */
     @Override
     //TODO se debe hacer por metodos booleanos
@@ -90,7 +89,7 @@ public class ItemDAOImpl implements ItemDAO{
                 resultadoDeAgregacion = sentenciaSQL.executeUpdate();         
             }
         } catch (SQLException ex) {
-            //TODO se debe manejar la excepción
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         } finally{
             conexion.desconecta();
         }
@@ -123,7 +122,6 @@ public class ItemDAOImpl implements ItemDAO{
      *
      * @param item
      * @param matricula
-     * @param folio
      * @return
      */
     @Override

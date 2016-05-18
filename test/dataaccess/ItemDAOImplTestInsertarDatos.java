@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
 
 /**
  * Pruebas de la inserción de datos
+ * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
  */
 public class ItemDAOImplTestInsertarDatos {
@@ -97,7 +98,8 @@ public class ItemDAOImplTestInsertarDatos {
     @Test (expected = SQLException.class)
     public void testReservarItemFallidoRepetido() throws Exception {
         int expResult = 1;
-        int result = instance.reservarItem(item, matricula,folioPrestamo);
+        resultado = instance.reservarItem(item, matricula,folioPrestamo);
+        int result =  instance.reservarItem(item, matricula,folioPrestamo);
         assertEquals(expResult, result);
     }
     //</editor-fold>

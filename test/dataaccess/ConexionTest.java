@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 /**
  *  Clase de prueba de conexión a la base de datos
  * @author Francisco Gerardo Mares Solano
+ * @author Luis Fernando Gomez Alejandre
  */
 public class ConexionTest {
     

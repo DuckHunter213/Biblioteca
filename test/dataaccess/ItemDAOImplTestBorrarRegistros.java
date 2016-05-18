@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
 /**
  * Pruebas de borrado
  * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
  */
 public class ItemDAOImplTestBorrarRegistros {
     
