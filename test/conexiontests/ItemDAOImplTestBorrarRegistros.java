@@ -1,8 +1,8 @@
-package dataaccess;
+package conexiontests;
 
 import Dominio.Item;
 import Dominio.Libro;
-import java.sql.ResultSet;
+import dataaccess.ItemDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +18,10 @@ import static org.junit.Assert.*;
  * Nombres:               @author Luis Fernando Gomez Alejandre
  *                        @author Francisco Gerardo Mares Solano
  * Fecha:                 @since 20/05/2016
- * Descripción:           Contiene pruebas generales de busqueda de registros de la base de datos,
+ * Descripción:           Contiene pruebas para borrar registros de la base de datos,
  *                        todas las pruebas son referentes a los items (ItemDAOImpl).
  */
-public class ItemDAOImplTest {    
+public class ItemDAOImplTestBorrarRegistros {    
     //<editor-fold defaultstate="collapse" desc="Definicion de variables">
     Item item = new Libro();
     List<Item> items = new ArrayList<>();
@@ -30,56 +30,69 @@ public class ItemDAOImplTest {
     String identificador = "S140111132";
     String folioPrestamo = "teardrops";
     String folioDevolucion = "Dark horse";
+    String folioErroneo = "sandDrops";
     ItemDAOImpl instance = new ItemDAOImpl();
+    int resultado;
     //</editor-fold>
     
-    public ItemDAOImplTest() {
+    public ItemDAOImplTestBorrarRegistros() {
     }
     
     //<editor-fold defaultstate="collapse" desc="Opciones de la prueba">
     @BeforeClass
-    public static void setUpClass() {        
+    public static void setUpClass() {
     }
     
     @AfterClass
     public static void tearDownClass() {
     }
     
-    @Before
-    public void setUp() {  
-        item.setIdentificador("S140111132");
+    @Before 
+    public void setUp() throws Exception{
+        item.setIdentificador(identificador);
         item.setTitulo("Como volver a comer lo que ya comiste");
         item.setAutor("Waffles");
         item.setCostoMulta(10);
         item.setFechaAdquisicion(2016, 0, 13);
         item.setFechaPublicación(2012, 0, 13);
-        item.setTiempoPrestamo(10);        
-        items.add(item);  
+        item.setTiempoPrestamo(10);
+        items.add(item);
+        resultado = instance.reservarItem(item, matricula);
+        resultado = instance.prestarItem(item, matricula);
     }
     
     @After
-    public void tearDown() {
+    public void tearDown() throws SQLException{
+        int result = instance.quitarItemDeReservacion(item.getIdentificador());
+        result = instance.quitarItemDePrestamo(item.getIdentificador());
     }
-    //</editor-fold>    
-    //<editor-fold defaultstate="collapse" desc="Pruebas">
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapse" desc="Pruebas de unidad">
     @Test
-    public void testBuscarItem() throws Exception {
-        List<Item> expResult = items;
-        List<Item> result = instance.buscarItem(item.getIdentificador());
+    public void testQuitarItemDePrestamoExitoso() throws SQLException {
+        int expResult = 1;
+        int result = instance.quitarItemDePrestamo(item.getIdentificador()); 
+        assertEquals(expResult, result);
+    }    
+    
+    @Test
+    public void testQuitarItemDePrestamoFallido() throws SQLException {
+        int expResult = 0;
+        int result = instance.quitarItemDePrestamo(folioErroneo);
+    }
+    
+    @Test
+    public void testquitarItemDeReservacionExitoso() throws SQLException {
+        int expResult = 1;
+        int result = instance.quitarItemDeReservacion(item.getIdentificador());
         assertEquals(expResult, result);
     }
     
     @Test
-    public void testBuscarItemInexistente() throws Exception {
-        List<Item> expResult = items;
-        List<Item> result = instance.buscarItem(identificador);
-        assertEquals(expResult, result);
-    }
-    
-    @Test
-    public void testRegresarTodo() {
-        List<Item> expResult = items;
-        List<Item> result = instance.regresarTodo();
+    public void testquitarItemDeReservacionFallido() throws SQLException {
+        int expResult = 0;
+        int result = instance.quitarItemDeReservacion(folioErroneo);
         assertEquals(expResult, result);
     }
     //</editor-fold>

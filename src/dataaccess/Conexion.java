@@ -43,7 +43,7 @@ public class Conexion {
     /**
      *  Funcion que termina la conexion y libera el recurso de conexión
      */
-    public void desconecta() {
+    public void desconecta() throws SQLException {
         if (conexion != null) {
             try {
                 if (!conexion.isClosed()) {
@@ -53,7 +53,7 @@ public class Conexion {
                 /* Se maneja la exepcion desde aqui para no interrumpir el flujo de las capas
                 * de arriba así la excepcion se manda a logger directamente
                 */
-                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            throw new SQLException("No hubo conección con la base de datos: " + ex.getMessage());
             }
         }
     }

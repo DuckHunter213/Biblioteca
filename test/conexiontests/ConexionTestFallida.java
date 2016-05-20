@@ -1,5 +1,6 @@
-package dataaccess;
+package conexiontests;
 
+import dataaccess.Conexion;
 import java.sql.Connection;
 import java.sql.SQLException;
 import org.junit.After;
@@ -17,10 +18,10 @@ import static org.junit.Assert.*;
  * Descripción:           Contiene pruebas para la conexión con la base de datos del sistema,
  *                        todas las pruebas son referentes a la clase Conexion.
  */
-public class ConexionTest {
+public class ConexionTestFallida {
     private final Conexion conexion;
     
-    public ConexionTest() {
+    public ConexionTestFallida() {
         conexion = new Conexion();
     }    
     
@@ -42,13 +43,13 @@ public class ConexionTest {
     }
     //</editor-fold>
     //<editor-fold defaultstate="collapse" desc="Pruebas">
-    @Test
+    @Test (expected = SQLException.class)
     public void pruebaConexionExitosa() throws SQLException {
         Connection connection = conexion.obtenerConexion();
         assertNotNull(connection);
     }
 
-    @Test
+    @Test (expected = SQLException.class)
     public void pruebaDesconectaExitoso() throws SQLException {
         Connection connection = conexion.obtenerConexion();
         conexion.desconecta();
