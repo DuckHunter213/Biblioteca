@@ -38,9 +38,7 @@ public interface ItemDAO {
      * Reserva el item pasado se asocia a una matricula de usuario y se genera
      * en un folio que es la referecia de esa reservación
      * @param item item que sera reservado
-     * @param matricula matricula que estara asociado a un usuario
-     * @param folio Se genera un folio automatico para referenciar el ticket de
-     * reservación 
+     * @param matricula matricula que estara asociado a un usuario 
      * @return Regresa una retroalimentación al usuario //TODO
      * @throws Exception //TODO
      */
