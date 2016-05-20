@@ -43,7 +43,7 @@ public interface ItemDAO {
      * @return Regresa una retroalimentación al usuario //TODO
      * @throws Exception //TODO
      */
-    public int reservarItem(Item item, String matricula) throws Exception;
+    public int reservarItem(Item item, String matricula) throws SQLException;
 
     /**
      *
@@ -62,12 +62,4 @@ public interface ItemDAO {
      * @throws java.sql.SQLException
      */
     public int prestarItem(Item item, String matricula) throws SQLException;
-
-    /**
-     * Funcion que regresa todos los items existentes de la base de datos
-     * @return regresa una lista con todos los items existentes en la base de
-     * datos
-     * @throws java.sql.SQLException
-     */
-    public List<Item> regresarTodo() throws SQLException;
 }

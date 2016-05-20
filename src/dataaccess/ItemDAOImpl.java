@@ -13,8 +13,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Nombre del programa:   Biblioteca
@@ -174,26 +172,6 @@ public class ItemDAOImpl implements ItemDAO{
             CONEXION.desconecta();
         }
         return resultadoDeLaEliminacion;
-    }
-    
-    @Override
-    public List<Item> regresarTodo() throws SQLException{        
-        List<Item> items = new ArrayList<>();
-        try{
-            connection = CONEXION.obtenerConexion();
-            PreparedStatement sentenciaSQL = connection.prepareStatement("SELECT titulo, identificador, categoria FROM Items ");
-            resultados = sentenciaSQL.executeQuery();
-            Item item = null;
-            while(resultados.next()){
-                item = capturarItem(item);
-                items.add(item);
-            }
-        } catch (SQLException ex) {
-            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
-        } finally {
-            CONEXION.desconecta();
-        }
-        return items;
     }
     
     /**

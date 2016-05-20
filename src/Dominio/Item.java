@@ -4,16 +4,15 @@ import java.util.List;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Locale;
 
 /**
- * Nombre del programa:   Biblioteca
- * Nombres:               @author Luis Fernando Gomez Alejandre
- *                        @author Francisco Gerardo Mares Solano
- * Fecha:                 @since 20/05/2016
- * Descripción:           Clase abstracta por facilidad de extener la funcionalidad
- *                        contiene atributos generales para cualquier clase de item que podría haber
- *                        y facilita las operaciones del sistema por medio de polimorfismo
+ * Clase abstracta por facilidad de extener la funcionalidad contiene atributos
+ * generales para cualquier clase de item que podría haber y facilita las
+ * operaciones del sistema por medio de polimorfismo
+ * 
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 20/05/2016
  */
 
 public abstract class Item {
@@ -32,8 +31,8 @@ public abstract class Item {
     private boolean existeItem(ArrayList<Item> items){return false;}
     public boolean agregarItem(Item item){return true;}
     public List<dataaccess.ItemDAO> regresarTodo(){return null;}
-    //<editor-fold defaultstate="collapsed" desc=" Get´s & Set´s ">
     
+    //<editor-fold defaultstate="collapsed" desc=" Get´s & Set´s ">    
     public String getAutor() {
         return autor;
     }
@@ -51,14 +50,20 @@ public abstract class Item {
     }
 
     /**
-     * @return El identificador con formato ?????????? donde los ? son numeros
+     * @return El identificador con formato
+     * "016" 3 ultimos digitos del año
+     * "05" mes "20" dia "06" hora(formato 24 horas) "05" segundo
+     * Salida: 01605200607
      */
     public String getIdentificador() {
         return identificador;
     }
 
     /**
-     * @param identificador  con formato ?????????? donde los ? son numeros
+     * @param identificador El identificador con formato
+     * "016" 3 ultimos digitos del año
+     * "05" mes "20" dia "06" hora(formato 24 horas) "07" segundo
+     * Salida: 01605200607
      */
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
