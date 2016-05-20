@@ -76,12 +76,5 @@ public class ItemDAOImplTest {
         List<Item> result = instance.buscarItem(identificador);
         assertEquals(expResult, result);
     }
-    
-    @Test
-    public void testRegresarTodo() throws SQLException {
-        List<Item> expResult = items;
-        List<Item> result = instance.regresarTodo();
-        assertEquals(expResult, result);
-    }
     //</editor-fold>
 }
