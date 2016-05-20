@@ -1,10 +1,10 @@
 package Dominio;
 
-import dataaccess.Conexion;
 import java.util.List;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Clase abstracta por facilidad de extender una funcionalidad

@@ -60,8 +60,8 @@ public class ItemDAOImplTestInsertarDatos {
     
     @After
     public void tearDown() {
-        resultado = instance.quitarItemDePrestamo(folioPrestamo);
-        resultado = instance.quitarItemDeReservacion(folioPrestamo);
+        resultado = instance.quitarItemDePrestamo(item.getIdentificador());
+        resultado = instance.quitarItemDeReservacion(item.getIdentificador());
     }
     
     //</editor-fold>
@@ -70,36 +70,36 @@ public class ItemDAOImplTestInsertarDatos {
     @Test
     public void testReservarItemExitoso() throws Exception {
         int expResult = 1;
-        int result = instance.reservarItem(item, matricula,folioPrestamo);
+        int result = instance.reservarItem(item, matricula);
         assertEquals(expResult, result);
     }
     
     @Test
     public void testPrestarItemExitoso() {
         int expResult = 1;
-        int result = instance.prestarItem(item, matricula,folioPrestamo,folioDevolucion);
+        int result = instance.prestarItem(item, matricula);
         assertEquals(expResult, result);
     }
     
     @Test (expected = SQLException.class)
     public void testReservarItemFallidoSQL() throws Exception {
         int expResult = 0;
-        int result = instance.reservarItem(item, matriculaErronea,folioPrestamo);
+        int result = instance.reservarItem(item, matriculaErronea);
         assertEquals(expResult, result);
     }
     
     @Test
     public void testPrestarItemFallido() {
         int expResult = 0;
-        int result = instance.prestarItem(item2, matriculaErronea,folioPrestamo,folioDevolucion);
+        int result = instance.prestarItem(item2, matriculaErronea);
         assertEquals(expResult, result);
     }
     
     @Test (expected = SQLException.class)
     public void testReservarItemFallidoRepetido() throws Exception {
         int expResult = 1;
-        resultado = instance.reservarItem(item, matricula,folioPrestamo);
-        int result =  instance.reservarItem(item, matricula,folioPrestamo);
+        resultado = instance.reservarItem(item, matricula);
+        int result =  instance.reservarItem(item, matricula);
         assertEquals(expResult, result);
     }
     //</editor-fold>

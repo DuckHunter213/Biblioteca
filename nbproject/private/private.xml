@@ -5,6 +5,8 @@
         <group>
             <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/dataaccess/ItemDAOImpl.java</file>
             <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/test/dataaccess/ItemDAOImplTestBorrarRegistros.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/dataaccess/ItemDAO.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/test/dataaccess/ItemDAOImplTest.java</file>
             <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/test/dataaccess/ItemDAOImplTestInsertarDatos.java</file>
         </group>
     </open-files>

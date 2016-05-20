@@ -53,14 +53,14 @@ public class ItemDAOImplTestBorrarRegistros {
         item.setFechaPublicación(2012,0,13);
         item.setTiempoPrestamo(10);
         items.add(item);
-        resultado = instance.reservarItem(item, matricula,folioPrestamo);
-        resultado = instance.prestarItem(item, matricula,folioPrestamo,folioDevolucion);
+        resultado = instance.reservarItem(item, matricula);
+        resultado = instance.prestarItem(item, matricula);
     }
     
     @After
     public void tearDown(){
-        int result = instance.quitarItemDeReservacion(folioPrestamo);
-        result = instance.quitarItemDePrestamo(folioPrestamo);
+        int result = instance.quitarItemDeReservacion(item.getIdentificador());
+        result = instance.quitarItemDePrestamo(item.getIdentificador());
     }
     //</editor-fold>
     
@@ -68,7 +68,7 @@ public class ItemDAOImplTestBorrarRegistros {
     @Test
     public void testQuitarItemDePrestamoExitoso() {
         int expResult = 1;
-        int result = instance.quitarItemDePrestamo(folioPrestamo);
+        int result = instance.quitarItemDePrestamo(item.getIdentificador()); 
         assertEquals(expResult, result);
     }    
     
@@ -81,7 +81,7 @@ public class ItemDAOImplTestBorrarRegistros {
     @Test
     public void testquitarItemDeReservacionExitoso() {
         int expResult = 1;
-        int result = instance.quitarItemDeReservacion(folioPrestamo);
+        int result = instance.quitarItemDeReservacion(item.getIdentificador());
         assertEquals(expResult, result);
     }
     
