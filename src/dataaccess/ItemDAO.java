@@ -2,7 +2,6 @@ package dataaccess;
 
 import Dominio.Item;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -45,7 +44,7 @@ public interface ItemDAO {
      * @return Regresa una retroalimentación al usuario //TODO
      * @throws Exception //TODO
      */
-    public int reservarItem(Item item,String matricula) throws Exception;
+    public int reservarItem(Item item, String matricula) throws Exception;
 
     /**
      *
@@ -59,18 +58,14 @@ public interface ItemDAO {
      * base de datos
      * @param item item a prestar al usuario
      * @param matricula usuario al que se le prestara el item
-     * @param folioPrestamo Folio generado automaticamente y es una referencia
-     * al prestamo
-     * @param folioDevolucion //No sera necesario en el prestamo, retirar de la
-     * clase he implementarla en la devolución
-     * @return regresa un valor de retroalimentacion //TODO
+     * @return regresa un valor de retroalimentacion //TODO valor booleano
      */
-    public int prestarItem(Item item,String matricula);
+    public int prestarItem(Item item, String matricula);
 
     /**
      * Funcion que regresa todos los items existentes de la base de datos
      * @return regresa una lista con todos los items existentes en la base de
      * datos
      */
-    public List<Item>  regresarTodo();
+    public List<Item> regresarTodo();
 }

@@ -26,13 +26,13 @@ import java.util.logging.Logger;
  *                        y mediante polimorfismo resuelve las funcinalidades necesarias.
  */
 public class ItemDAOImpl implements ItemDAO{
-    private Conexion conexion;
+    private final Conexion CONEXION;
     private Connection connection;
     private Statement consulta;
     private ResultSet resultados;
     
     public ItemDAOImpl(){
-        conexion = new Conexion();
+        CONEXION = new Conexion();
     }
 
     /**
@@ -44,10 +44,10 @@ public class ItemDAOImpl implements ItemDAO{
     public List<Item> buscarItem(String identificador) throws SQLException{
         List<Item> items = new ArrayList<>();
         try{
-            connection = conexion.obtenerConexion();
+            connection = CONEXION.obtenerConexion();
             PreparedStatement sentenciaSQL  = connection.prepareStatement("SELECT titulo, identificador, categoria FROM Items WHERE identificador = ?");            
-            sentenciaSQL.setString(1,identificador);
-            resultados=sentenciaSQL.executeQuery();
+            sentenciaSQL.setString(1, identificador);
+            resultados = sentenciaSQL.executeQuery();
             
             Item item = null;
             while(resultados.next()){
@@ -58,13 +58,13 @@ public class ItemDAOImpl implements ItemDAO{
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-            conexion.desconecta();
+            CONEXION.desconecta();
         }
         return items;
     }
     
     /**
-     *  Funcion que pone un item en reservación asociado a un usuario
+     * Funcion que pone un item en reservación asociado a un usuario
      * 
      * @param item Recibe un objeto de tipo item
      * @param matricula Recibe la matricula del usuario que va a pedir la reservación
@@ -73,10 +73,10 @@ public class ItemDAOImpl implements ItemDAO{
      * @throws java.sql.SQLException 
      */
     @Override
-    public int reservarItem(Item item,String matricula) throws SQLException{
+    public int reservarItem(Item item, String matricula) throws SQLException{
         int resultadoDeAgregacion = 0;
         try{
-            connection = conexion.obtenerConexion();
+            connection = CONEXION.obtenerConexion();
             if (ItemEstadoDisponibilidad(item.getIdentificador())== true){
                 PreparedStatement sentenciaSQL  = connection.prepareStatement("INSERT INTO reservados VALUES (?,?,?)");
                 sentenciaSQL.setString(1,generadorDeIdentificador());
@@ -87,29 +87,30 @@ public class ItemDAOImpl implements ItemDAO{
         } catch (SQLException ex) {
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         } finally{
-            conexion.desconecta();
+            CONEXION.desconecta();
         }
         return resultadoDeAgregacion;
     }
 
     /**
-     *
-     * @param identificadorItem
-     * @return
+     * 
+     * @param identificadorItem quitar un item de una reservación pasando por 
+     * referencia el item
+     * @return regresa valor de retroalimntación
      */
     @Override
     public int quitarItemDeReservacion(String identificadorItem ){
-        int resultadoDeLaEliminacion=0;
+        int resultadoDeLaEliminacion = 0;
         try{ 
-            connection = conexion.obtenerConexion();
-            PreparedStatement sentenciaSQL  = connection.prepareStatement("DELETE FROM reservados WHERE identificador = ?");
-            sentenciaSQL.setString(1,identificadorItem);
+            connection = CONEXION.obtenerConexion();
+            PreparedStatement sentenciaSQL = connection.prepareStatement("DELETE FROM reservados WHERE identificador = ?");
+            sentenciaSQL.setString(1, identificadorItem);
             resultadoDeLaEliminacion = sentenciaSQL.executeUpdate();
             
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-            conexion.desconecta();
+            CONEXION.desconecta();
         }
         return resultadoDeLaEliminacion;
     }
@@ -121,7 +122,7 @@ public class ItemDAOImpl implements ItemDAO{
      * @return
      */
     @Override
-    public int prestarItem(Item item,String matricula){
+    public int prestarItem(Item item, String matricula){
         int resultadoDeAgregacion = 0;
         Calendar calendario = GregorianCalendar.getInstance();
         Date fechaPrestamo = new Date(); 
@@ -133,7 +134,7 @@ public class ItemDAOImpl implements ItemDAO{
         java.sql.Date fechaFinPrestamoMili = new java.sql.Date(fechaFinPrestamo.getTime());
         
         try{
-            connection = conexion.obtenerConexion();
+            connection = CONEXION.obtenerConexion();
             if (ItemEstadoDisponibilidad(item.getIdentificador())== true){
                 PreparedStatement sentenciaSQL  = connection.prepareStatement("INSERT INTO prestamos VALUES (?,?,?,?,?,?)");
                 sentenciaSQL.setDate(1, fechaPrestamoMili);
@@ -147,21 +148,22 @@ public class ItemDAOImpl implements ItemDAO{
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-            conexion.desconecta();
+            CONEXION.desconecta();
         }
         return resultadoDeAgregacion;
     }
 
     /**
      *
-     * @param identificadorItem
-     * @return
+     * @param identificadorItem item a retirar con el identificador buscado
+     * @return regresa un valor de retroaliementación para el usuario
+     * //TODO valor de retroalimentación
      */
     @Override
     public int quitarItemDePrestamo(String identificadorItem){
         int resultadoDeLaEliminacion=0;
         try{
-            connection = conexion.obtenerConexion();
+            connection = CONEXION.obtenerConexion();
             PreparedStatement sentenciaSQL  = connection.prepareStatement("DELETE FROM prestamos WHERE identificador = ?");
             sentenciaSQL.setString(1,identificadorItem);
             resultadoDeLaEliminacion = sentenciaSQL.executeUpdate();
@@ -169,40 +171,33 @@ public class ItemDAOImpl implements ItemDAO{
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-            conexion.desconecta();
+            CONEXION.desconecta();
         }
         return resultadoDeLaEliminacion;
     }
     
-    /**
-     *
-     * @return
-     */
     @Override
     public List<Item> regresarTodo() {        
         List<Item> items = new ArrayList<>();
         try{
-            connection = conexion.obtenerConexion();
-            PreparedStatement sentenciaSQL  = connection.prepareStatement("SELECT titulo, identificador, categoria FROM Items ");
-            resultados=sentenciaSQL.executeQuery();
-            
+            connection = CONEXION.obtenerConexion();
+            PreparedStatement sentenciaSQL = connection.prepareStatement("SELECT titulo, identificador, categoria FROM Items ");
+            resultados = sentenciaSQL.executeQuery();
             Item item = null;
             while(resultados.next()){
                 item = capturarItem(item);
                 items.add(item);
-            } 
-            
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-            conexion.desconecta();
+        } finally {
+            CONEXION.desconecta();
         }
         return items;
     }
     
     /**
-     * Seteo de items segun su categoria aplica para la implemntacio de los 
-     * items
+     * Seteo de items segun su categoria aplica para la implementación
      */
     private Item capturarItem(Item item) throws SQLException{
         if (resultados != null){
@@ -216,15 +211,15 @@ public class ItemDAOImpl implements ItemDAO{
     }
     
     private boolean ItemEstadoDisponibilidad(String identificador) throws SQLException{
-        boolean existeItem=true;
+        boolean existeItem = true;
         Connection connection2;
         Conexion conexion2 = new Conexion();
         try{
             connection2 = conexion2.obtenerConexion();
-            PreparedStatement itemEnReserva  = connection2.prepareStatement("SELECT folio FROM reservados WHERE identificador = ?"); 
-            PreparedStatement itemPrestado  = connection2.prepareStatement("SELECT folio FROM prestamos WHERE identificador = ?");         
-            itemEnReserva.setString(1,identificador);
-            itemPrestado.setString(1,identificador);
+            PreparedStatement itemEnReserva = connection2.prepareStatement("SELECT folio FROM reservados WHERE identificador = ?"); 
+            PreparedStatement itemPrestado = connection2.prepareStatement("SELECT folio FROM prestamos WHERE identificador = ?");         
+            itemEnReserva.setString(1, identificador);
+            itemPrestado.setString(1, identificador);
             ResultSet resultadoReserva = itemEnReserva.executeQuery();  
             ResultSet resultadoPrestamo = itemEnReserva.executeQuery();            
             while (resultadoReserva.next() || resultadoPrestamo.next()){
@@ -240,8 +235,8 @@ public class ItemDAOImpl implements ItemDAO{
     
     private static String generadorDeIdentificador(){
         Date fecha = new Date();
-        SimpleDateFormat formateadorDeFecha=new SimpleDateFormat("yyyMMddHHmmss");
-        String identificadorGenerado= formateadorDeFecha.format(fecha);
+        SimpleDateFormat formateadorDeFecha = new SimpleDateFormat("yyyMMddHHmmss");
+        String identificadorGenerado = formateadorDeFecha.format(fecha);
         identificadorGenerado = (String) identificadorGenerado.subSequence(1, identificadorGenerado.length());
         return identificadorGenerado;
     }

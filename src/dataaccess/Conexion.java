@@ -50,8 +50,9 @@ public class Conexion {
                     conexion.close();
                 }
             } catch (SQLException ex) {
-                // Se maneja la exepcion desde aqui para no interrumpir el flujo de las capas
-                // de arriba así la excepcion se manda a logger directamente
+                /* Se maneja la exepcion desde aqui para no interrumpir el flujo de las capas
+                * de arriba así la excepcion se manda a logger directamente
+                */
                 Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
