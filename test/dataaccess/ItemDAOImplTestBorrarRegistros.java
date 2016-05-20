@@ -12,10 +12,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Pruebas de borrado
- * @author Luis Fernando Gomez Alejandre
- * @author Francisco Gerardo Mares Solano
+ * Nombre del programa:   Biblioteca
+ * Nombres:               @author Luis Fernando Gomez Alejandre
+ *                        @author Francisco Gerardo Mares Solano
+ * Fecha:                 @since 20/05/2016
+ * Descripción:           Contiene pruebas para borrar registros de la base de datos,
+ *                        todas las pruebas son referentes a los items (ItemDAOImpl).
  */
+
 public class ItemDAOImplTestBorrarRegistros {
     
     //<editor-fold defaultstate="collapse" desc="Definicion de variables">

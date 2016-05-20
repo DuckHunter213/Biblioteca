@@ -14,10 +14,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Pruebas de la implementacion de Item
- * @author Luis Fernando Gomez Alejandre
- * @author Francisco Gerardo Mares Solano
+ * Nombre del programa:   Biblioteca
+ * Nombres:               @author Luis Fernando Gomez Alejandre
+ *                        @author Francisco Gerardo Mares Solano
+ * Fecha:                 @since 20/05/2016
+ * Descripción:           Contiene pruebas generales de busqueda de registros de la base de datos,
+ *                        todas las pruebas son referentes a los items (ItemDAOImpl).
  */
+
 public class ItemDAOImplTest {
     
     //<editor-fold defaultstate="collapse" desc="Definicion de variables">

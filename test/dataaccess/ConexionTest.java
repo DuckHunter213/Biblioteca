@@ -10,10 +10,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *  Clase de prueba de conexión a la base de datos
- * @author Francisco Gerardo Mares Solano
- * @author Luis Fernando Gomez Alejandre
+ * Nombre del programa:   Biblioteca
+ * Nombres:               @author Luis Fernando Gomez Alejandre
+ *                        @author Francisco Gerardo Mares Solano
+ * Fecha:                 @since 20/05/2016
+ * Descripción:           Contiene pruebas para la conexión con la base de datos del sistema,
+ *                        todas las pruebas son referentes a la clase Conexion.
  */
+
 public class ConexionTest {
     
     public ConexionTest() {
