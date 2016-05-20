@@ -7,10 +7,15 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Clase abstracta por facilidad de extender una funcionalidad
- * @author Luis Fernando Gomez Alejandre
- * @author Francisco Gerardo Mares Solano
+ * Nombre del programa:   Biblioteca
+ * Nombres:               @author Luis Fernando Gomez Alejandre
+ *                        @author Francisco Gerardo Mares Solano
+ * Fecha:                 @since 20/05/2016
+ * Descripción:           Clase abstracta por facilidad de extener la funcionalidad
+ *                        contiene atributos generales para cualquier clase de item que podría haber
+ *                        y facilita las operaciones del sistema por medio de polimorfismo
  */
+
 public abstract class Item {
     private String autor;
     private String titulo;

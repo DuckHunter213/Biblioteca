@@ -17,9 +17,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *  Clase 
- * @author Luis Fernando Gomez Alejandre
- * @author Francisco Gerardo Mares Solano
+ * Nombre del programa:   Biblioteca
+ * Nombres:               @author Luis Fernando Gomez Alejandre
+ *                        @author Francisco Gerardo Mares Solano
+ * Fecha:                 @since 20/05/2016
+ * Descripción:           Es la implementación del patrón DAO para el item,
+ *                        sus métodos son genéricos para el interface ItemDAO
+ *                        y mediante polimorfismo resuelve las funcinalidades necesarias.
  */
 public class ItemDAOImpl implements ItemDAO{
     private Conexion conexion;
@@ -27,16 +31,11 @@ public class ItemDAOImpl implements ItemDAO{
     private Statement consulta;
     private ResultSet resultados;
     
-    /**
-     *
-     */
     public ItemDAOImpl(){
         conexion = new Conexion();
     }
 
     /**
-     *  
-     * 
      * @param identificador 
      * @return Se regresa una lista de items 
      * @throws SQLException
@@ -69,21 +68,18 @@ public class ItemDAOImpl implements ItemDAO{
      * 
      * @param item Recibe un objeto de tipo item
      * @param matricula Recibe la matricula del usuario que va a pedir la reservación
-     * @param folio Recibe un folio generado automaticamente por el sistema
      * @return retorna un valor de retroaliemntación falso o verdadero en caso
      * de no haber podido capturar el item 
      * @throws java.sql.SQLException 
      */
     @Override
-    //TODO se debe hacer por metodos booleanos
-    //TODO esto se debe validar para 
-    public int reservarItem(Item item,String matricula, String folio) throws SQLException{
+    public int reservarItem(Item item,String matricula) throws SQLException{
         int resultadoDeAgregacion = 0;
         try{
             connection = conexion.obtenerConexion();
-            if (ItemEstadoDisponibilidad(folio)== false){
+            if (ItemEstadoDisponibilidad(item.getIdentificador())== true){
                 PreparedStatement sentenciaSQL  = connection.prepareStatement("INSERT INTO reservados VALUES (?,?,?)");
-                sentenciaSQL.setString(1,folio);
+                sentenciaSQL.setString(1,generadorDeIdentificador());
                 sentenciaSQL.setString(2,matricula);
                 sentenciaSQL.setString(3,item.getIdentificador());
                 resultadoDeAgregacion = sentenciaSQL.executeUpdate();         
@@ -98,16 +94,16 @@ public class ItemDAOImpl implements ItemDAO{
 
     /**
      *
-     * @param folioDeReserva
+     * @param identificadorItem
      * @return
      */
     @Override
-    public int quitarItemDeReservacion(String folioDeReserva ){
+    public int quitarItemDeReservacion(String identificadorItem ){
         int resultadoDeLaEliminacion=0;
         try{ 
             connection = conexion.obtenerConexion();
-            PreparedStatement sentenciaSQL  = connection.prepareStatement("DELETE FROM reservados WHERE folio = ?");
-            sentenciaSQL.setString(1,folioDeReserva);
+            PreparedStatement sentenciaSQL  = connection.prepareStatement("DELETE FROM reservados WHERE identificador = ?");
+            sentenciaSQL.setString(1,identificadorItem);
             resultadoDeLaEliminacion = sentenciaSQL.executeUpdate();
             
         } catch (SQLException ex) {
@@ -125,7 +121,7 @@ public class ItemDAOImpl implements ItemDAO{
      * @return
      */
     @Override
-    public int prestarItem(Item item,String matricula, String folioPrestamo, String folioDevolucion){
+    public int prestarItem(Item item,String matricula){
         int resultadoDeAgregacion = 0;
         Calendar calendario = GregorianCalendar.getInstance();
         Date fechaPrestamo = new Date(); 
@@ -138,11 +134,11 @@ public class ItemDAOImpl implements ItemDAO{
         
         try{
             connection = conexion.obtenerConexion();
-            if (ItemEstadoDisponibilidad(folioPrestamo)== false){
+            if (ItemEstadoDisponibilidad(item.getIdentificador())== true){
                 PreparedStatement sentenciaSQL  = connection.prepareStatement("INSERT INTO prestamos VALUES (?,?,?,?,?,?)");
                 sentenciaSQL.setDate(1, fechaPrestamoMili);
-                sentenciaSQL.setString(2, folioPrestamo);
-                sentenciaSQL.setString(3, folioDevolucion);
+                sentenciaSQL.setString(2, generadorDeIdentificador());
+                sentenciaSQL.setString(3, generadorDeIdentificador());
                 sentenciaSQL.setDate(4, fechaFinPrestamoMili);
                 sentenciaSQL.setString(5,item.getIdentificador());
                 sentenciaSQL.setString(6,matricula);
@@ -158,16 +154,16 @@ public class ItemDAOImpl implements ItemDAO{
 
     /**
      *
-     * @param folioDePrestamo
+     * @param identificadorItem
      * @return
      */
     @Override
-    public int quitarItemDePrestamo(String folioDePrestamo){
+    public int quitarItemDePrestamo(String identificadorItem){
         int resultadoDeLaEliminacion=0;
         try{
             connection = conexion.obtenerConexion();
-            PreparedStatement sentenciaSQL  = connection.prepareStatement("DELETE FROM prestamos WHERE folioPrestamo = ?");
-            sentenciaSQL.setString(1,folioDePrestamo);
+            PreparedStatement sentenciaSQL  = connection.prepareStatement("DELETE FROM prestamos WHERE identificador = ?");
+            sentenciaSQL.setString(1,identificadorItem);
             resultadoDeLaEliminacion = sentenciaSQL.executeUpdate();
             
         } catch (SQLException ex) {
@@ -203,6 +199,7 @@ public class ItemDAOImpl implements ItemDAO{
         }
         return items;
     }
+    
     /**
      * Seteo de items segun su categoria aplica para la implemntacio de los 
      * items
@@ -217,20 +214,21 @@ public class ItemDAOImpl implements ItemDAO{
         }
         return item;
     }
-    private boolean ItemEstadoDisponibilidad(String folio) throws SQLException{
-        boolean existeItem=false;
+    
+    private boolean ItemEstadoDisponibilidad(String identificador) throws SQLException{
+        boolean existeItem=true;
         Connection connection2;
         Conexion conexion2 = new Conexion();
         try{
             connection2 = conexion2.obtenerConexion();
-            PreparedStatement itemEnReserva  = connection2.prepareStatement("SELECT folio FROM reservados WHERE folio = ?"); 
-            PreparedStatement itemPrestado  = connection2.prepareStatement("SELECT folio FROM prestamos WHERE folio = ?");         
-            itemEnReserva.setString(1,folio);
-            itemPrestado.setString(1,folio);
+            PreparedStatement itemEnReserva  = connection2.prepareStatement("SELECT folio FROM reservados WHERE identificador = ?"); 
+            PreparedStatement itemPrestado  = connection2.prepareStatement("SELECT folio FROM prestamos WHERE identificador = ?");         
+            itemEnReserva.setString(1,identificador);
+            itemPrestado.setString(1,identificador);
             ResultSet resultadoReserva = itemEnReserva.executeQuery();  
             ResultSet resultadoPrestamo = itemEnReserva.executeQuery();            
             while (resultadoReserva.next() || resultadoPrestamo.next()){
-                existeItem = true;
+                existeItem = false;
             }             
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -240,4 +238,11 @@ public class ItemDAOImpl implements ItemDAO{
         return existeItem;
     }
     
+    private static String generadorDeIdentificador(){
+        Date fecha = new Date();
+        SimpleDateFormat formateadorDeFecha=new SimpleDateFormat("yyyMMddHHmmss");
+        String identificadorGenerado= formateadorDeFecha.format(fecha);
+        identificadorGenerado = (String) identificadorGenerado.subSequence(1, identificadorGenerado.length());
+        return identificadorGenerado;
+    }
 }

@@ -7,11 +7,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Clase de tipo conexión, es la encargada de proveer conexión y desconexión
- * de la base de datos 
- * @author Luis Fernando Gomez Alejandre
- * @author Francisco Gerardo Mares Solano
+ * Nombre del programa:   Biblioteca
+ * Nombres:               @author Luis Fernando Gomez Alejandre
+ *                        @author Francisco Gerardo Mares Solano
+ * Fecha:                 @since 18/04/2016
+ * Descripción:           Es la implementación del patrón DAO para el item,
+ *                        sus métodos son genéricos para el interface ItemDAO
+ *                        y mediante polimorfismo resuelve las funcinalidades necesarias.
  */
+
 public class Conexion {
     
     private Connection conexion;

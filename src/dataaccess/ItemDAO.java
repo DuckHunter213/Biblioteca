@@ -6,13 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 /**
- * Clase abstracta de los items 
- * desicion de ser abstracta por que será más fácil extender la funcionalidad
- * al solo hacer instancias de la clase item
- * @author Luis Fernando Gomez Alejandre
- * @author Francisco Gerardo Mares Solano
+ * Nombre del programa:   Biblioteca
+ * Nombres:               @author Luis Fernando Gomez Alejandre
+ *                        @author Francisco Gerardo Mares Solano
+ * Fecha:                 @since 20/05/2016
+ * Descripción:           Interface para generar el patrón DAO para guardar item en la base de datos
+ *                        se decidió usar una interface para el uso de polimorfismo.
  */
+
 public interface ItemDAO {
     
     /**
@@ -42,7 +45,7 @@ public interface ItemDAO {
      * @return Regresa una retroalimentación al usuario //TODO
      * @throws Exception //TODO
      */
-    public int reservarItem(Item item,String matricula, String folio) throws Exception;
+    public int reservarItem(Item item,String matricula) throws Exception;
 
     /**
      *
@@ -62,7 +65,7 @@ public interface ItemDAO {
      * clase he implementarla en la devolución
      * @return regresa un valor de retroalimentacion //TODO
      */
-    public int prestarItem(Item item,String matricula, String folioPrestamo, String folioDevolucion);
+    public int prestarItem(Item item,String matricula);
 
     /**
      * Funcion que regresa todos los items existentes de la base de datos
