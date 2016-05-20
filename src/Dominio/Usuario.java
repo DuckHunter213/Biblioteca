@@ -1,4 +1,3 @@
-
 package Dominio;
 
 import java.text.NumberFormat;
@@ -6,9 +5,14 @@ import sun.security.util.Password;
 
 
 /**
- *
- * @author Luis Fernando Gomez Alejandre
- * @author Francisco Gerardo Mares Solano
+ * Nombre del programa:    Biblioteca
+ * Nombres:                @author Luis Fernando Gomez Alejandre
+ *                         @author Francisco Gerardo Mares Solano
+ * Fecha:                  @since 20/05/2016
+ * Descripción:            Es el objeto del dominio de la clase usuario que es
+ *                         creado cada ves que va a ser registrado
+ * 
+ * 
  */
 public class Usuario {
     private Password contrasenia;
@@ -118,7 +122,4 @@ public class Usuario {
     public void setNumeroDePrestamosActivos(int numeroDePrestamosActivos) {
         this.numeroDePrestamosActivos = numeroDePrestamosActivos;
     }
-    
-    
-    
 }

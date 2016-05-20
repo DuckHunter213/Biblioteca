@@ -1,15 +1,15 @@
-
 package Dominio;
 
-import java.text.NumberFormat;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
 /**
- *
- * @author Luis Fernando Gomez Alejandre
- * @author Francisco Gerardo Mares Solano
+ * Nombre del programa:    Biblioteca
+ * Nombres:                @author Luis Fernando Gomez Alejandre
+ *                         @author Francisco Gerardo Mares Solano
+ * Fecha:                  @since 20/05/2016
+ * Descripción:            Clase prestamo es generada cada ves que se piden
+ *                         items
  */
 public class Prestamo {
     private Item item;
@@ -19,19 +19,17 @@ public class Prestamo {
     private String identificadorPrestamo;
     
     public Prestamo(){
-      identificadorPrestamo =  "Hay que setearlo";
-      fechaPrestamo = new GregorianCalendar(Locale.ROOT);
+        identificadorPrestamo = "";
+        fechaPrestamo = new GregorianCalendar(Locale.ROOT);
     }    
-    //public boolean agregarItemABaseDeDatos(){
-        
-    //}
+    
     public boolean setUSuario(Usuario usuario){
         this.usuario = usuario;
         return true;
     }
+    
     public boolean setItem(Item item){
         this.item = item;
         return true;
-    }    
-    
+    }
 }
