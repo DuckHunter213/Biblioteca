@@ -17,14 +17,12 @@ import static org.junit.Assert.*;
  * Descripción:           Contiene pruebas para la conexión con la base de datos del sistema,
  *                        todas las pruebas son referentes a la clase Conexion.
  */
-
 public class ConexionTest {
+    private final Conexion conexion;
     
     public ConexionTest() {
         conexion = new Conexion();
-    }
-    
-    private final Conexion conexion;
+    }    
     
     //<editor-fold defaultstate="collapse" desc="Opciones de la prueba">
     @BeforeClass
@@ -43,7 +41,6 @@ public class ConexionTest {
     public void tearDown() {
     }
     //</editor-fold>
-
     //<editor-fold defaultstate="collapse" desc="Pruebas">
     @Test
     public void pruebaConexionExitosa() throws SQLException {

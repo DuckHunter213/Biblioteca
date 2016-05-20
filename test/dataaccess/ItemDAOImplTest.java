@@ -21,9 +21,7 @@ import static org.junit.Assert.*;
  * Descripción:           Contiene pruebas generales de busqueda de registros de la base de datos,
  *                        todas las pruebas son referentes a los items (ItemDAOImpl).
  */
-
-public class ItemDAOImplTest {
-    
+public class ItemDAOImplTest {    
     //<editor-fold defaultstate="collapse" desc="Definicion de variables">
     Item item = new Libro();
     List<Item> items = new ArrayList<>();
@@ -53,8 +51,8 @@ public class ItemDAOImplTest {
         item.setTitulo("Como volver a comer lo que ya comiste");
         item.setAutor("Waffles");
         item.setCostoMulta(10);
-        item.setFechaAdquisicion(2016,0,13);
-        item.setFechaPublicación(2012,0,13);
+        item.setFechaAdquisicion(2016, 0, 13);
+        item.setFechaPublicación(2012, 0, 13);
         item.setTiempoPrestamo(10);        
         items.add(item);  
     }
@@ -62,8 +60,7 @@ public class ItemDAOImplTest {
     @After
     public void tearDown() {
     }
-    //</editor-fold>
-    
+    //</editor-fold>    
     //<editor-fold defaultstate="collapse" desc="Pruebas">
     @Test
     public void testBuscarItem() throws Exception {

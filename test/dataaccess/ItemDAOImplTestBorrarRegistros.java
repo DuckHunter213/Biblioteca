@@ -19,9 +19,7 @@ import static org.junit.Assert.*;
  * Descripción:           Contiene pruebas para borrar registros de la base de datos,
  *                        todas las pruebas son referentes a los items (ItemDAOImpl).
  */
-
-public class ItemDAOImplTestBorrarRegistros {
-    
+public class ItemDAOImplTestBorrarRegistros {    
     //<editor-fold defaultstate="collapse" desc="Definicion de variables">
     Item item = new Libro();
     List<Item> items = new ArrayList<>();
@@ -53,8 +51,8 @@ public class ItemDAOImplTestBorrarRegistros {
         item.setTitulo("Como volver a comer lo que ya comiste");
         item.setAutor("Waffles");
         item.setCostoMulta(10);
-        item.setFechaAdquisicion(2016,0,13);
-        item.setFechaPublicación(2012,0,13);
+        item.setFechaAdquisicion(2016, 0, 13);
+        item.setFechaPublicación(2012, 0, 13);
         item.setTiempoPrestamo(10);
         items.add(item);
         resultado = instance.reservarItem(item, matricula);
