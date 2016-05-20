@@ -31,8 +31,9 @@ public interface ItemDAO {
      * @param identificador es el parametro por el cual sera quitado el item de
      * una reservación
      * @return regresa una retroalimentación //TODO
+     * @throws java.sql.SQLException
      */
-    public int quitarItemDeReservacion(String identificador);
+    public int quitarItemDeReservacion(String identificador) throws SQLException;
 
     /**
      * Reserva el item pasado se asocia a una matricula de usuario y se genera
@@ -48,8 +49,9 @@ public interface ItemDAO {
      *
      * @param identificador
      * @return
+     * @throws java.sql.SQLException
      */
-    public int quitarItemDePrestamo(String identificador);
+    public int quitarItemDePrestamo(String identificador) throws SQLException;
 
     /**
      * Funcion que enlaza un item a un usuario y se guarda un registro en la 
@@ -57,13 +59,15 @@ public interface ItemDAO {
      * @param item item a prestar al usuario
      * @param matricula usuario al que se le prestara el item
      * @return regresa un valor de retroalimentacion //TODO valor booleano
+     * @throws java.sql.SQLException
      */
-    public int prestarItem(Item item, String matricula);
+    public int prestarItem(Item item, String matricula) throws SQLException;
 
     /**
      * Funcion que regresa todos los items existentes de la base de datos
      * @return regresa una lista con todos los items existentes en la base de
      * datos
+     * @throws java.sql.SQLException
      */
-    public List<Item> regresarTodo();
+    public List<Item> regresarTodo() throws SQLException;
 }

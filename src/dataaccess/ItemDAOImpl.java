@@ -56,7 +56,7 @@ public class ItemDAOImpl implements ItemDAO{
             } 
             
         } catch (SQLException ex) {
-            Logger.getLogger(ItemDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{
             CONEXION.desconecta();
         }
@@ -99,7 +99,7 @@ public class ItemDAOImpl implements ItemDAO{
      * @return regresa valor de retroalimntación
      */
     @Override
-    public int quitarItemDeReservacion(String identificadorItem ){
+    public int quitarItemDeReservacion(String identificadorItem ) throws SQLException{
         int resultadoDeLaEliminacion = 0;
         try{ 
             connection = CONEXION.obtenerConexion();
@@ -108,7 +108,7 @@ public class ItemDAOImpl implements ItemDAO{
             resultadoDeLaEliminacion = sentenciaSQL.executeUpdate();
             
         } catch (SQLException ex) {
-            Logger.getLogger(ItemDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{
             CONEXION.desconecta();
         }
@@ -122,7 +122,7 @@ public class ItemDAOImpl implements ItemDAO{
      * @return
      */
     @Override
-    public int prestarItem(Item item, String matricula){
+    public int prestarItem(Item item, String matricula) throws SQLException{
         int resultadoDeAgregacion = 0;
         Calendar calendario = GregorianCalendar.getInstance();
         Date fechaPrestamo = new Date(); 
@@ -146,7 +146,7 @@ public class ItemDAOImpl implements ItemDAO{
                 resultadoDeAgregacion = sentenciaSQL.executeUpdate();           
             }            
         } catch (SQLException ex) {
-            Logger.getLogger(ItemDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{
             CONEXION.desconecta();
         }
@@ -160,7 +160,7 @@ public class ItemDAOImpl implements ItemDAO{
      * //TODO valor de retroalimentación
      */
     @Override
-    public int quitarItemDePrestamo(String identificadorItem){
+    public int quitarItemDePrestamo(String identificadorItem) throws SQLException{
         int resultadoDeLaEliminacion=0;
         try{
             connection = CONEXION.obtenerConexion();
@@ -169,7 +169,7 @@ public class ItemDAOImpl implements ItemDAO{
             resultadoDeLaEliminacion = sentenciaSQL.executeUpdate();
             
         } catch (SQLException ex) {
-            Logger.getLogger(ItemDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{
             CONEXION.desconecta();
         }
@@ -177,7 +177,7 @@ public class ItemDAOImpl implements ItemDAO{
     }
     
     @Override
-    public List<Item> regresarTodo() {        
+    public List<Item> regresarTodo() throws SQLException{        
         List<Item> items = new ArrayList<>();
         try{
             connection = CONEXION.obtenerConexion();
@@ -189,7 +189,7 @@ public class ItemDAOImpl implements ItemDAO{
                 items.add(item);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ItemDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         } finally {
             CONEXION.desconecta();
         }
@@ -226,14 +226,14 @@ public class ItemDAOImpl implements ItemDAO{
                 existeItem = false;
             }             
         } catch (SQLException ex) {
-            Logger.getLogger(ItemDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{
             conexion2.desconecta();
         }
         return existeItem;
     }
     
-    private static String generadorDeIdentificador(){
+    private static String generadorDeIdentificador() throws SQLException{
         Date fecha = new Date();
         SimpleDateFormat formateadorDeFecha = new SimpleDateFormat("yyyMMddHHmmss");
         String identificadorGenerado = formateadorDeFecha.format(fecha);
