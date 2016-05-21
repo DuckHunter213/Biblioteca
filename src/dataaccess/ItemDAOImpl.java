@@ -39,7 +39,7 @@ public class ItemDAOImpl implements ItemDAO{
      * @throws SQLException
      */
     @Override
-    public List<Item> buscarItem(String identificador) throws SQLException{
+    public List<Item> buscarItems(String identificador) throws SQLException{
         List<Item> items = new ArrayList<>();
         try{
             connection = CONEXION.obtenerConexion();

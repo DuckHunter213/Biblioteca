@@ -24,7 +24,7 @@ public interface ItemDAO {
      * encontrar ninguno regresa la lista vacia
      * @throws SQLException Salta la excepcion en //TODO
      */
-    public List<Item> buscarItem(String identificador) throws SQLException;
+    public List<Item> buscarItems(String identificador) throws SQLException;
 
     /**
      * Quita el item buscado previamente de una reservación
