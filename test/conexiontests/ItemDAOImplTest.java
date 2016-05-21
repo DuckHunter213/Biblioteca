@@ -22,16 +22,18 @@ import static org.junit.Assert.*;
  * Descripción:           Contiene pruebas generales de busqueda de registros de la base de datos,
  *                        todas las pruebas son referentes a los items (ItemDAOImpl).
  */
-public class ItemDAOImplTest {    
-    //<editor-fold defaultstate="collapse" desc="Definicion de variables">
+public class ItemDAOImplTest {
+    //<editor-fold defaultstate="collapse" desc="Declaración de varaibles
     Item item = new Libro();
     List<Item> items = new ArrayList<>();
-    String matricula = "S140111131";
-    String matriculaErronea = "bloodDrops";
-    String identificador = "S140111132";
-    String folioPrestamo = "teardrops";
-    String folioDevolucion = "Dark horse";
+    String identificadorAlumno = "IDENTIFICADORA5";
+    String identificadorItem = "identif006";
+    String titulo = "Software requirements";
+    String identificador = "identif001";
+    public static final int COSTO_MULTA = 10;
+    public static final int TIEMPO_PRESTAMO= 10;
     ItemDAOImpl instance = new ItemDAOImpl();
+    int resultado;
     //</editor-fold>
     
     public ItemDAOImplTest() {
@@ -47,15 +49,13 @@ public class ItemDAOImplTest {
     }
     
     @Before
-    public void setUp() {  
-        item.setIdentificador("S140111132");
-        item.setTitulo("Como volver a comer lo que ya comiste");
-        item.setAutor("Waffles");
-        item.setCostoMulta(10);
-        item.setFechaAdquisicion(2016, 0, 13);
-        item.setFechaPublicación(2012, 0, 13);
-        item.setTiempoPrestamo(10);        
-        items.add(item);  
+    public void setUp() {
+        item.setIdentificador(identificadorItem);
+        item.setCostoMulta(COSTO_MULTA);
+        item.setTiempoPrestamo(TIEMPO_PRESTAMO);
+        item.setTitulo(titulo);
+        item.setIdentificador(identificador);
+        items.add(item);
     }
     
     @After
@@ -66,14 +66,15 @@ public class ItemDAOImplTest {
     @Test
     public void testBuscarItem() throws Exception {
         List<Item> expResult = items;
-        List<Item> result = instance.buscarItem(item.getIdentificador());
+        List<Item> result = instance.buscarItems(item.getIdentificador());
         assertEquals(expResult, result);
     }
     
     @Test
     public void testBuscarItemInexistente() throws Exception {
+        items.clear();
         List<Item> expResult = items;
-        List<Item> result = instance.buscarItem(identificador);
+        List<Item> result = instance.buscarItems(identificadorItem);
         assertEquals(expResult, result);
     }
     //</editor-fold>
