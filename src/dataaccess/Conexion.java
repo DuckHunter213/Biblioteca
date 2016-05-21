@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class Conexion {
     
     private Connection conexion;
-    private final String DB = "jdbc:mysql://127.0.0.1/Biblioteca2_0";
+    private final String DB = "jdbc:mysql://127.0.0.1/Biblioteca";
     private final String USUARIO = "root";
     private final String CONTRASENA = "";
 

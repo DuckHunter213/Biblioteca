@@ -1,4 +1,4 @@
-package conexiontests;
+package reservaciontests;
 
 import Dominio.Item;
 import Dominio.Libro;
@@ -21,21 +21,19 @@ import static org.junit.Assert.*;
  * Descripción:           Contiene pruebas para borrar registros de la base de datos,
  *                        todas las pruebas son referentes a los items (ItemDAOImpl).
  */
-public class ItemDAOImplTestBorrarRegistros {    
+public class BorrarReservacionTest {    
     //<editor-fold defaultstate="collapse" desc="Definicion de variables">
     Item item = new Libro();
-    List<Item> items = new ArrayList<>();
-    String matricula = "S140111131";
-    String matriculaErronea = "bloodDrops";
-    String identificador = "S140111132";
-    String folioPrestamo = "teardrops";
-    String folioDevolucion = "Dark horse";
-    String folioErroneo = "sandDrops";
+    String identificadorAlumno = "IDENTIFICADORA6";
+    String identificadorItemErroneo = "identif005";
+    String identificadorItem = "identif006";
+    public static final int COSTO_MULTA = 10;
+    public static final int TIEMPO_PRESTAMO= 10;
     ItemDAOImpl instance = new ItemDAOImpl();
     int resultado;
     //</editor-fold>
     
-    public ItemDAOImplTestBorrarRegistros() {
+    public BorrarReservacionTest() {
     }
     
     //<editor-fold defaultstate="collapse" desc="Opciones de la prueba">
@@ -49,39 +47,17 @@ public class ItemDAOImplTestBorrarRegistros {
     
     @Before 
     public void setUp() throws Exception{
-        item.setIdentificador(identificador);
-        item.setTitulo("Como volver a comer lo que ya comiste");
-        item.setAutor("Waffles");
-        item.setCostoMulta(10);
-        item.setFechaAdquisicion(2016, 0, 13);
-        item.setFechaPublicación(2012, 0, 13);
-        item.setTiempoPrestamo(10);
-        items.add(item);
-        resultado = instance.reservarItem(item, matricula);
-        resultado = instance.prestarItem(item, matricula);
+        item.setIdentificador(identificadorItem);
+        item.setCostoMulta(COSTO_MULTA);
+        item.setTiempoPrestamo(TIEMPO_PRESTAMO);
+        instance.reservarItem(item, identificadorAlumno);
     }
     
     @After
     public void tearDown() throws SQLException{
-        int result = instance.quitarItemDeReservacion(item.getIdentificador());
-        result = instance.quitarItemDePrestamo(item.getIdentificador());
     }
-    //</editor-fold>
-    
-    //<editor-fold defaultstate="collapse" desc="Pruebas de unidad">
-    @Test
-    public void testQuitarItemDePrestamoExitoso() throws SQLException {
-        int expResult = 1;
-        int result = instance.quitarItemDePrestamo(item.getIdentificador()); 
-        assertEquals(expResult, result);
-    }    
-    
-    @Test
-    public void testQuitarItemDePrestamoFallido() throws SQLException {
-        int expResult = 0;
-        int result = instance.quitarItemDePrestamo(folioErroneo);
-    }
-    
+    //</editor-fold>    
+    //<editor-fold defaultstate="collapse" desc="Pruebas de unidad">    
     @Test
     public void testquitarItemDeReservacionExitoso() throws SQLException {
         int expResult = 1;
@@ -92,7 +68,9 @@ public class ItemDAOImplTestBorrarRegistros {
     @Test
     public void testquitarItemDeReservacionFallido() throws SQLException {
         int expResult = 0;
-        int result = instance.quitarItemDeReservacion(folioErroneo);
+        instance.quitarItemDeReservacion(item.getIdentificador());
+        item.setIdentificador(identificadorItemErroneo);
+        int result = instance.quitarItemDeReservacion(item.getIdentificador());
         assertEquals(expResult, result);
     }
     //</editor-fold>

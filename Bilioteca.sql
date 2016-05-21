@@ -26,21 +26,19 @@ DROP TABLE IF EXISTS `Items` CASCADE
 
 CREATE TABLE `Reservados`
 (
-	`folioReservación` VARCHAR(10) NOT NULL,
-	`identificadorUsuario` VARCHAR(10) NOT NULL,
+	`folioReservacion` VARCHAR(15) NOT NULL,
+	`identificadorUsuario` VARCHAR(15) NOT NULL,
 	`identificadorItem` VARCHAR(10) NOT NULL,
-	`identificador` VARCHAR(0),
-	CONSTRAINT `PK_Reservados` PRIMARY KEY (`folioReservación`)
+	CONSTRAINT `PK_Reservados` PRIMARY KEY (`identificadorItem`)
 )
 ;
 
 CREATE TABLE `Multas`
 (
 	`montoMulta` VARCHAR(10) NOT NULL,
-	`folioMulta` VARCHAR(10) NOT NULL,
+	`folioMulta` VARCHAR(15) NOT NULL,
 	`identificadorUsuario` VARCHAR(15) NOT NULL,
 	`identificadorItem` VARCHAR(10) NOT NULL,
-	`identificador` VARCHAR(0),
 	CONSTRAINT `PK_Multas` PRIMARY KEY (`folioMulta`)
 )
 ;
@@ -48,10 +46,9 @@ CREATE TABLE `Multas`
 CREATE TABLE `Devolucion`
 (
 	`fechaDevolucion` DATE NOT NULL,
-	`folioDevolucion` VARCHAR(10) NOT NULL,
+	`folioDevolucion` VARCHAR(15) NOT NULL,
 	`identificadorItem` VARCHAR(10) NOT NULL,
 	`identificadorUsuario` VARCHAR(15) NOT NULL,
-	`identificador` VARCHAR(0),
 	CONSTRAINT `PK_Devolucion` PRIMARY KEY (`folioDevolucion`)
 )
 ;
@@ -59,12 +56,11 @@ CREATE TABLE `Devolucion`
 CREATE TABLE `Prestamos`
 (
 	`fechaPrestamo` DATE NOT NULL,
-	`folioPrestamo` VARCHAR(10) NOT NULL,
+	`folioPrestamo` VARCHAR(15) NOT NULL,
 	`identificadorItem` VARCHAR(10) NOT NULL,
 	`identificadorUsuario` VARCHAR(15) NOT NULL,
 	`fechaFinPrestamo` DATE NOT NULL,
-	`identificador` VARCHAR(10) NOT NULL,
-	CONSTRAINT `PK_Prestamos` PRIMARY KEY (`folioPrestamo`)
+	CONSTRAINT `PK_Prestamos` PRIMARY KEY (`identificadorItem`)
 )
 ;
 
@@ -76,23 +72,19 @@ CREATE TABLE `Usuarios`
 	`nombre` VARCHAR(50) NOT NULL,
 	`primerApellido` VARCHAR(50),
 	`segundoApellido` VARCHAR(50),
-	`folioPrestamo` VARCHAR(0),
 	CONSTRAINT `PK_Usuarios` PRIMARY KEY (`identificador`)
 )
 ;
 
 CREATE TABLE `Items`
 (
-	`tiempoPrestamo` DATE NOT NULL,
+	`tiempoPrestamo` int NOT NULL,
 	`autor` VARCHAR(50),
 	`titulo` VARCHAR(150) NOT NULL,
 	`identificador` VARCHAR(10) NOT NULL,
-	`fechaAdquisicion` DATE,
+	`fechaRegistro` DATE,
 	`costoMulta` FLOAT(24) NOT NULL,
-	`fechaPublicacion` DATE,
 	`categoria` VARCHAR(50) NOT NULL,
-	`folioPrestamo` VARCHAR(0),
-	`folioReservación` VARCHAR(0),
 	CONSTRAINT `PK_Items` PRIMARY KEY (`identificador`)
 )
 ;
@@ -137,4 +129,110 @@ ALTER TABLE `Prestamos`
 	FOREIGN KEY (`identificador`) REFERENCES `Usuarios` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
 ;
 
-SET FOREIGN_KEY_CHECKS=1
+SET FOREIGN_KEY_CHECKS=1;
+
+
+
+INSERT INTO `Usuarios` VALUES(	
+	'S14011614',
+	'Activo',
+	'IDENTIFICADORA1',
+	'Waffles',
+	'McCartney',
+	'Warf'
+);
+INSERT INTO `Usuarios` VALUES(	
+	'S14011615',
+	'Activo',
+	'IDENTIFICADORA2',
+	'Galleta',
+	'McCornic',
+	'Warf'
+);
+INSERT INTO `Usuarios` VALUES(	
+	'S14011616',
+	'Activo',
+	'IDENTIFICADORA3',
+	'Cho',
+	'El loco',
+	'Gomez'
+);
+INSERT INTO `Usuarios` VALUES(	
+	'S14011617',
+	'Activo',
+	'IDENTIFICADORA4',
+	'Gerardo',
+	'Mares',
+	'Solano'
+);
+INSERT INTO `Usuarios` VALUES(	
+	'S14011618',
+	'Activo',
+	'IDENTIFICADORA5',
+	'Cho',
+	'Xalaquia',
+	'Tolstoi'
+);
+
+
+
+INSERT INTO `Items` VALUES (
+	'10',
+	'Wiegers',
+	'Software requirements',
+	'identif001',
+	'2016-05-02',
+	'10.0',
+	'Libro'
+);
+INSERT INTO `Items` VALUES (
+	'10',
+	'Erich Gamma',
+	'Design Pattern',
+	'identif002',
+	'2016-05-02',
+	'10.0',
+	'Libro'
+);
+INSERT INTO `Items` VALUES (
+	'10',
+	'Albin Wiley',
+	'The art of software architecture',
+	'identif003',
+	'2016-05-02',
+	'10.0',
+	'Libro'
+);
+INSERT INTO `Items` VALUES (
+	'10',
+	'Somerville',
+	'Software Engineering',
+	'identif004',
+	'2016-05-02',
+	'10.0',
+	'Libro'
+);
+INSERT INTO `Items` VALUES (
+	'10',
+	'joy Beatty',
+	'Planning elicitation',
+	'identif005',
+	'2016-05-02',
+	'10.0',
+	'Libro'
+);
+
+
+
+INSERT INTO `reservados` VALUES (
+	'0160520234746',
+	'IDENTIFICADORA6',
+	'identif004'
+);
+INSERT INTO `prestamos` VALUES (
+	'2016-05-20',
+	'0160520234746',
+	'identif004',
+	'IDENTIFICADORA6',
+	'2016-05-29'
+);

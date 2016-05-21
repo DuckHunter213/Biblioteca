@@ -1,4 +1,4 @@
-package conexiontests;
+package prestamotests;
 
 import Dominio.Item;
 import Dominio.Libro;
@@ -21,23 +21,19 @@ import static org.junit.Assert.*;
  * Descripción:           Contiene pruebas para registrar registros de la base de datos,
  *                        todas las pruebas son referentes a los items (ItemDAOImpl).
  */
-public class pruebasInsercionesPrestamo {    
-    //<editor-fold defaultstate="collapse" desc="Declaración de varaibles">   
+public class InsercionesPrestamoTest {    
+    //<editor-fold defaultstate="collapse" desc="Declaración de varaibles
     Item item = new Libro();
-    List<Item> items = new ArrayList<>();
-    String matricula = "S140111131";
-    String matriculaErronea = "bloodDrops";
-    String identificador = "S140111132";
-    String folioPrestamo = "teardrops";
-    String folioDevolucion = "Dark horse";
-    String folioErroneo = "sandDrops";
-    Item item2 = new Libro();
-    List<Item> items2 = new ArrayList<>();
+    String identificadorAlumno = "IDENTIFICADORA6";
+    String identificadorItemErroneo = "identif004";
+    String identificadorItem = "identif006";
+    public static final int COSTO_MULTA = 10;
+    public static final int TIEMPO_PRESTAMO= 10;
     ItemDAOImpl instance = new ItemDAOImpl();
     int resultado;
     //</editor-fold>
     
-    public pruebasInsercionesPrestamo() {
+    public InsercionesPrestamoTest() {
     }
     
     //<editor-fold defaultstate="collapse" desc="Opciones de la prueba">
@@ -50,21 +46,15 @@ public class pruebasInsercionesPrestamo {
     }
     
     @Before
-    public void setUp() {        
-        item.setIdentificador("S140111132");
-        item.setTitulo("Como volver a comer lo que ya comiste");
-        item.setAutor("Waffles");
-        item.setCostoMulta(10);
-        item.setFechaAdquisicion(2016, 0, 13);
-        item.setFechaPublicación(2012, 0, 13);
-        item.setTiempoPrestamo(10);        
-        items.add(item);
+    public void setUp() {
+        item.setIdentificador(identificadorItem);
+        item.setCostoMulta(COSTO_MULTA);
+        item.setTiempoPrestamo(TIEMPO_PRESTAMO);
     }
     
     @After
     public void tearDown() throws SQLException {
-        resultado = instance.quitarItemDePrestamo(item.getIdentificador());
-        resultado = instance.quitarItemDeReservacion(item.getIdentificador());
+        instance.quitarItemDePrestamo(identificadorItem);
     }
     //</editor-fold>    
     //<editor-fold defaultstate="collapse" desc="Pruebas">
@@ -72,14 +62,15 @@ public class pruebasInsercionesPrestamo {
     @Test
     public void testPrestarItemExitoso() throws SQLException {
         int expResult = 1;
-        int result = instance.prestarItem(item, matricula);
+        int result = instance.prestarItem(item, identificadorAlumno);
         assertEquals(expResult, result);
     }
     
-    @Test
-    public void testPrestarItemFallido() throws SQLException {
+    @Test (expected = SQLException.class)
+    public void testPrestarItemFallidoId() throws SQLException {
         int expResult = 0;
-        int result = instance.prestarItem(item2, matriculaErronea);
+        item.setIdentificador(identificadorItemErroneo);
+        int result = instance.prestarItem(item, identificadorAlumno);
         assertEquals(expResult, result);
     }
     //</editor-fold>

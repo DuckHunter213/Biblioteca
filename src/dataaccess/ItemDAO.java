@@ -43,7 +43,7 @@ public interface ItemDAO {
      * @return Regresa una retroalimentación al usuario //TODO
      * @throws Exception //TODO
      */
-    public int reservarItem(Item item, String matricula) throws SQLException;
+    public int reservarItem(Item item, String identificadorUsuario) throws SQLException;
 
     /**
      *
@@ -61,5 +61,5 @@ public interface ItemDAO {
      * @return regresa un valor de retroalimentacion //TODO valor booleano
      * @throws java.sql.SQLException
      */
-    public int prestarItem(Item item, String matricula) throws SQLException;
+    public int prestarItem(Item item, String identificadorUsuario) throws SQLException;
 }
