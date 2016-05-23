@@ -2,7 +2,7 @@ package prestamotests;
 
 import Dominio.Item;
 import Dominio.Libro;
-import dataaccess.ItemDAOImpl;
+import dataaccess.prestamoDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class InsercionesPrestamoTest {
     String identificadorItem = "identif006";
     public static final int COSTO_MULTA = 10;
     public static final int TIEMPO_PRESTAMO= 10;
-    ItemDAOImpl instance = new ItemDAOImpl();
+    prestamoDAOImpl instance = new prestamoDAOImpl();
     int resultado;
     //</editor-fold>
     

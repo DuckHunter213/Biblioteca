@@ -30,7 +30,7 @@ public abstract class Item {
     
     private boolean existeItem(ArrayList<Item> items){return false;}
     public boolean agregarItem(Item item){return true;}
-    public List<dataaccess.ItemDAO> regresarTodo(){return null;}
+    public List<dataaccess.bibliotecaDAO> regresarTodo(){return null;}
     
     //<editor-fold defaultstate="collapsed" desc=" Get´s & Set´s ">    
     public String getAutor() {

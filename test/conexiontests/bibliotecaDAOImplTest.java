@@ -2,7 +2,7 @@ package conexiontests;
 
 import Dominio.Item;
 import Dominio.Libro;
-import dataaccess.ItemDAOImpl;
+import dataaccess.bibliotecaDAOImpl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
  * Descripción:           Contiene pruebas generales de busqueda de registros de la base de datos,
  *                        todas las pruebas son referentes a los items (ItemDAOImpl).
  */
-public class ItemDAOImplTest {
+public class bibliotecaDAOImplTest {
     //<editor-fold defaultstate="collapse" desc="Declaración de varaibles
     Item item = new Libro();
     List<Item> items = new ArrayList<>();
@@ -32,11 +32,11 @@ public class ItemDAOImplTest {
     String identificador = "identif001";
     public static final int COSTO_MULTA = 10;
     public static final int TIEMPO_PRESTAMO= 10;
-    ItemDAOImpl instance = new ItemDAOImpl();
+    bibliotecaDAOImpl instance = new bibliotecaDAOImpl();
     int resultado;
     //</editor-fold>
     
-    public ItemDAOImplTest() {
+    public bibliotecaDAOImplTest() {
     }
     
     //<editor-fold defaultstate="collapse" desc="Opciones de la prueba">
