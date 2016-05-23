@@ -7,6 +7,7 @@ package dataaccess;
 
 import Dominio.Item;
 import Dominio.Libro;
+import biblioteca.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,10 +53,10 @@ public class prestamoDAOImpl implements prestamoDAO{
         
         try{
             connection = CONEXION.obtenerConexion();
-            if (ItemEstadoDisponibilidad(item.getIdentificador())== true){
+            if (Util.ItemEstadoDisponibilidad(item.getIdentificador())== true){
                 PreparedStatement sentenciaSQL  = connection.prepareStatement("INSERT INTO prestamos VALUES (?,?,?,?,?)");
                 sentenciaSQL.setDate(1, fechaPrestamoMili);
-                sentenciaSQL.setString(2, generadorDeIdentificador());
+                sentenciaSQL.setString(2, Util.generadorDeIdentificador());
                 sentenciaSQL.setString(3, item.getIdentificador());
                 sentenciaSQL.setString(4, identificadorUsuario);
                 sentenciaSQL.setDate(5, fechaFinPrestamoMili);
@@ -91,34 +92,5 @@ public class prestamoDAOImpl implements prestamoDAO{
         }
         return resultadoDeLaEliminacion;
     }
-    
-    private boolean ItemEstadoDisponibilidad(String identificador) throws SQLException{
-        boolean existeItem = true;
-        Connection connection2;
-        Conexion conexion2 = new Conexion();
-        try{
-            connection2 = conexion2.obtenerConexion();
-            PreparedStatement itemNoDisponible = connection2.prepareStatement("SELECT * FROM reservados WHERE folioReservacion = ?");
-            itemNoDisponible.setString(1, identificador);
-            ResultSet resultadoDisponibilidad = itemNoDisponible.executeQuery();              
-            while (resultadoDisponibilidad.next()){
-                existeItem = false;
-            }             
-        } catch (SQLException ex) {
-            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
-        }finally{
-            conexion2.desconecta();
-        }
-        return existeItem;
-    }
-    
-    private static String generadorDeIdentificador() throws SQLException{
-        Date fecha = new Date();
-        SimpleDateFormat formateadorDeFecha = new SimpleDateFormat("yyyMMddHHmmss");
-        String identificadorGenerado = formateadorDeFecha.format(fecha);
-        identificadorGenerado = (String) identificadorGenerado.subSequence(1, identificadorGenerado.length());
-        return identificadorGenerado;
-    }
-    
-    
+        
 }
