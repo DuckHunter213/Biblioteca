@@ -132,6 +132,16 @@ ALTER TABLE `Prestamos`
 SET FOREIGN_KEY_CHECKS=1;
 
 
+delimiter //
+create procedure consultaDisponibilidad (IN folio varchar(15)) 
+	BEGIN
+	select * from prestamos where folioPrestamo = folio;
+	select * from reservados where folioReservacion = folio;
+	END
+//
+
+delimiter ;
+
 
 INSERT INTO `Usuarios` VALUES(	
 	'S14011614',
@@ -236,3 +246,4 @@ INSERT INTO `prestamos` VALUES (
 	'IDENTIFICADORA6',
 	'2016-05-29'
 );
+
