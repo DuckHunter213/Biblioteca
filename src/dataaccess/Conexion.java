@@ -3,17 +3,14 @@ package dataaccess;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- * Nombre del programa:   Biblioteca
- * Nombres:               @author Luis Fernando Gomez Alejandre
- *                        @author Francisco Gerardo Mares Solano
- * Fecha:                 @since 18/04/2016
- * Descripción:           Es la implementación del patrón DAO para el item,
- *                        sus métodos son genéricos para el interface ItemDAO
- *                        y mediante polimorfismo resuelve las funcinalidades necesarias.
+ * Es la implementación del patrón DAO para el item, sus métodos son genéricos
+ * para el interface ItemDAO y mediante polimorfismo resuelve las
+ * funcinalidades necesarias.
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 18/04/2016
  */
 
 public class Conexion {

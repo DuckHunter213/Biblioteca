@@ -1,26 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import Dominio.Item;
-import Dominio.Libro;
 import biblioteca.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
  *
- * @author gerar
+ * @author Francisco Gerardo Mares Solano
  */
 public class prestamoDAOImpl implements prestamoDAO{
     private final Conexion CONEXION;

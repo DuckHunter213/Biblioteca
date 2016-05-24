@@ -4,12 +4,10 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 /**
- * Nombre del programa:    Biblioteca
- * Nombres:                @author Luis Fernando Gomez Alejandre
- *                         @author Francisco Gerardo Mares Solano
- * Fecha:                  @since 20/05/2016
- * Descripción:            Clase prestamo es generada cada ves que se piden
- *                         items
+ * Clase prestamo es generada cada ves que se piden items
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 20/05/2016
  */
 public class Prestamo {
     private Item item;

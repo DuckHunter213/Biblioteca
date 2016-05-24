@@ -7,21 +7,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
- * Nombre del programa:   Biblioteca
- * Nombres:               @author Luis Fernando Gomez Alejandre
- *                        @author Francisco Gerardo Mares Solano
- * Fecha:                 @since 20/05/2016
- * Descripción:           Es la implementación del patrón DAO para el item,
- *                        sus métodos son genéricos para el interface ItemDAO
- *                        y mediante polimorfismo resuelve las funcinalidades necesarias.
+ * Es la implementación del patrón DAO para el item,sus métodos son genéricos
+ * para el interface ItemDAO y mediante polimorfismo resuelve las
+ * funcinalidades necesarias.
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 20/05/2016
  */
 public class bibliotecaDAOImpl implements bibliotecaDAO{
     private final Conexion CONEXION;
@@ -34,8 +29,11 @@ public class bibliotecaDAOImpl implements bibliotecaDAO{
     }
 
     /**
+     * Clase generica que es ocupada por todas las clases que puedan manejar
+     * items
      * @param identificador 
-     * @return Se regresa una lista de items 
+     * @return Se regresa una lista de items en caso de no encontrar ninguno
+     * regresara la lista vacia 
      * @throws SQLException
      */
     @Override
@@ -43,7 +41,7 @@ public class bibliotecaDAOImpl implements bibliotecaDAO{
         List<Item> items = new ArrayList<>();
         try{
             connection = CONEXION.obtenerConexion();
-            PreparedStatement sentenciaSQL  = connection.prepareStatement("SELECT titulo, identificador, categoria FROM Items WHERE identificador = ?");            
+            PreparedStatement sentenciaSQL  = connection.prepareStatement("SELECT titulo, identificador,  categoria FROM Items WHERE identificador = ?");            
             sentenciaSQL.setString(1, identificador);
             resultados = sentenciaSQL.executeQuery();
             

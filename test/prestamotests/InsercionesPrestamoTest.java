@@ -14,15 +14,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Nombre del programa:   Biblioteca
- * Nombres:               @author Luis Fernando Gomez Alejandre
- *                        @author Francisco Gerardo Mares Solano
- * Fecha:                 @since 20/05/2016
- * Descripción:           Contiene pruebas para registrar registros de la base de datos,
- *                        todas las pruebas son referentes a los items (ItemDAOImpl).
+ * Contiene pruebas para registrar registros de la base de datos, todas las
+ * pruebas son referentes a la clase prestamo                   
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 20/05/2016
  */
 public class InsercionesPrestamoTest {    
-    //<editor-fold defaultstate="collapse" desc="Declaración de varaibles
+    //<editor-fold defaultstate="collapse" desc="Declaración de varaibles ">
     Item item = new Libro();
     String identificadorAlumno = "IDENTIFICADORA6";
     String identificadorItemErroneo = "identif004";

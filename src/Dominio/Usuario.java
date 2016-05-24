@@ -5,14 +5,11 @@ import sun.security.util.Password;
 
 
 /**
- * Nombre del programa:    Biblioteca
- * Nombres:                @author Luis Fernando Gomez Alejandre
- *                         @author Francisco Gerardo Mares Solano
- * Fecha:                  @since 20/05/2016
- * Descripción:            Es el objeto del dominio de la clase usuario que es
- *                         creado cada ves que va a ser registrado
- * 
- * 
+ * Es el objeto del dominio de la clase usuario que es creado cada ves que va
+ * a ser registrado
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 20/05/2016
  */
 public class Usuario {
     private Password contrasenia;
@@ -24,7 +21,7 @@ public class Usuario {
     private int numeroDePrestamosActivos;
     private NumberFormat multaAcumulada;
     
-
+    //<editor-fold defaultstate="collapse" desc="Get's and Set's  ">
     /**
      * @return the contrasenia
      */
@@ -122,4 +119,5 @@ public class Usuario {
     public void setNumeroDePrestamosActivos(int numeroDePrestamosActivos) {
         this.numeroDePrestamosActivos = numeroDePrestamosActivos;
     }
+    //</editor-fold>
 }
