@@ -54,7 +54,9 @@ public class prestamoDAOImpl implements prestamoDAO{
                 sentenciaSQL.setString(4, identificadorUsuario);
                 sentenciaSQL.setDate(5, fechaFinPrestamoMili);
                 resultadoDeAgregacion = sentenciaSQL.executeUpdate();           
-            }            
+            }else{
+                return 0;
+            }        
         } catch (SQLException ex) {
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{

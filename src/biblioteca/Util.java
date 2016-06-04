@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package biblioteca;
 
 import dataaccess.Conexion;
@@ -14,8 +9,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
- * @author gerar
+ * Nombre del programa:   Biblioteca
+ * Nombres:               @author Luis Fernando Gomez Alejandre
+ *                        @author Francisco Gerardo Mares Solano
+ * Fecha:                 @since 23/05/2016
+ * Descripción:           Es la implementación del patrón DAO para el item,
+ *                        sus métodos son genéricos para el interface ItemDAO
+ *                        y mediante polimorfismo resuelve las funcinalidades necesarias.
  */
 public class Util {
     
@@ -30,7 +30,7 @@ public class Util {
             ResultSet resultadoDisponibilidad = itemNoDisponible.executeQuery();              
             while (resultadoDisponibilidad.next()){
                 existeItem = false;
-            }             
+            }
         } catch (SQLException ex) {
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{
