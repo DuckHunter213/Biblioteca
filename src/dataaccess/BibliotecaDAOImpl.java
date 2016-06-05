@@ -43,7 +43,7 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
             connection = CONEXION.obtenerConexion();
             PreparedStatement sentenciaSQL  = connection.prepareStatement("SELECT * FROM Items WHERE identificador = ?");            
             sentenciaSQL.setString(1, identificador);
-            resultados = sentenciaSQL.executeQuery();            
+            resultados = sentenciaSQL.executeQuery();
             Item item = null;
             while(resultados.next()){
                 item = capturarItem(item);
@@ -73,7 +73,8 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
         }
         return item;
     }
-
+    
+            
     @Override
     public int getTiempoPrestamoDeItem(String identificador) throws SQLException {
         int tiempoPrestamo = 0;

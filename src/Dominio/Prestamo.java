@@ -3,6 +3,7 @@ package Dominio;
 import java.util.GregorianCalendar;
 import biblioteca.Util;
 import dataaccess.BibliotecaDAOImpl;
+import dataaccess.PrestamoDAOImpl;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
@@ -51,12 +52,13 @@ public class Prestamo {
     
     public boolean setMatriculaUsuario(String matriculaUsuario){
         boolean estadoSetMatricula=false;
-        if (matriculaUsuario.length() == 15 && (matriculaUsuario.toLowerCase()).startsWith("i") ){
+        if (Util.verificarIdentificadorAlumno(matriculaUsuario)){
             this.matriculaUsuario  = matriculaUsuario;
             estadoSetMatricula = true;
         }
         return estadoSetMatricula;
     }
+    
     public String getMatriculaUsuario(){
         return this.matriculaUsuario;
     }
@@ -69,4 +71,14 @@ public class Prestamo {
         return this.item.getIdentificador();
     }
     
+    public int realizarPrestamo() throws SQLException{
+        PrestamoDAOImpl prestamoDAO = new PrestamoDAOImpl();
+        int estadoPrestamo = 0;
+        try{
+            estadoPrestamo = prestamoDAO.prestarItem(this);            
+        }catch(SQLException ex){
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
+        }
+        return estadoPrestamo;
+    }
 }

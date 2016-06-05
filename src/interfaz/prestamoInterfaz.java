@@ -5,6 +5,12 @@
  */
 package interfaz;
 
+import Dominio.Biblioteca;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author gerar
@@ -126,11 +132,48 @@ public class prestamoInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_botonRegresarActionPerformed
 
     private void botonAceptarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarPrestamoActionPerformed
-        String idenfiticadorItem = identificadorItemTexto.getText();
+        String identificadorItem = identificadorItemTexto.getText();
         String identificadorAlumno = matriculaAlumnoTexto.getText();
-        Biblioteca biblioteca = new Biblioteca();
+        int estadoPrestamo = 0;
+        try {
+            estadoPrestamo = realizarPrestamo(identificadorItem, identificadorAlumno);
+            if(estadoPrestamo == 1){
+                JOptionPane.showMessageDialog(null, "El préstamo se ha realizado con éxito", "Préstamo correcto", JOptionPane.INFORMATION_MESSAGE);
+            }else if(estadoPrestamo == -1){
+                JOptionPane.showMessageDialog(null, "El usuario ya superó su límite de préstamos", "Ocurrió un problema", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Lo lamentamos, ha ocurrido un error con la conexión a la Base de Datos", "Ocurrió un problema", JOptionPane.WARNING_MESSAGE);
+        }
+        //if (estadoPrestamo)
     }//GEN-LAST:event_botonAceptarPrestamoActionPerformed
 
+    private static int realizarPrestamo(String identificadorItem, String identificadorAlumno)throws SQLException{
+        Biblioteca biblioteca = new Biblioteca();
+        int estadoPrestamo = 0;
+        if (biblioteca.verificarMatricula(identificadorAlumno)){
+            if (biblioteca.verificarItem(identificadorItem)){
+                int confirmacionPrestamo = JOptionPane.showConfirmDialog(null, "¿Está seguro?");
+                if (confirmacionPrestamo == 0){
+                    try {
+                        if (biblioteca.realizarPrestamo(identificadorItem, identificadorAlumno))
+                            estadoPrestamo = 1;
+                        else
+                            estadoPrestamo = -1;
+                    } catch (SQLException ex) {
+                        throw new SQLException("Hubo un error con la BD: " + ex.getMessage());                    
+                    }                    
+                }else{
+                    estadoPrestamo = 0;
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "El identificador del item es inválido", "Datos erroneos", JOptionPane.WARNING_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "La matricula introducide es inválida", "Datos erroneos", JOptionPane.WARNING_MESSAGE);
+        }
+        return estadoPrestamo;
+    }
     /**
      * @param args the command line arguments
      */

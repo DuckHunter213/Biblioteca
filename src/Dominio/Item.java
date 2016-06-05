@@ -2,9 +2,7 @@ package Dominio;
 
 import dataaccess.BibliotecaDAOImpl;
 import java.sql.SQLException;
-import java.util.List;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -25,14 +23,6 @@ public abstract class Item {
     private Calendar fechaPublicación = Calendar.getInstance();
     private NumberFormat costoMulta = NumberFormat.getInstance();
     private int tiempoPrestamo;
-    
-    public List<Item> buscarItem(String codigoBarras, ArrayList listaItems, String tipoItem, String filtroBusqueda){return null;}
-    public boolean actualizarItem(){return false;}
-    public boolean eliminarItem(){return false;}
-    
-    private boolean existeItem(ArrayList<Item> items){return false;}
-    public boolean agregarItem(Item item){return true;}
-    public List<dataaccess.BibliotecaDAO> regresarTodo(){return null;}
     
     //<editor-fold defaultstate="collapsed" desc=" Get´s & Set´s ">    
     public String getAutor() {

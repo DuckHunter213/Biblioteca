@@ -46,5 +46,11 @@ public class Util {
         identificadorGenerado = (String) identificadorGenerado.subSequence(1, identificadorGenerado.length());
         return identificadorGenerado;
     }
+    public static boolean verificarIdentificadorAlumno(String identificador) {        
+        return identificador.length() == 15 && (identificador.toLowerCase()).startsWith("i");
+    }
+    public static boolean verificarIdentificadorItem(String identificador){
+        return identificador.length() == 10 && (identificador.toLowerCase()).startsWith("i");
+    }
     
 }
