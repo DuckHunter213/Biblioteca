@@ -32,7 +32,6 @@ public class ReservacionDAOImpl implements ReservacionDAO{
      * de no haber podido capturar el item 
      * @throws java.sql.SQLException 
      */
-    @Override
     public int reservarItem(Item item, String identificadorUsuario) throws SQLException{
         int resultadoDeAgregacion = 0;
         try{

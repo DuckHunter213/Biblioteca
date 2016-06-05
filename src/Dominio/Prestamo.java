@@ -45,6 +45,9 @@ public class Prestamo {
     public Long getFechaCaducidad(){
         return this.fechaCaducidad.getTime();
     }
+    public String getFechaCaducidadNormal(){
+        return this.fechaCaducidad.toString();
+    }
     
     public String getIdentificadorPrestamo(){
         return this.identificadorPrestamo;
@@ -75,7 +78,7 @@ public class Prestamo {
         PrestamoDAOImpl prestamoDAO = new PrestamoDAOImpl();
         int estadoPrestamo = 0;
         try{
-            estadoPrestamo = prestamoDAO.prestarItem(this);            
+            estadoPrestamo = prestamoDAO.prestarItem(this);          
         }catch(SQLException ex){
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }

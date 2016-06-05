@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -19,24 +20,57 @@ import java.util.Date;
  */
 public class Util {
     
-    public static boolean ItemEstadoDisponibilidad(String identificador) throws SQLException{
-        boolean existeItem = true;
-        Connection connection2;
-        Conexion conexion2 = new Conexion();
+    public static boolean itemEstadoDisponibilidad(String identificador) throws SQLException{
+        boolean disponibilidadItem = true;
+        Conexion CONEXION;
+        Connection connection;
+        Statement consulta;
+        ResultSet resultadoDisponibilidad;
+        CONEXION = new Conexion();
+        
         try{
-            connection2 = conexion2.obtenerConexion();
-            PreparedStatement itemNoDisponible = connection2.prepareStatement("call consultaDisponibilidad (?)");
+            connection = CONEXION.obtenerConexion();
+            PreparedStatement itemNoDisponible = connection.prepareStatement("call consultaDisponibilidad (?)");
             itemNoDisponible.setString(1, identificador);
-            ResultSet resultadoDisponibilidad = itemNoDisponible.executeQuery();              
+            resultadoDisponibilidad = itemNoDisponible.executeQuery();              
             while (resultadoDisponibilidad.next()){
-                existeItem = false;
+                disponibilidadItem = false;
             }
         } catch (SQLException ex) {
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{
-            conexion2.desconecta();
+            CONEXION.desconecta();
         }
-        return existeItem;
+        return disponibilidadItem;
+    }    
+    
+    public static boolean revisarLimitePrestamos(String identificador) throws SQLException{
+        boolean disponibilidadUsuario = true;
+        Conexion CONEXION;
+        Connection connection;
+        Statement consulta;
+        ResultSet resultadoDisponibilidad;
+        CONEXION = new Conexion();
+        
+        try{
+            connection = CONEXION.obtenerConexion();
+            PreparedStatement itemNoDisponible = connection.prepareStatement("select identificadorUsuario from prestamos where identificadorUsuario = ?");
+            itemNoDisponible.setString(1, identificador);
+            resultadoDisponibilidad = itemNoDisponible.executeQuery();
+            int contadorPrestamos = 0;
+            while (resultadoDisponibilidad.next()){
+                contadorPrestamos += 1;
+                if (contadorPrestamos==3){
+                    disponibilidadUsuario = false;
+                    break;
+                }
+            }
+        } catch (SQLException ex) {
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
+        }finally{
+            CONEXION.desconecta();
+        }
+        return disponibilidadUsuario;
     }
     
     public static String generadorDeIdentificador() throws SQLException{

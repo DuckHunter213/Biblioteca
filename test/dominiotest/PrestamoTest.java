@@ -8,6 +8,7 @@ package dominiotest;
 import Dominio.Item;
 import Dominio.Libro;
 import Dominio.Prestamo;
+import dataaccess.PrestamoDAO;
 import dataaccess.PrestamoDAOImpl;
 import java.sql.SQLException;
 import org.junit.After;
@@ -53,7 +54,9 @@ public class PrestamoTest {
     }
     
     @After
-    public void tearDown() {
+    public void tearDown() throws SQLException {
+        PrestamoDAO prestamoDAO = new PrestamoDAOImpl();
+        prestamoDAO.quitarItemDePrestamo(identificadorItem);
     }
 
     /**
@@ -96,4 +99,26 @@ public class PrestamoTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Test of realizarPrestamo method, of class Prestamo.
+     * @throws java.sql.SQLException
+     */
+    @Test
+    public void testRealizarPrestamoExitoso() throws SQLException {
+        int expResult = 1;
+        int result = prestamo.realizarPrestamo();
+        assertEquals(expResult, result);
+    }
+    /**
+     * Test of realizarPrestamo method, of class Prestamo.
+     * @throws java.sql.SQLException
+     */
+    @Test (expected = SQLException.class)
+    public void testRealizarPrestamoFallido() throws SQLException {
+        int expResult = 1;
+        item.setIdentificador(identificadorAlumno);
+        prestamo.setItem(item);
+        int result = prestamo.realizarPrestamo();
+        assertEquals(expResult, result);
+    }    
 }

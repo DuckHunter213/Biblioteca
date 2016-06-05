@@ -133,10 +133,11 @@ SET FOREIGN_KEY_CHECKS=1;
 
 
 delimiter //
-create procedure consultaDisponibilidad (IN folio varchar(15)) 
+DROP PROCEDURE `consultaDisponibilidad` //
+CREATE PROCEDURE consultaDisponibilidad (IN id varchar(16)) 
 	BEGIN
-	select * from prestamos where folioPrestamo = folio;
-	select * from reservados where folioReservacion = folio;
+		select identificadorItem from prestamos Where identificadorItem = id;
+		select identificadorItem from reservados Where identificadorItem = id;
 	END
 //
 

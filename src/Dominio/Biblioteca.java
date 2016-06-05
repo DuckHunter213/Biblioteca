@@ -16,8 +16,10 @@ import java.util.List;
  * @author gerar
  */
 public class Biblioteca {
+    public List<Prestamo> prestamos = null;
+    
     public Biblioteca(){
-        
+        prestamos = new ArrayList<>();
     }
     public List<Item> buscarItem(String identificador) throws SQLException{
         List<Item> items = new ArrayList<>();
@@ -36,17 +38,41 @@ public class Biblioteca {
     public boolean verificarItem(String identificadorItem){
         return Util.verificarIdentificadorItem(identificadorItem);
     }
-    public boolean realizarPrestamo(String identificadorItem, String identificadorAlumno) throws SQLException{
+    public String generarPrestamo(String identificadorItem, String identificadorAlumno) throws SQLException{
         List items = new ArrayList<>();
+        String identificadorPrestamo = "";
         try{
             items = buscarItem(identificadorItem);
             Prestamo prestamo =  new Prestamo((Item) items.get(0));
             prestamo.setMatriculaUsuario(identificadorAlumno);
-            prestamo.realizarPrestamo();
+            identificadorPrestamo = prestamo.getIdentificadorPrestamo();
+            prestamos.add(prestamo);
         }catch(SQLException ex){
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());            
         }
-        return true;
+        return identificadorPrestamo;
+    }
+    public String verFechaFinPrestamo(String identificadorPrestamo){
+        Prestamo prestamo = null;
+        for(int i=0;i<prestamos.size();i++) {
+            if (prestamos.get(i).getIdentificadorPrestamo().equals(identificadorPrestamo))
+                prestamo  =  prestamos.get(i);
+        }
+        return prestamo.getFechaCaducidadNormal();
+    }
+    public int realizarPrestamo(String identificadorPrestamo) throws SQLException{
+        int estadoPrestamo = 0;
+        Prestamo prestamo = null;
+        for(int i=0;i<prestamos.size();i++) {
+            if (prestamos.get(i).getIdentificadorPrestamo().equals(identificadorPrestamo))
+                prestamo  =  prestamos.get(i);
+        }
+        try{
+            estadoPrestamo = prestamo.realizarPrestamo();
+        }catch(SQLException ex){
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());            
+        }
+        return estadoPrestamo;
     }
     
 }
