@@ -38,13 +38,12 @@ public class Biblioteca {
     public boolean verificarItem(String identificadorItem){
         return Util.verificarIdentificadorItem(identificadorItem);
     }
-    public String generarPrestamo(String identificadorItem, String identificadorAlumno) throws SQLException{
+    public String generarPrestamo(String identificadorItem) throws SQLException{
         List items = new ArrayList<>();
         String identificadorPrestamo = "";
         try{
             items = buscarItem(identificadorItem);
-            Prestamo prestamo =  new Prestamo((Item) items.get(0));
-            prestamo.setMatriculaUsuario(identificadorAlumno);
+            Prestamo prestamo =  new Prestamo((Item) items.get(0));          
             identificadorPrestamo = prestamo.getIdentificadorPrestamo();
             prestamos.add(prestamo);
         }catch(SQLException ex){
@@ -60,7 +59,7 @@ public class Biblioteca {
         }
         return prestamo.getFechaCaducidadNormal();
     }
-    public int realizarPrestamo(String identificadorPrestamo) throws SQLException{
+    public int realizarPrestamo(String identificadorPrestamo, String identificadorAlumno) throws SQLException{
         int estadoPrestamo = 0;
         Prestamo prestamo = null;
         for(int i=0;i<prestamos.size();i++) {
@@ -68,7 +67,9 @@ public class Biblioteca {
                 prestamo  =  prestamos.get(i);
         }
         try{
-            estadoPrestamo = prestamo.realizarPrestamo();
+            boolean estadoMatricula = prestamo.setMatriculaUsuario(identificadorAlumno);
+            if (estadoMatricula)
+                estadoPrestamo = prestamo.realizarPrestamo();
         }catch(SQLException ex){
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());            
         }

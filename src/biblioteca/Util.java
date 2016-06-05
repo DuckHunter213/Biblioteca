@@ -1,5 +1,6 @@
 package biblioteca;
 
+import dataaccess.BibliotecaDAOImpl;
 import dataaccess.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -80,8 +81,13 @@ public class Util {
         identificadorGenerado = (String) identificadorGenerado.subSequence(1, identificadorGenerado.length());
         return identificadorGenerado;
     }
-    public static boolean verificarIdentificadorAlumno(String identificador) {        
-        return identificador.length() == 15 && (identificador.toLowerCase()).startsWith("i");
+    public static boolean verificarIdentificadorAlumno(String identificador) throws SQLException {
+        boolean estado = false;
+            BibliotecaDAOImpl biblioteca = new BibliotecaDAOImpl();
+            if (biblioteca.verificarAlumno(identificador)){
+                estado = identificador.length() == 15 && (identificador.toLowerCase()).startsWith("i");
+            }
+        return estado;
     }
     public static boolean verificarIdentificadorItem(String identificador){
         return identificador.length() == 10 && (identificador.toLowerCase()).startsWith("i");

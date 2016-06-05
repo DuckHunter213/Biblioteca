@@ -148,7 +148,7 @@ public class PrestamoInterfaz extends javax.swing.JFrame {
             estadoPrestamo = realizarPrestamo(identificadorItem, identificadorAlumno);
             switch (estadoPrestamo) {
                 case MATRICULA_INVALIDA:
-                    JOptionPane.showMessageDialog(null, "La matricula introducide es inválida", "Datos erroneos", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "La matricula introducide es inválida o no existe ese usuario", "Datos erroneos", JOptionPane.WARNING_MESSAGE);
                     break;
                 case ITEM_INVALIDO:
                     JOptionPane.showMessageDialog(null, "El identificador del item es inválido", "Datos erroneos", JOptionPane.WARNING_MESSAGE);
@@ -168,6 +168,8 @@ public class PrestamoInterfaz extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Lo lamentamos, ha ocurrido un error con la conexión a la Base de Datos", "Ocurrió un problema", JOptionPane.WARNING_MESSAGE);
+        } catch (ArrayIndexOutOfBoundsException ex){
+            JOptionPane.showMessageDialog(null, "Lo lamentamos, el item no está registrado", "Ocurrió un problema", JOptionPane.WARNING_MESSAGE);
         }
         //if (estadoPrestamo)
     }//GEN-LAST:event_botonAceptarPrestamoActionPerformed
@@ -179,11 +181,11 @@ public class PrestamoInterfaz extends javax.swing.JFrame {
                 int confirmacionPrestamo = JOptionPane.showConfirmDialog(null, "¿Está seguro?");
                 if (confirmacionPrestamo == 0){
                     try {
-                        identificadorPrestamo = biblioteca.generarPrestamo(identificadorItem, identificadorAlumno);
-                        estadoPrestamo = biblioteca.realizarPrestamo(identificadorPrestamo);
+                        identificadorPrestamo = biblioteca.generarPrestamo(identificadorItem);
+                        estadoPrestamo = biblioteca.realizarPrestamo(identificadorPrestamo, identificadorAlumno);
                     } catch (SQLException ex) {
                         throw new SQLException("Hubo un error con la BD: " + ex.getMessage());                    
-                    }                    
+                    }
                 }else{
                     estadoPrestamo = ACCION_CANCELADA;
                 }

@@ -120,7 +120,7 @@ public class vistaPreviaItem extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel autorCampo;
     private javax.swing.JPanel datosItemPanel;
-    private javax.swing.JButton elegirItemBoton;
+    public javax.swing.JButton elegirItemBoton;
     private javax.swing.JPanel footer;
     private javax.swing.JLabel nombreItemCampo;
     private javax.swing.JLabel tipoItemCampo;

@@ -53,11 +53,11 @@ public class Prestamo {
         return this.identificadorPrestamo;
     }
     
-    public boolean setMatriculaUsuario(String matriculaUsuario){
-        boolean estadoSetMatricula=false;
+    public boolean setMatriculaUsuario(String matriculaUsuario) throws SQLException{
+        boolean estadoSetMatricula = false;
         if (Util.verificarIdentificadorAlumno(matriculaUsuario)){
-            this.matriculaUsuario  = matriculaUsuario;
-            estadoSetMatricula = true;
+                this.matriculaUsuario = matriculaUsuario;
+                estadoSetMatricula = true;
         }
         return estadoSetMatricula;
     }

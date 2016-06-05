@@ -7,6 +7,8 @@ package interfaz;
 
 import Dominio.Biblioteca;
 import Dominio.Item;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,15 +33,22 @@ public class SeleccionarItemInterfaz extends javax.swing.JFrame {
     public void mostrarItems() throws SQLException{
         List<Item> items = new ArrayList<>();
         items = biblioteca.getItems();
-        for (int i=0;i<=items.size();i++){            
-            //instancia nueva a componente
+        for (int i=0;i<=items.size();i++){
             vistaPreviaItem vistaItem = new vistaPreviaItem(items.get(i));
-            //jpc.btn.addActionListener(this);//escucha eventos
-            this.add(vistaItem);//se añade al jpanel
+            vistaItem.elegirItemBoton.addActionListener((ActionListener) this);//escucha eventos
+            this.add(vistaItem);
             this.validate();
-            //se añade al MAP
-            //this.nota.put("key_" + index, jpc );
         }
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        //se obtiene el comando ejecutado
+        String comando = e.getActionCommand();
+        ReservacionInterfaz reservacion = new ReservacionInterfaz();
+        reservacion.setVisible(true);
+        reservacion.setTitle("Prestar Item");
+        dispose();
+        
     }
 
     /**
