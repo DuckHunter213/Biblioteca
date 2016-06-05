@@ -18,13 +18,13 @@ import java.util.List;
  * @author Francisco Gerardo Mares Solano
  * @since 20/05/2016
  */
-public class bibliotecaDAOImpl implements bibliotecaDAO{
+public class BibliotecaDAOImpl implements BibliotecaDAO{
     private final Conexion CONEXION;
     private Connection connection;
     private Statement consulta;
     private ResultSet resultados;
     
-    public bibliotecaDAOImpl(){
+    public BibliotecaDAOImpl(){
         CONEXION = new Conexion();
     }
 
@@ -41,16 +41,14 @@ public class bibliotecaDAOImpl implements bibliotecaDAO{
         List<Item> items = new ArrayList<>();
         try{
             connection = CONEXION.obtenerConexion();
-            PreparedStatement sentenciaSQL  = connection.prepareStatement("SELECT titulo, identificador,  categoria FROM Items WHERE identificador = ?");            
+            PreparedStatement sentenciaSQL  = connection.prepareStatement("SELECT * FROM Items WHERE identificador = ?");            
             sentenciaSQL.setString(1, identificador);
-            resultados = sentenciaSQL.executeQuery();
-            
+            resultados = sentenciaSQL.executeQuery();            
             Item item = null;
             while(resultados.next()){
-                item = capturarTipoItem(item);
+                item = capturarItem(item);
                 items.add(item);
-            } 
-            
+            }             
         } catch (SQLException ex) {
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{
@@ -62,14 +60,39 @@ public class bibliotecaDAOImpl implements bibliotecaDAO{
     /**
      * Seteo de items segun su categoria aplica para la implementación
      */
-    private Item capturarTipoItem(Item item) throws SQLException{
+    private Item capturarItem(Item item) throws SQLException{
         if (resultados != null){
             String categoria = resultados.getString("categoria");
             if (categoria.equals("Libro"))
                 item = new Libro();
             item.setIdentificador(resultados.getString("identificador"));
-            item.setTitulo(resultados.getString("Titulo"));            
+            item.setTitulo(resultados.getString("titulo"));
+            item.setAutor(resultados.getString("autor"));
+            item.setTiempoPrestamo(resultados.getInt("tiempoPrestamo"));
+            item.setCostoMulta(resultados.getInt("costoMulta"));
         }
         return item;
+    }
+
+    @Override
+    public int getTiempoPrestamoDeItem(String identificador) throws SQLException {
+        int tiempoPrestamo = 0;
+        try{
+            connection = CONEXION.obtenerConexion();
+            PreparedStatement sentenciaSQL  = connection.prepareStatement("SELECT * FROM items WHERE identificador = ?");
+            sentenciaSQL.setString(1,identificador);
+            resultados = sentenciaSQL.executeQuery();
+            
+            Item item = null;
+            while(resultados.next()){
+                item = capturarItem(item);
+            } 
+            tiempoPrestamo = item.getTiempoPrestamo();
+        } catch (SQLException ex) {
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
+        }finally{
+            CONEXION.desconecta();
+        }
+        return tiempoPrestamo;
     }
 }

@@ -2,7 +2,7 @@ package reservaciontests;
 
 import Dominio.Item;
 import Dominio.Libro;
-import dataaccess.reservacionDAOImpl;
+import dataaccess.ReservacionDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class BorrarReservacionTest {
     String identificadorItem = "identif006";
     public static final int COSTO_MULTA = 10;
     public static final int TIEMPO_PRESTAMO= 10;
-    reservacionDAOImpl instance = new reservacionDAOImpl();
+    ReservacionDAOImpl instance = new ReservacionDAOImpl();
     int resultado;
     //</editor-fold>
     

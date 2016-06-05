@@ -2,6 +2,7 @@ package dataaccess;
 
 import Dominio.Item;
 import biblioteca.Util;
+import Dominio.Prestamo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,47 +16,40 @@ import java.util.GregorianCalendar;
  *
  * @author Francisco Gerardo Mares Solano
  */
-public class prestamoDAOImpl implements prestamoDAO{
+public class PrestamoDAOImpl implements PrestamoDAO{
     private final Conexion CONEXION;
     private Connection connection;
     private Statement consulta;
     private ResultSet resultados;
     
-    public prestamoDAOImpl(){
+    public PrestamoDAOImpl(){
         CONEXION = new Conexion();
     }
     
     /**
      *
-     * @param item
+     * @param prestamo
      * @param identificadorUsuario
-     * @param matricula
      * @return
      */
     @Override
-    public int prestarItem(Item item, String identificadorUsuario) throws SQLException{
+    public int prestarItem(Prestamo prestamo) throws SQLException{
         int resultadoDeAgregacion = 0;
-        Calendar calendario = GregorianCalendar.getInstance();
-        Date fechaPrestamo = new Date(); 
-        fechaPrestamo.setTime(calendario.getTimeInMillis());
-        calendario.add(Calendar.DAY_OF_WEEK_IN_MONTH, item.getTiempoPrestamo());
-        Date fechaFinPrestamo = new Date();
-        fechaFinPrestamo.setTime(calendario.getTimeInMillis());
-        java.sql.Date fechaPrestamoMili = new java.sql.Date(fechaPrestamo.getTime());
-        java.sql.Date fechaFinPrestamoMili = new java.sql.Date(fechaFinPrestamo.getTime());
+        java.sql.Date fechaPrestamoMili = new java.sql.Date(prestamo.getFechaPrestamo());
+        java.sql.Date fechaFinPrestamoMili = new java.sql.Date(prestamo.getFechaCaducidad());
         
         try{
             connection = CONEXION.obtenerConexion();
-            if (Util.ItemEstadoDisponibilidad(item.getIdentificador())== true){
+            if (Util.ItemEstadoDisponibilidad(prestamo.getIdentificadorItem())== true){
                 PreparedStatement sentenciaSQL  = connection.prepareStatement("INSERT INTO prestamos VALUES (?,?,?,?,?)");
                 sentenciaSQL.setDate(1, fechaPrestamoMili);
-                sentenciaSQL.setString(2, Util.generadorDeIdentificador());
-                sentenciaSQL.setString(3, item.getIdentificador());
-                sentenciaSQL.setString(4, identificadorUsuario);
+                sentenciaSQL.setString(2, prestamo.getIdentificadorPrestamo());
+                sentenciaSQL.setString(3, prestamo.getIdentificadorItem());
+                sentenciaSQL.setString(4, prestamo.getMatriculaUsuario());
                 sentenciaSQL.setDate(5, fechaFinPrestamoMili);
                 resultadoDeAgregacion = sentenciaSQL.executeUpdate();           
             }else{
-                return 0;
+                resultadoDeAgregacion = 0;
             }        
         } catch (SQLException ex) {
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());

@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/dataaccess/ItemDAO.java</file>
-            <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/dataaccess/ItemDAOImpl.java</file>
-            <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/Dominio/Prestamo.java</file>
-            <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/Dominio/Item.java</file>
-            <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/demoDAO/Main.java</file>
-            <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/Dominio/Devolucion.java</file>
-            <file>file:/C:/Users/DARKENSES/Documents/GitHub/Proyecto_Biblioteca/Biblioteca/Biblioteca/src/Dominio/Libro.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/dataaccess/bibliotecaDAOImpl.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/dataaccess/prestamoDAOImpl.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/biblioteca/Util.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/dataaccess/reservacionDAOImpl.java</file>
         </group>
     </open-files>
 </project-private>

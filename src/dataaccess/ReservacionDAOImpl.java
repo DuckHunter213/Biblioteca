@@ -13,13 +13,13 @@ import java.sql.Statement;
  * @author Francisco Gerardo Mares Solano
  * @since 24/05/2016
  */
-public class reservacionDAOImpl implements reservacionDAO{
+public class ReservacionDAOImpl implements ReservacionDAO{
     private final Conexion CONEXION;
     private Connection connection;
     private Statement consulta;
     private ResultSet resultados;
     
-    public reservacionDAOImpl(){
+    public ReservacionDAOImpl(){
         CONEXION = new Conexion();
     }
     

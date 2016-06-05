@@ -2,7 +2,8 @@ package prestamotests;
 
 import Dominio.Item;
 import Dominio.Libro;
-import dataaccess.prestamoDAOImpl;
+import Dominio.Prestamo;
+import dataaccess.PrestamoDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +21,16 @@ import static org.junit.Assert.*;
  * @author Francisco Gerardo Mares Solano
  * @since 20/05/2016
  */
-public class InsercionesPrestamoTest {    
+public class InsercionesPrestamoTest {
     //<editor-fold defaultstate="collapse" desc="Declaración de varaibles ">
     Item item = new Libro();
-    String identificadorAlumno = "IDENTIFICADORA6";
-    String identificadorItemErroneo = "identif004";
-    String identificadorItem = "identif006";
+    String identificadorAlumno = "IDENTIFICADORA5";
+    String identificadorItemErroneo = "identif010";
+    String identificadorItem = "identif005";
     public static final int COSTO_MULTA = 10;
     public static final int TIEMPO_PRESTAMO= 10;
-    prestamoDAOImpl instance = new prestamoDAOImpl();
+    Prestamo prestamo;
+    PrestamoDAOImpl instance = new PrestamoDAOImpl();
     int resultado;
     //</editor-fold>
     
@@ -45,10 +47,12 @@ public class InsercionesPrestamoTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException {
         item.setIdentificador(identificadorItem);
         item.setCostoMulta(COSTO_MULTA);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
+        prestamo = new Prestamo(item);
+        prestamo.setMatriculaUsuario(identificadorAlumno);
     }
     
     @After
@@ -61,7 +65,7 @@ public class InsercionesPrestamoTest {
     @Test
     public void testPrestarItemExitoso() throws SQLException {
         int expResult = 1;
-        int result = instance.prestarItem(item, identificadorAlumno);
+        int result = instance.prestarItem(prestamo);
         assertEquals(expResult, result);
     }
     
@@ -69,8 +73,17 @@ public class InsercionesPrestamoTest {
     public void testPrestarItemFallidoId() throws SQLException {
         int expResult = 0;
         item.setIdentificador(identificadorItemErroneo);
-        int result = instance.prestarItem(item, identificadorAlumno);
-        assertEquals(expResult, result);
+        prestamo.setItem(item);
+        int result = instance.prestarItem(prestamo);
+        assertEquals(expResult, result); 
+    }
+    
+    @Test (expected = SQLException.class)
+    public void testPrestarItemFallidoRepetido() throws SQLException {
+        int expResult = 0;
+        instance.prestarItem(prestamo);
+        int result = instance.prestarItem(prestamo);
+        assertEquals(expResult, result); 
     }
     //</editor-fold>
 }

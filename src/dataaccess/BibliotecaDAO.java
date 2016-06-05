@@ -12,7 +12,7 @@ import java.util.List;
  * @since 20/05/2016
  */
 
-public interface bibliotecaDAO {
+public interface BibliotecaDAO {
     
     /**
      * Funcion que busca en todas las clases que puedan manejar items
@@ -22,4 +22,5 @@ public interface bibliotecaDAO {
      * @throws SQLException Salta la excepcion en //TODO
      */
     public List<Item> buscarItems(String identificador) throws SQLException;
+    public int getTiempoPrestamoDeItem(String identificador) throws SQLException;
 }

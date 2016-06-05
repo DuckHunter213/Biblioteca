@@ -78,8 +78,8 @@ CREATE TABLE `Usuarios`
 
 CREATE TABLE `Items`
 (
-	`tiempoPrestamo` int NOT NULL,
-	`autor` VARCHAR(50),
+	`tiempoPrestamo` int(3) NOT NULL,
+	`autor` VARCHAR(50) NOT NULL,
 	`titulo` VARCHAR(150) NOT NULL,
 	`identificador` VARCHAR(10) NOT NULL,
 	`fechaRegistro` DATE,
@@ -91,42 +91,42 @@ CREATE TABLE `Items`
 
 ALTER TABLE `Reservados` 
  ADD CONSTRAINT `FK_Reservados_Items`
-	FOREIGN KEY (`identificador`) REFERENCES `Items` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
+	FOREIGN KEY (`identificadorItem`) REFERENCES `Items` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
 ;
 
 ALTER TABLE `Reservados` 
  ADD CONSTRAINT `FK_Reservados_Usuarios`
-	FOREIGN KEY (`identificador`) REFERENCES `Usuarios` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
+	FOREIGN KEY (`identificadorUsuario`) REFERENCES `Usuarios` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
 ;
 
 ALTER TABLE `Multas` 
  ADD CONSTRAINT `FK_Multas_Items`
-	FOREIGN KEY (`identificador`) REFERENCES `Items` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
+	FOREIGN KEY (`identificadorItem`) REFERENCES `Items` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
 ;
 
 ALTER TABLE `Multas` 
  ADD CONSTRAINT `FK_Multas_Usuarios`
-	FOREIGN KEY (`identificador`) REFERENCES `Usuarios` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
+	FOREIGN KEY (`identificadorUsuario`) REFERENCES `Usuarios` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
 ;
 
 ALTER TABLE `Devolucion` 
  ADD CONSTRAINT `FK_Devolucion_Items`
-	FOREIGN KEY (`identificador`) REFERENCES `Items` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
+	FOREIGN KEY (`identificadorItem`) REFERENCES `Items` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
 ;
 
 ALTER TABLE `Devolucion` 
  ADD CONSTRAINT `FK_Devolucion_Usuarios`
-	FOREIGN KEY (`identificador`) REFERENCES `Usuarios` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
+	FOREIGN KEY (`identificadorUsuario`) REFERENCES `Usuarios` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
 ;
 
 ALTER TABLE `Prestamos` 
  ADD CONSTRAINT `FK_Prestamos_Items`
-	FOREIGN KEY (`identificador`) REFERENCES `Items` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
+	FOREIGN KEY (`identificadorItem`) REFERENCES `Items` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
 ;
 
 ALTER TABLE `Prestamos` 
  ADD CONSTRAINT `FK_Prestamos_Usuarios`
-	FOREIGN KEY (`identificador`) REFERENCES `Usuarios` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
+	FOREIGN KEY (`identificadorUsuario`) REFERENCES `Usuarios` (`identificador`) ON DELETE Restrict ON UPDATE Restrict
 ;
 
 SET FOREIGN_KEY_CHECKS=1;

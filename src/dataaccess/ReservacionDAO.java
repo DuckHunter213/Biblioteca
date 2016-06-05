@@ -7,7 +7,7 @@ import java.sql.SQLException;
  *
  * @author Francisco Gerardo Mares Solano
  */
-public interface reservacionDAO {
+public interface ReservacionDAO {
     /**
      * Quita el item buscado previamente de una reservación
      * @param identificador es el parametro por el cual sera quitado el item de

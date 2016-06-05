@@ -1,5 +1,7 @@
 package Dominio;
 
+import dataaccess.BibliotecaDAOImpl;
+import java.sql.SQLException;
 import java.util.List;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ public abstract class Item {
     
     private boolean existeItem(ArrayList<Item> items){return false;}
     public boolean agregarItem(Item item){return true;}
-    public List<dataaccess.bibliotecaDAO> regresarTodo(){return null;}
+    public List<dataaccess.BibliotecaDAO> regresarTodo(){return null;}
     
     //<editor-fold defaultstate="collapsed" desc=" Get´s & Set´s ">    
     public String getAutor() {
@@ -64,9 +66,15 @@ public abstract class Item {
      * "016" 3 ultimos digitos del año
      * "05" mes "20" dia "06" hora(formato 24 horas) "07" segundo
      * Salida: 01605200607
+     * @return 
      */
-    public void setIdentificador(String identificador) {
-        this.identificador = identificador;
+    public boolean setIdentificador(String identificador) {
+        boolean estadoIdentificador = false;
+        if (validacionIdentificadorItem(identificador)){
+            this.identificador = identificador;
+            estadoIdentificador = true;
+        }
+        return estadoIdentificador;
     }
 
     public Calendar getFechaAdquisicion() {
@@ -99,7 +107,16 @@ public abstract class Item {
         this.costoMulta.format(precio);
     }
 
-    public int getTiempoPrestamo() {
+    public int getTiempoPrestamo() throws SQLException{
+        int tiempoPrestamo = 0;
+        if(identificador.length() == 9 && (identificador.toLowerCase()).startsWith("s") ){
+            BibliotecaDAOImpl bibliotecaAuxiliar = new BibliotecaDAOImpl();
+            try{
+                tiempoPrestamo = bibliotecaAuxiliar.getTiempoPrestamoDeItem(identificador);
+            }catch(SQLException ex){
+                throw new SQLException("Hubo un error con la BD: " + ex.getMessage());                
+            }
+        }
         return tiempoPrestamo;
     }
     
@@ -107,7 +124,19 @@ public abstract class Item {
         this.tiempoPrestamo = dias;
     }
     
-    //</editor-fold>
+    //</editor-fold>    
+    
+    private boolean validacionIdentificadorItem(String identificadorItem){
+        boolean identificadorValido=false;
+        try{
+            if (identificadorItem.length() == 9 && (identificadorItem.toLowerCase()).startsWith("i") ){
+                identificadorValido = true;
+            }
+        }catch(NullPointerException ex){
+            throw new NullPointerException("El identificador no es válido: " + ex.getMessage());            
+        }
+        return true;
+    }
     
     @Override
     public int hashCode() {
@@ -117,6 +146,7 @@ public abstract class Item {
 	result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 	return result;
     }
+    
     @Override
     public boolean equals(Object obj) {
 	if (this == obj)

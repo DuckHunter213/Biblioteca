@@ -2,7 +2,8 @@ package prestamotests;
 
 import Dominio.Item;
 import Dominio.Libro;
-import dataaccess.prestamoDAOImpl;
+import Dominio.Prestamo;
+import dataaccess.PrestamoDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +25,13 @@ import static org.junit.Assert.*;
 public class BorrarPrestamoTest {    
     //<editor-fold defaultstate="collapse" desc="Definicion de variables">
     Item item = new Libro();
-    String identificadorAlumno = "IDENTIFICADORA6";
-    String identificadorItemErroneo = "identif005";
-    String identificadorItem = "identif006";
+    String identificadorAlumno = "IDENTIFICADORA5";
+    String identificadorItemErroneo = "identif010";
+    String identificadorItem = "identif005";
     public static final int COSTO_MULTA = 10;
     public static final int TIEMPO_PRESTAMO= 10;
-    prestamoDAOImpl instance = new prestamoDAOImpl();
+    Prestamo prestamo;
+    PrestamoDAOImpl instance = new PrestamoDAOImpl();
     int resultado;
     //</editor-fold>
     
@@ -50,7 +52,9 @@ public class BorrarPrestamoTest {
         item.setIdentificador(identificadorItem);
         item.setCostoMulta(COSTO_MULTA);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
-        instance.prestarItem(item, identificadorAlumno);
+        prestamo = new Prestamo(item);
+        prestamo.setMatriculaUsuario(identificadorAlumno);
+        instance.prestarItem(prestamo);
     }
     
     @After

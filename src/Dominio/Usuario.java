@@ -21,7 +21,7 @@ public class Usuario {
     private int numeroDePrestamosActivos;
     private NumberFormat multaAcumulada;
     
-    //<editor-fold defaultstate="collapse" desc="Get's and Set's  ">
+    //<editor-fold defaultstate="collapse" desc="Get's and Set's  ">    
     /**
      * @return the contrasenia
      */
