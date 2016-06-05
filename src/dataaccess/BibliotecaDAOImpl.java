@@ -36,7 +36,6 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
      * regresara la lista vacia 
      * @throws SQLException
      */
-    @Override
     public List<Item> buscarItems(String identificador) throws SQLException{
         List<Item> items = new ArrayList<>();
         try{
@@ -74,8 +73,7 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
         return item;
     }
     
-            
-    @Override
+    
     public int getTiempoPrestamoDeItem(String identificador) throws SQLException {
         int tiempoPrestamo = 0;
         try{

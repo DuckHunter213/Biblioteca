@@ -159,7 +159,7 @@ public class prestamoInterfaz extends javax.swing.JFrame {
                         if (biblioteca.realizarPrestamo(identificadorItem, identificadorAlumno))
                             estadoPrestamo = 1;
                         else
-                            estadoPrestamo = -1;
+                            estadoPrestamo = 1;
                     } catch (SQLException ex) {
                         throw new SQLException("Hubo un error con la BD: " + ex.getMessage());                    
                     }                    

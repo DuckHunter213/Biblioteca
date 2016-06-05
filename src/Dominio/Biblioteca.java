@@ -38,10 +38,14 @@ public class Biblioteca {
     }
     public boolean realizarPrestamo(String identificadorItem, String identificadorAlumno) throws SQLException{
         List items = new ArrayList<>();
-        items = buscarItem(identificadorItem);
-        Prestamo prestamo =  new Prestamo((Item) items.get(0));
-        prestamo.setMatriculaUsuario(identificadorAlumno);
-        prestamo.realizarPrestamo();
+        try{
+            items = buscarItem(identificadorItem);
+            Prestamo prestamo =  new Prestamo((Item) items.get(0));
+            prestamo.setMatriculaUsuario(identificadorAlumno);
+            prestamo.realizarPrestamo();
+        }catch(SQLException ex){
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());            
+        }
         return true;
     }
     
