@@ -57,6 +57,33 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
     }
     
     /**
+     * Clase generica que es ocupada por todas las clases que puedan manejar
+     * items
+     * @param identificador 
+     * @return Se regresa una lista de items en caso de no encontrar ninguno
+     * regresara la lista vacia 
+     * @throws SQLException
+     */
+    public List<Item> getItems() throws SQLException{
+        List<Item> items = new ArrayList<>();
+        try{
+            connection = CONEXION.obtenerConexion();
+            PreparedStatement sentenciaSQL  = connection.prepareStatement("SELECT * FROM Items");
+            resultados = sentenciaSQL.executeQuery();
+            Item item = null;
+            while(resultados.next()){
+                item = capturarItem(item);
+                items.add(item);
+            }             
+        } catch (SQLException ex) {
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
+        }finally{
+            CONEXION.desconecta();
+        }
+        return items;
+    }
+    
+    /**
      * Seteo de items segun su categoria aplica para la implementación
      */
     private Item capturarItem(Item item) throws SQLException{

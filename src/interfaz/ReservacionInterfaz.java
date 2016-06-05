@@ -9,12 +9,12 @@ package interfaz;
  *
  * @author gerar
  */
-public class reservacionInterfaz extends javax.swing.JFrame {
+public class ReservacionInterfaz extends javax.swing.JFrame {
 
     /**
      * Creates new form reservacionInterfaz
      */
-    public reservacionInterfaz() {
+    public ReservacionInterfaz() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -214,20 +214,21 @@ public class reservacionInterfaz extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(reservacionInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReservacionInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(reservacionInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReservacionInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(reservacionInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReservacionInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(reservacionInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReservacionInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new reservacionInterfaz().setVisible(true);
+                new ReservacionInterfaz().setVisible(true);
             }
         });
     }

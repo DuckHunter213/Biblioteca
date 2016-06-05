@@ -75,4 +75,15 @@ public class Biblioteca {
         return estadoPrestamo;
     }
     
+    public List<Item> getItems()throws SQLException{
+        List<Item> items = new ArrayList<>();
+        BibliotecaDAOImpl bibliotecaDAO = new BibliotecaDAOImpl();
+        try{
+            items = bibliotecaDAO.getItems();
+        } catch (SQLException ex){
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());            
+        }
+        return items;
+    }
+    
 }

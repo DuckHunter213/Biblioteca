@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author gerar
  */
-public class prestamoInterfaz extends javax.swing.JFrame {
+public class PrestamoInterfaz extends javax.swing.JFrame {
         public static String identificadorPrestamo = "";
         public static Biblioteca biblioteca;
         public static final int MATRICULA_INVALIDA = 3;
@@ -28,7 +28,7 @@ public class prestamoInterfaz extends javax.swing.JFrame {
     /**
      * Creates new form prestamoInterfaz
      */
-    public prestamoInterfaz() {
+    public PrestamoInterfaz() {
         biblioteca = new Biblioteca();
         initComponents();
         setLocationRelativeTo(null);
@@ -212,19 +212,20 @@ public class prestamoInterfaz extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(prestamoInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestamoInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(prestamoInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestamoInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(prestamoInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestamoInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(prestamoInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestamoInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new prestamoInterfaz().setVisible(true);
+            new PrestamoInterfaz().setVisible(true);
         });
     }
 

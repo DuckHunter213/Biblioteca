@@ -85,14 +85,14 @@ public class PanelPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSeccionReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSeccionReservarActionPerformed
-        reservacionInterfaz reservacion = new reservacionInterfaz();
+        ReservacionInterfaz reservacion = new ReservacionInterfaz();
         reservacion.setVisible(true);
         reservacion.setTitle("Prestar Item");
         dispose();
     }//GEN-LAST:event_botonSeccionReservarActionPerformed
 
     private void botonSeccionPrestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSeccionPrestarActionPerformed
-        prestamoInterfaz prestamo = new prestamoInterfaz();
+        PrestamoInterfaz prestamo = new PrestamoInterfaz();
         prestamo.setVisible(true);
         prestamo.setTitle("Prestar Item");
         dispose();
