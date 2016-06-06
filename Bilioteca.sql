@@ -26,6 +26,7 @@ DROP TABLE IF EXISTS `Items` CASCADE
 
 CREATE TABLE `Reservados`
 (
+	`fechaFinReservacion` DATE NOT NULL,
 	`folioReservacion` VARCHAR(15) NOT NULL,
 	`identificadorUsuario` VARCHAR(15) NOT NULL,
 	`identificadorItem` VARCHAR(10) NOT NULL,
@@ -136,7 +137,7 @@ delimiter //
 DROP PROCEDURE `consultaDisponibilidad` //
 CREATE PROCEDURE consultaDisponibilidad (IN id varchar(16)) 
 	BEGIN
-		select identificadorItem from prestamos Where identificadorItem = id;
+		select identificadorItem from prestamos Where identificadorItem = id UNION ALL
 		select identificadorItem from reservados Where identificadorItem = id;
 	END
 //
@@ -233,18 +234,4 @@ INSERT INTO `Items` VALUES (
 	'Libro'
 );
 
-
-
-INSERT INTO `reservados` VALUES (
-	'0160520234746',
-	'IDENTIFICADORA6',
-	'identif004'
-);
-INSERT INTO `prestamos` VALUES (
-	'2016-05-20',
-	'0160520234746',
-	'identif004',
-	'IDENTIFICADORA6',
-	'2016-05-29'
-);
 

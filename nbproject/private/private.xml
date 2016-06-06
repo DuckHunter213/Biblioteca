@@ -3,10 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/dataaccess/bibliotecaDAOImpl.java</file>
-            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/dataaccess/prestamoDAOImpl.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/demoDAO/Main.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/Dominio/Reservacion.java</file>
             <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/biblioteca/Util.java</file>
-            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/dataaccess/reservacionDAOImpl.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/dataaccess/BibliotecaDAOImpl.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/Dominio/Biblioteca.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/interfaz/ReservacionInterfaz.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/interfaz/PanelPrincipal.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/interfaz/SeleccionarItemInterfaz.java</file>
+            <file>file:/C:/Users/gerar/Documents/GitHub/Biblioteca/src/interfaz/PrestamoInterfaz.java</file>
         </group>
     </open-files>
 </project-private>
