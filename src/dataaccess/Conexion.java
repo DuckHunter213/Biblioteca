@@ -5,16 +5,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Es la implementación del patrón DAO para el item, sus métodos son genéricos
- * para el interface ItemDAO y mediante polimorfismo resuelve las
- * funcinalidades necesarias.
+ * Clase encargada de hacer conexiones a la base de datos de igual manera
+ * es la encargada de liberar los recursos de la conexión
  * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
  * @since 18/04/2016
  */
-
 public class Conexion {
     
+    /** 
+     * Seteo de datos en bruto para manejar funcionalidad, sera programable
+     * despues con variables.
+     */
     private Connection conexion;
     private final String DB = "jdbc:mysql://127.0.0.1/Biblioteca";
     private final String USUARIO = "root";
@@ -39,6 +41,8 @@ public class Conexion {
 
     /**
      *  Funcion que termina la conexion y libera el recurso de conexión
+     * @throws java.sql.SQLException Lanza la excepcion en caso de fallar en la
+     * base de datos
      */
     public void desconecta() throws SQLException {
         if (conexion != null) {
@@ -47,9 +51,6 @@ public class Conexion {
                     conexion.close();
                 }
             } catch (SQLException ex) {
-                /* Se maneja la exepcion desde aqui para no interrumpir el flujo de las capas
-                * de arriba así la excepcion se manda a logger directamente
-                */
             throw new SQLException("No hubo conección con la base de datos: " + ex.getMessage());
             }
         }

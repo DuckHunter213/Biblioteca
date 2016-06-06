@@ -1,12 +1,12 @@
 package dataaccess;
 
-import Dominio.Item;
 import Dominio.Reservacion;
 import java.sql.SQLException;
 
 /**
  *
  * @author Francisco Gerardo Mares Solano
+ * @since 06/06/16
  */
 public interface ReservacionDAO {
     /**
@@ -26,5 +26,4 @@ public interface ReservacionDAO {
      * @throws java.sql.SQLException
      */
     public int reservarItem(Reservacion reservacion) throws SQLException;
-
 }

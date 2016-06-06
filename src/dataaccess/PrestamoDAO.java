@@ -1,12 +1,12 @@
 package dataaccess;
 
-import Dominio.Item;
 import Dominio.Prestamo;
 import java.sql.SQLException;
 
 /**
  *
  * @author Francisco Gerardo Mares Solano
+ * @since 06/06/2016
  */
 public interface PrestamoDAO {
     
@@ -22,7 +22,6 @@ public interface PrestamoDAO {
      * Funcion que enlaza un item a un usuario y se guarda un registro en la 
      * base de datos
      * @param prestamo
-     * @param identificadorUsuario
      * @return regresa un valor de retroalimentacion //TODO valor booleano
      * @throws java.sql.SQLException
      */

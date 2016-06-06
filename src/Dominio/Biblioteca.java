@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Dominio;
 
 import biblioteca.Util;
@@ -13,22 +8,30 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
- * @author gerar
+ * Clase tipo biblioteca, este sera el manejador de os items prestamos,
+ * devoluciones y validaciones
+ * @author Francisco Gerardo Mares Solano
+ * @since 06/06/2016
  */
+
 public class Biblioteca {
     public List<Prestamo> prestamos = null;
     public List<Reservacion> reservaciones = null;
     
+    /**
+     * Crea los prestamos y las reservaciones en una lista vacia para no meter
+     * basura en la base de datos
+     */
     public Biblioteca(){
         prestamos = new ArrayList<>();
         reservaciones = new ArrayList<>();
     }
+    
     public List<Item> buscarItem(String identificador) throws SQLException{
         List<Item> items = new ArrayList<>();
         BibliotecaDAOImpl bibliotecaDAO = new BibliotecaDAOImpl();
         try{
-            items = bibliotecaDAO.buscarItems(identificador);
+            items = bibliotecaDAO.buscarItem(identificador);
         } catch (SQLException ex) {
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }
@@ -38,9 +41,11 @@ public class Biblioteca {
     public boolean verificarMatricula(String identificadorAlumno) throws SQLException{
         return Util.verificarIdentificadorAlumno(identificadorAlumno);
     }
+    
     public boolean verificarItem(String identificadorItem) throws SQLException{
         return Util.verificarIdentificadorItem(identificadorItem);
     }
+    
     public String generarPrestamo(String identificadorItem) throws SQLException{
         List items = new ArrayList<>();
         String identificadorPrestamo = "";
@@ -54,6 +59,7 @@ public class Biblioteca {
         }
         return identificadorPrestamo;
     }
+    
     public String generarReservacion(Item item) throws SQLException{
         Reservacion reservacion = new Reservacion(item);
         reservacion.setIdentificadorUsuario("identificadora1");
@@ -62,6 +68,7 @@ public class Biblioteca {
         reservaciones.add(reservacion);
         return identificador;
     }
+    
     public String verFechaFinPrestamo(String identificadorPrestamo){
         Prestamo prestamo = null;
         for(int i=0;i<prestamos.size();i++) {
@@ -70,6 +77,7 @@ public class Biblioteca {
         }
         return prestamo.getFechaCaducidadNormal();
     }
+    
     public Date verFechaFinReservacion(String identificador){
         Reservacion reservacion = null;
         for(int i=0;i<reservaciones.size();i++) {
@@ -78,6 +86,7 @@ public class Biblioteca {
         }
         return reservacion.getFechaLimite();
     }
+    
     public int realizarPrestamo(String identificadorPrestamo, String identificadorAlumno) throws SQLException{
         int estadoPrestamo = 0;
         Prestamo prestamo = null;
@@ -94,6 +103,7 @@ public class Biblioteca {
         }
         return estadoPrestamo;
     }
+    
     public int realizarReservacion(String identificador) throws SQLException{
         Reservacion reservacion =  null;
         for(int i=0;i<reservaciones.size();i++) {
@@ -103,6 +113,7 @@ public class Biblioteca {
         int estadoReservacion = reservacion.realizarReservacion();
         return estadoReservacion;
     }
+    
     public List<Item> getItems()throws SQLException{
         List<Item> items = new ArrayList<>();
         BibliotecaDAOImpl bibliotecaDAO = new BibliotecaDAOImpl();
@@ -113,5 +124,4 @@ public class Biblioteca {
         }
         return items;
     }
-    
 }

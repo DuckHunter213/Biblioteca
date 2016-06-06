@@ -1,6 +1,5 @@
 package dataaccess;
 
-import Dominio.Item;
 import biblioteca.Util;
 import Dominio.Prestamo;
 import java.sql.Connection;
@@ -8,9 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  *
@@ -29,9 +25,9 @@ public class PrestamoDAOImpl implements PrestamoDAO{
     /**
      *
      * @param prestamo
-     * @param identificadorUsuario
      * @return
      */
+    @Override
     public int prestarItem(Prestamo prestamo) throws SQLException{
         int resultadoDeAgregacion = 0;
         java.sql.Date fechaPrestamoMili = new java.sql.Date(prestamo.getFechaPrestamo());

@@ -1,8 +1,6 @@
 package Dominio;
 
 import java.text.NumberFormat;
-import sun.security.util.Password;
-
 
 /**
  * Es el objeto del dominio de la clase usuario que es creado cada ves que va
@@ -12,7 +10,6 @@ import sun.security.util.Password;
  * @since 20/05/2016
  */
 public class Usuario {
-    private Password contrasenia;
     private String domicilio;
     private String matricula;
     private String nombre;
@@ -22,20 +19,6 @@ public class Usuario {
     private NumberFormat multaAcumulada;
     
     //<editor-fold defaultstate="collapse" desc="Get's and Set's  ">    
-    /**
-     * @return the contrasenia
-     */
-    public Password getContrasenia() {
-        return contrasenia;
-    }
-
-    /**
-     * @param contrasenia the contrasenia to set
-     */
-    public void setContrasenia(Password contrasenia) {
-        this.contrasenia = contrasenia;
-    }
-
     /**
      * @return the domicilio
      */

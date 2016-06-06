@@ -1,10 +1,8 @@
 package dataaccess;
 
-import Dominio.Item;
 import Dominio.Reservacion;
 import biblioteca.Util;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,7 +26,6 @@ public class ReservacionDAOImpl implements ReservacionDAO{
     /**
      * Funcion que pone un item en reservación asociado a un usuario
      * 
-     * @param identificadorUsuario
      * @return retorna un valor de retroaliemntación falso o verdadero en caso
      * de no haber podido capturar el item 
      * @throws java.sql.SQLException 

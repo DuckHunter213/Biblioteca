@@ -66,7 +66,7 @@ public class BibliotecaDAOImplTest {
     @Test
     public void testBuscarItem() throws Exception {
         List<Item> expResult = items;
-        List<Item> result = instance.buscarItems(item.getIdentificador());
+        List<Item> result = instance.buscarItem(item.getIdentificador());
         assertEquals(expResult, result);
     }
     
@@ -74,7 +74,7 @@ public class BibliotecaDAOImplTest {
     public void testBuscarItemInexistente() throws Exception {
         items.clear();
         List<Item> expResult = items;
-        List<Item> result = instance.buscarItems(identificadorItem);
+        List<Item> result = instance.buscarItem(identificadorItem);
         assertEquals(expResult, result);
     }
     

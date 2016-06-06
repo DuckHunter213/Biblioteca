@@ -2,7 +2,6 @@ package Dominio;
 
 import java.util.GregorianCalendar;
 import biblioteca.Util;
-import dataaccess.BibliotecaDAOImpl;
 import dataaccess.PrestamoDAOImpl;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -38,6 +37,7 @@ public class Prestamo {
         }
     }
     
+    //<editor-fold defaultstate="collapsed" desc=" Get´s & Set´s ">
     public Long getFechaPrestamo(){
         return this.fechaPrestamo.getTime();
     }
@@ -45,6 +45,7 @@ public class Prestamo {
     public Long getFechaCaducidad(){
         return this.fechaCaducidad.getTime();
     }
+    
     public String getFechaCaducidadNormal(){
         return this.fechaCaducidad.toString();
     }
@@ -73,7 +74,13 @@ public class Prestamo {
     public String getIdentificadorItem(){
         return this.item.getIdentificador();
     }
+    //</editor-fold>
     
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public int realizarPrestamo() throws SQLException{
         PrestamoDAOImpl prestamoDAO = new PrestamoDAOImpl();
         int estadoPrestamo = 0;

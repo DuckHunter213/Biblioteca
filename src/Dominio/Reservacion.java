@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Dominio;
 
 import biblioteca.Util;
@@ -14,7 +9,7 @@ import java.util.GregorianCalendar;
 
 /**
  *
- * @author gerar
+ * @author Francisco Gerardo Mares Solano
  */
 public class Reservacion {
     private Item item;
@@ -22,6 +17,7 @@ public class Reservacion {
     private Date fechaLimite;
     private String identificadorReservacion;
 
+    //<editor-fold defaultstate="collapsed" desc=" Get´s & Set´s ">
     public String getIdentificadorUsuario() {
         return identificadorUsuario;
     }
@@ -45,7 +41,13 @@ public class Reservacion {
     public String getIdentificadorItem(){
         return item.getIdentificador();
     }
+    //</editor-fold>
     
+    /**
+     *
+     * @param item
+     * @throws SQLException
+     */
     public Reservacion(Item item) throws SQLException{
         this.item = item;
         Calendar calendario = GregorianCalendar.getInstance();
@@ -53,10 +55,21 @@ public class Reservacion {
         fechaLimite = new Date(); 
         fechaLimite.setTime(calendario.getTimeInMillis());
     }
+    
+    /**
+     * genera un identificador unico para las reservaciones
+     * @return Regresa el identificador generado por el sistema
+     */
     public String generarIdentificador(){
         identificadorReservacion = Util.generadorDeIdentificador();
         return identificadorReservacion;
     }
+    
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public int realizarReservacion() throws SQLException{
         ReservacionDAOImpl reservacionDAO = new ReservacionDAOImpl();
         int estadoReservacion = 0;
@@ -67,5 +80,4 @@ public class Reservacion {
         }
         return estadoReservacion;
     }
-    
 }

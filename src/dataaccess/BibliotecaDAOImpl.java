@@ -28,15 +28,9 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
         CONEXION = new Conexion();
     }
 
-    /**
-     * Clase generica que es ocupada por todas las clases que puedan manejar
-     * items
-     * @param identificador 
-     * @return Se regresa una lista de items en caso de no encontrar ninguno
-     * regresara la lista vacia 
-     * @throws SQLException
-     */
-    public List<Item> buscarItems(String identificador) throws SQLException{
+    
+    @Override
+    public List<Item> buscarItem(String identificador) throws SQLException{
         List<Item> items = new ArrayList<>();
         try{
             connection = CONEXION.obtenerConexion();
@@ -57,6 +51,16 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
         }
         return items;
     }
+    
+    /**
+     *
+     * @param identificadorUsuario indentificador del usuario a verificar si 
+     * existen en la base de datos
+     * @return Regresa el estado del usuario donde dice si el usuario existe o 
+     * no existe
+     * @throws SQLException Lanza una SQLException en caso de tener problemas
+     * en la base de datos
+     */
     public boolean verificarAlumno(String identificadorUsuario) throws SQLException{
         boolean estado = false;
         try{
@@ -74,6 +78,7 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
         }
         return estado;
     }
+    
     public boolean verificarItem(String identificadorItem) throws SQLException{
         boolean estado = false;
         try{
@@ -94,8 +99,7 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
     
     /**
      * Clase generica que es ocupada por todas las clases que puedan manejar
-     * items
-     * @param identificador 
+     * items 
      * @return Se regresa una lista de items en caso de no encontrar ninguno
      * regresara la lista vacia 
      * @throws SQLException
@@ -136,7 +140,13 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
         return item;
     }
     
-    
+    /**
+     *
+     * @param identificador 
+     * @return 
+     * @throws SQLException
+     */
+    @Override
     public int getTiempoPrestamoDeItem(String identificador) throws SQLException {
         int tiempoPrestamo = 0;
         try{

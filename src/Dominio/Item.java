@@ -24,7 +24,7 @@ public abstract class Item {
     private NumberFormat costoMulta = NumberFormat.getInstance();
     private int tiempoPrestamo;
     
-    //<editor-fold defaultstate="collapsed" desc=" Get´s & Set´s ">    
+    //<editor-fold defaultstate="collapsed" desc=" Get´s & Set´s ">
     public String getAutor() {
         return autor;
     }
@@ -113,8 +113,7 @@ public abstract class Item {
     public void setTiempoPrestamo(int dias) {
         this.tiempoPrestamo = dias;
     }
-    
-    //</editor-fold>    
+    //</editor-fold>
     
     private boolean validacionIdentificadorItem(String identificadorItem){
         boolean identificadorValido=false;
