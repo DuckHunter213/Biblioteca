@@ -77,7 +77,12 @@ public class SeleccionarItemInterfaz extends javax.swing.JFrame implements Actio
             if (numeroDeItem.equals("ver "+i))
                 itemSeleccionado = items.get(i);
         }
-        ReservacionInterfaz reservacion = new ReservacionInterfaz(itemSeleccionado);
+        ReservacionInterfaz reservacion=null;
+            try {
+                reservacion = new ReservacionInterfaz(itemSeleccionado);
+            } catch (SQLException ex) {
+                Logger.getLogger(SeleccionarItemInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+            }
         reservacion.setVisible(true);
         reservacion.setTitle("Prestar Item");
         dispose();
