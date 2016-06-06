@@ -98,15 +98,6 @@ public abstract class Item {
     }
 
     public int getTiempoPrestamo() throws SQLException{
-        int tiempoPrestamo = 0;
-        if(identificador.length() == 9 && (identificador.toLowerCase()).startsWith("s") ){
-            BibliotecaDAOImpl bibliotecaAuxiliar = new BibliotecaDAOImpl();
-            try{
-                tiempoPrestamo = bibliotecaAuxiliar.getTiempoPrestamoDeItem(identificador);
-            }catch(SQLException ex){
-                throw new SQLException("Hubo un error con la BD: " + ex.getMessage());                
-            }
-        }
         return tiempoPrestamo;
     }
     

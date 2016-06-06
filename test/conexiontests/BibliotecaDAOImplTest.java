@@ -72,8 +72,8 @@ public class BibliotecaDAOImplTest {
     
     @Test
     public void testBuscarItemInexistente() throws Exception {
-        items.clear();
-        List<Item> expResult = items;
+        Item itemAux =  null;
+        List<Item> expResult = (List<Item>) itemAux;
         List<Item> result = instance.buscarItem(identificadorItem);
         assertEquals(expResult, result);
     }

@@ -43,10 +43,10 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
                 items.add(item);
             }
             if (items.size() == 0)
-                throw new ArrayIndexOutOfBoundsException();
+                return (List<Item>) item;
         } catch (SQLException ex) {
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
-        }finally{
+        } finally{
             CONEXION.desconecta();
         }
         return items;

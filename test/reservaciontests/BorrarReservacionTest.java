@@ -2,6 +2,7 @@ package reservaciontests;
 
 import Dominio.Item;
 import Dominio.Libro;
+import Dominio.Reservacion;
 import dataaccess.ReservacionDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,9 +25,9 @@ import static org.junit.Assert.*;
 public class BorrarReservacionTest {    
     //<editor-fold defaultstate="collapse" desc="Definicion de variables">
     Item item = new Libro();
-    String identificadorAlumno = "IDENTIFICADORA6";
-    String identificadorItemErroneo = "identif005";
-    String identificadorItem = "identif006";
+    String identificadorAlumno = "IDENTIFICADORA5";
+    String identificadorItemErroneo = "identif010";
+    String identificadorItem = "identif005";
     public static final int COSTO_MULTA = 10;
     public static final int TIEMPO_PRESTAMO= 10;
     ReservacionDAOImpl instance = new ReservacionDAOImpl();
@@ -50,7 +51,11 @@ public class BorrarReservacionTest {
         item.setIdentificador(identificadorItem);
         item.setCostoMulta(COSTO_MULTA);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
-        instance.reservarItem(item, identificadorAlumno);
+        Reservacion reservacion =  new Reservacion(item);
+        reservacion.generarIdentificador();
+        reservacion.setIdentificadorUsuario(identificadorAlumno);
+        reservacion.realizarReservacion();
+        instance.reservarItem(reservacion);
     }
     
     @After

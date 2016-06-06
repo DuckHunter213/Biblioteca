@@ -78,7 +78,7 @@ public class InsercionesPrestamoTest {
         assertEquals(expResult, result); 
     }
     
-    @Test (expected = SQLException.class)
+    @Test 
     public void testPrestarItemFallidoRepetido() throws SQLException {
         int expResult = 0;
         instance.prestarItem(prestamo);

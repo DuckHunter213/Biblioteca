@@ -2,6 +2,7 @@ package reservaciontests;
 
 import Dominio.Item;
 import Dominio.Libro;
+import Dominio.Reservacion;
 import dataaccess.ReservacionDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,11 +25,12 @@ import static org.junit.Assert.*;
 public class InsertarReservacionTest {    
     //<editor-fold defaultstate="collapse" desc="Declaración de varaibles">
     Item item = new Libro();
-    String identificadorAlumno = "IDENTIFICADORA6";
-    String identificadorItemErroneo = "identif004";
-    String identificadorItem = "identif006";
+    String identificadorAlumno = "IDENTIFICADORA5";
+    String identificadorItemErroneo = "identif010";
+    String identificadorItem = "identif005";
     public static final int COSTO_MULTA = 10;
     public static final int TIEMPO_PRESTAMO= 10;
+    Reservacion reservacion;
     ReservacionDAOImpl instance = new ReservacionDAOImpl();
     int resultado;
     //</editor-fold>
@@ -46,10 +48,13 @@ public class InsertarReservacionTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException {
         item.setIdentificador(identificadorItem);
         item.setCostoMulta(COSTO_MULTA);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
+        reservacion = new Reservacion(item);
+        reservacion.generarIdentificador();
+        reservacion.setIdentificadorUsuario(identificadorAlumno);
     }
     
     @After
@@ -61,7 +66,7 @@ public class InsertarReservacionTest {
     @Test
     public void testReservarItemExitoso() throws Exception {
         int expResult = 1;
-        int result = instance.reservarItem(item, identificadorAlumno);
+        int result = instance.reservarItem(reservacion);
         assertEquals(expResult, result);
     }
     
@@ -69,7 +74,7 @@ public class InsertarReservacionTest {
     public void testReservarItemFallidoSQL() throws Exception {
         int expResult = 0;
         item.setIdentificador(identificadorItemErroneo);
-        int result = instance.reservarItem(item, identificadorAlumno);
+        int result = instance.reservarItem(reservacion);
         assertEquals(expResult, result);
     }
     //</editor-fold>

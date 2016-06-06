@@ -63,7 +63,7 @@ public class PrestamoTest {
      * Test of setMatriculaUsuario method, of class Prestamo.
      */
     @Test
-    public void testSetMatriculaUsuarioExitoso() {
+    public void testSetMatriculaUsuarioExitoso() throws SQLException {
         boolean expResult = true;
         boolean result = prestamo.setMatriculaUsuario(identificadorAlumno);
         assertEquals(expResult, result);
@@ -73,7 +73,7 @@ public class PrestamoTest {
      * Test of setMatriculaUsuario method, of class Prestamo.
      */
     @Test
-    public void testSetMatriculaUsuarioFallido() {
+    public void testSetMatriculaUsuarioFallido() throws SQLException {
         boolean expResult = false;
         boolean result = prestamo.setMatriculaUsuario("");
         assertEquals(expResult, result);
