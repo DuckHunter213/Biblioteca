@@ -1,8 +1,10 @@
 package dataaccess;
 
 import Dominio.Item;
+import Dominio.Reservacion;
 import biblioteca.Util;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,21 +28,23 @@ public class ReservacionDAOImpl implements ReservacionDAO{
     /**
      * Funcion que pone un item en reservación asociado a un usuario
      * 
-     * @param item Recibe un objeto de tipo item
      * @param identificadorUsuario
      * @return retorna un valor de retroaliemntación falso o verdadero en caso
      * de no haber podido capturar el item 
      * @throws java.sql.SQLException 
      */
-    public int reservarItem(Item item, String identificadorUsuario) throws SQLException{
+    @Override
+    public int reservarItem(Reservacion reservacion) throws SQLException{
         int resultadoDeAgregacion = 0;
+        java.sql.Date fechaPrestamoMili = new java.sql.Date(reservacion.getFechaLimiteBD());        
         try{
             connection = CONEXION.obtenerConexion();
-            if (Util.ItemEstadoDisponibilidad(item.getIdentificador())== true){
-                PreparedStatement sentenciaSQL  = connection.prepareStatement("INSERT INTO reservados VALUES (?,?,?)");
-                sentenciaSQL.setString(1, Util.generadorDeIdentificador());
-                sentenciaSQL.setString(2, identificadorUsuario);
-                sentenciaSQL.setString(3, item.getIdentificador());
+            if (Util.itemEstadoDisponibilidad(reservacion.getIdentificadorItem())){
+                PreparedStatement sentenciaSQL  = connection.prepareStatement("INSERT INTO reservados VALUES (?,?,?,?)");
+                sentenciaSQL.setDate(1, fechaPrestamoMili);
+                sentenciaSQL.setString(2, reservacion.getIdentificadorReservacion());
+                sentenciaSQL.setString(3, reservacion.getIdentificadorUsuario());
+                sentenciaSQL.setString(4, reservacion.getIdentificadorItem());
                 resultadoDeAgregacion = sentenciaSQL.executeUpdate();         
             }
         } catch (SQLException ex) {

@@ -39,8 +39,8 @@ public class PrestamoDAOImpl implements PrestamoDAO{
         
         try{
             connection = CONEXION.obtenerConexion();
-            if (Util.itemEstadoDisponibilidad(prestamo.getIdentificadorItem())== true){
-                if (Util.revisarLimitePrestamos(prestamo.getMatriculaUsuario()) == true){
+            if (Util.itemEstadoDisponibilidad(prestamo.getIdentificadorItem())){
+                if (Util.revisarLimitePrestamos(prestamo.getMatriculaUsuario())){
                     PreparedStatement sentenciaSQL  = connection.prepareStatement("INSERT INTO prestamos VALUES (?,?,?,?,?)");
                     sentenciaSQL.setDate(1, fechaPrestamoMili);
                     sentenciaSQL.setString(2, prestamo.getIdentificadorPrestamo());

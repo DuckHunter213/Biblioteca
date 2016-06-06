@@ -1,6 +1,7 @@
 package dataaccess;
 
 import Dominio.Item;
+import Dominio.Reservacion;
 import java.sql.SQLException;
 
 /**
@@ -20,11 +21,10 @@ public interface ReservacionDAO {
     /**
      * Reserva el item pasado se asocia a una matricula de usuario y se genera
      * en un folio que es la referecia de esa reservación
-     * @param item item que sera reservado 
-     * @param identificadorUsuario 
+     * @param reservacion 
      * @return Regresa una retroalimentación al usuario //TODO
      * @throws java.sql.SQLException
      */
-    public int reservarItem(Item item, String identificadorUsuario) throws SQLException;
+    public int reservarItem(Reservacion reservacion) throws SQLException;
 
 }

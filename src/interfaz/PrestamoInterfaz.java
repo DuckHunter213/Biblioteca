@@ -141,10 +141,10 @@ public class PrestamoInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_botonRegresarActionPerformed
 
     private void botonAceptarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarPrestamoActionPerformed
-        String identificadorItem = identificadorItemTexto.getText();
-        String identificadorAlumno = matriculaAlumnoTexto.getText();
-        int estadoPrestamo = 0;
         try {
+            String identificadorItem = identificadorItemTexto.getText();
+            String identificadorAlumno = matriculaAlumnoTexto.getText();
+            int estadoPrestamo = 0;
             estadoPrestamo = realizarPrestamo(identificadorItem, identificadorAlumno);
             switch (estadoPrestamo) {
                 case MATRICULA_INVALIDA:
@@ -163,11 +163,10 @@ public class PrestamoInterfaz extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "El usuario superó su límite de préstamos", "Ocurrió un problema", JOptionPane.WARNING_MESSAGE);
                     break;
                 default:
-            JOptionPane.showMessageDialog(null, "Lo lamentamos, ha ocurrido un error desconocido :(", "Ocurrió un problema", JOptionPane.WARNING_MESSAGE);
                     break;
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Lo lamentamos, ha ocurrido un error con la conexión a la Base de Datos", "Ocurrió un problema", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Lo lamentamos, no podemos conectar con la Base de Datos", "Ocurrió un problema", JOptionPane.WARNING_MESSAGE);
         } catch (ArrayIndexOutOfBoundsException ex){
             JOptionPane.showMessageDialog(null, "Lo lamentamos, el item no está registrado", "Ocurrió un problema", JOptionPane.WARNING_MESSAGE);
         }

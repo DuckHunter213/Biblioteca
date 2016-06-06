@@ -5,37 +5,43 @@
  */
 package interfaz;
 
+import Dominio.Biblioteca;
 import Dominio.Item;
 import biblioteca.Util;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author gerar
  */
 public class ReservacionInterfaz extends javax.swing.JFrame {
-
+    Item item;
+    Biblioteca biblioteca;
     /**
      * Creates new form reservacionInterfaz
-     * @param item
+     * @param itemSeleccionado
+     * @throws java.sql.SQLException
      */
-    public ReservacionInterfaz(Item item) throws SQLException {
+    public ReservacionInterfaz(Item itemSeleccionado) throws SQLException {
+        item = itemSeleccionado;
+        biblioteca = new Biblioteca();
         initComponents();
-        setInformacion(item);
-        checarDisponibilidad(item);
+        setInformacion();
+        checarDisponibilidad();
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Reservación");
     }
-    public void setInformacion(Item item){
+    public void setInformacion(){
         this.autorCampo.setText("Autor: "+item.getAutor());
         this.tipoMaterialCampo.setText("Tipo: " + item.getClass().getName());
         this.tituloCampo.setText("Título: " + item.getTitulo());
         this.calificacionCampo.setText("Calificación: 9.5/10 ");        
     }
-    public void checarDisponibilidad(Item item) throws SQLException{
+    public void checarDisponibilidad() throws SQLException{
         boolean disponibilidad = Util.itemEstadoDisponibilidad(item.getIdentificador());
         botonAceptarReservacion.setEnabled(disponibilidad);
     }
@@ -67,11 +73,13 @@ public class ReservacionInterfaz extends javax.swing.JFrame {
         informacionTabPanel = new javax.swing.JTabbedPane();
         comentarioPanel = new javax.swing.JPanel();
         informacionPanel = new javax.swing.JPanel();
+        panelNavegacion = new javax.swing.JPanel();
+        nombreUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(440, 340));
-        setPreferredSize(new java.awt.Dimension(440, 340));
-        setSize(new java.awt.Dimension(440, 340));
+        setMaximumSize(new java.awt.Dimension(440, 370));
+        setPreferredSize(new java.awt.Dimension(440, 370));
+        setSize(new java.awt.Dimension(440, 370));
         getContentPane().setLayout(null);
 
         imagenPanel.setBackground(new java.awt.Color(140, 140, 140));
@@ -88,7 +96,7 @@ public class ReservacionInterfaz extends javax.swing.JFrame {
         );
 
         getContentPane().add(imagenPanel);
-        imagenPanel.setBounds(10, 11, 100, 100);
+        imagenPanel.setBounds(10, 30, 100, 100);
 
         footerPanel.setBackground(new java.awt.Color(230, 230, 230));
 
@@ -125,7 +133,7 @@ public class ReservacionInterfaz extends javax.swing.JFrame {
         );
 
         getContentPane().add(footerPanel);
-        footerPanel.setBounds(0, 280, 435, 30);
+        footerPanel.setBounds(0, 310, 435, 30);
 
         panelDatos.setBackground(new java.awt.Color(230, 230, 230));
 
@@ -153,19 +161,19 @@ public class ReservacionInterfaz extends javax.swing.JFrame {
         panelDatosLayout.setVerticalGroup(
             panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDatosLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(4, 4, 4)
                 .addComponent(tituloCampo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(autorCampo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(calificacionCampo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tipoMaterialCampo)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelDatos);
-        panelDatos.setBounds(120, 11, 305, 100);
+        panelDatos.setBounds(120, 30, 305, 100);
 
         informacionTabPanel.setPreferredSize(new java.awt.Dimension(430, 144));
 
@@ -196,7 +204,32 @@ public class ReservacionInterfaz extends javax.swing.JFrame {
         informacionTabPanel.addTab("Información", informacionPanel);
 
         getContentPane().add(informacionTabPanel);
-        informacionTabPanel.setBounds(10, 129, 415, 144);
+        informacionTabPanel.setBounds(10, 150, 415, 144);
+
+        panelNavegacion.setBackground(new java.awt.Color(230, 230, 230));
+
+        nombreUsuario.setFont(new java.awt.Font("Raleway", 2, 14)); // NOI18N
+        nombreUsuario.setText("¡Bienvenido/a, Xalaquia!");
+        nombreUsuario.setToolTipText("Ésta es la sesión en la que te encuentras");
+
+        javax.swing.GroupLayout panelNavegacionLayout = new javax.swing.GroupLayout(panelNavegacion);
+        panelNavegacion.setLayout(panelNavegacionLayout);
+        panelNavegacionLayout.setHorizontalGroup(
+            panelNavegacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNavegacionLayout.createSequentialGroup()
+                .addContainerGap(261, Short.MAX_VALUE)
+                .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panelNavegacionLayout.setVerticalGroup(
+            panelNavegacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNavegacionLayout.createSequentialGroup()
+                .addComponent(nombreUsuario)
+                .addGap(0, 2, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(panelNavegacion);
+        panelNavegacion.setBounds(0, 0, 440, 20);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -213,7 +246,20 @@ public class ReservacionInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_botonRegresarActionPerformed
 
     private void botonAceptarReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarReservacionActionPerformed
-        // TODO add your handling code here:
+        int estadoReservacion = 0;
+        String identificadorReservacion="";
+        try {
+            identificadorReservacion = biblioteca.generarReservacion(item);
+            estadoReservacion = biblioteca.realizarReservacion(identificadorReservacion);
+            if (estadoReservacion == 1){
+                botonAceptarReservacion.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "La reservación ha sido exitosa. \nPasa por el item en la fecha "+biblioteca.verFechaFinReservacion(identificadorReservacion), "Exito", JOptionPane.INFORMATION_MESSAGE);            
+            } else {
+                JOptionPane.showMessageDialog(null, "Ocurrio algo y la reservación falló ", "Reservacion erronea", JOptionPane.ERROR_MESSAGE);            
+            }
+        } catch (SQLException ex) {
+                Logger.getLogger(ReservacionInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonAceptarReservacionActionPerformed
 
     /**
@@ -262,7 +308,9 @@ public class ReservacionInterfaz extends javax.swing.JFrame {
     private javax.swing.JPanel imagenPanel;
     private javax.swing.JPanel informacionPanel;
     private javax.swing.JTabbedPane informacionTabPanel;
+    private javax.swing.JLabel nombreUsuario;
     private javax.swing.JPanel panelDatos;
+    private javax.swing.JPanel panelNavegacion;
     private javax.swing.JLabel tipoMaterialCampo;
     private javax.swing.JLabel tituloCampo;
     // End of variables declaration//GEN-END:variables

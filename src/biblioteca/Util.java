@@ -74,7 +74,7 @@ public class Util {
         return disponibilidadUsuario;
     }
     
-    public static String generadorDeIdentificador() throws SQLException{
+    public static String generadorDeIdentificador(){
         Date fecha = new Date();
         SimpleDateFormat formateadorDeFecha = new SimpleDateFormat("yyyMMddHHmmss");
         String identificadorGenerado = formateadorDeFecha.format(fecha);

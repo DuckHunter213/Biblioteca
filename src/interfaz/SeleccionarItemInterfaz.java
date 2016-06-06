@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
@@ -31,8 +32,8 @@ public class SeleccionarItemInterfaz extends javax.swing.JFrame implements Actio
         public static JScrollPane panelItems;
         public static JPanel panelVistaItems;
         public static Biblioteca biblioteca;
-        public static List<Item> items = new ArrayList<>();
-        public static List<VistaPreviaItem> vistasItems = new ArrayList<>();
+        public static List<Item> items;
+        public static List<VistaPreviaItem> vistasItems;
 
     /**
      * Creates new form SeleccionarItemInterfaz
@@ -41,17 +42,23 @@ public class SeleccionarItemInterfaz extends javax.swing.JFrame implements Actio
     public SeleccionarItemInterfaz() throws SQLException {
         biblioteca = new Biblioteca();
         panelItems = new JScrollPane();
+        items = new ArrayList<>();
+        vistasItems = new ArrayList<>();
         panelVistaItems = new JPanel();
         panelVistaItems.setLayout(new FlowLayout());
-        panelVistaItems.setPreferredSize(new Dimension(420,800));
+        panelVistaItems.setPreferredSize(new Dimension(770,800));
         setLayout(new FlowLayout());
         setLocationRelativeTo(null);
         setTitle("Selecciona Item");
-        setSize(500, 400);
-        mostrarItems();
+        setSize(830, 400);
+        try{
+            mostrarItems();
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "No hay conexión con la Base de Datos ", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
         panelItems.getViewport().setView(panelVistaItems);
         panelItems.getViewport().add(panelVistaItems);
-        panelItems.setPreferredSize(new Dimension(440,310));
+        panelItems.setPreferredSize(new Dimension(810,310));
         this.getContentPane().add(panelItems);
         initComponents();
         this.pack();
@@ -102,14 +109,14 @@ public class SeleccionarItemInterfaz extends javax.swing.JFrame implements Actio
         botonRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(500, 380));
-        setPreferredSize(new java.awt.Dimension(500, 380));
+        setMaximumSize(new java.awt.Dimension(830, 380));
+        setPreferredSize(new java.awt.Dimension(830, 380));
         setResizable(false);
-        setSize(new java.awt.Dimension(500, 380));
+        setSize(new java.awt.Dimension(830, 380));
         getContentPane().setLayout(new java.awt.FlowLayout());
 
         footer.setBackground(new java.awt.Color(230, 230, 230));
-        footer.setPreferredSize(new java.awt.Dimension(500, 30));
+        footer.setPreferredSize(new java.awt.Dimension(800, 30));
 
         botonRegresar.setText("Regresar");
         botonRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +131,7 @@ public class SeleccionarItemInterfaz extends javax.swing.JFrame implements Actio
             footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(footerLayout.createSequentialGroup()
                 .addComponent(botonRegresar)
-                .addGap(0, 423, Short.MAX_VALUE))
+                .addGap(0, 723, Short.MAX_VALUE))
         );
         footerLayout.setVerticalGroup(
             footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

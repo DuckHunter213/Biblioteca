@@ -9,6 +9,7 @@ import biblioteca.Util;
 import dataaccess.BibliotecaDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,9 +18,11 @@ import java.util.List;
  */
 public class Biblioteca {
     public List<Prestamo> prestamos = null;
+    public List<Reservacion> reservaciones = null;
     
     public Biblioteca(){
         prestamos = new ArrayList<>();
+        reservaciones = new ArrayList<>();
     }
     public List<Item> buscarItem(String identificador) throws SQLException{
         List<Item> items = new ArrayList<>();
@@ -51,6 +54,14 @@ public class Biblioteca {
         }
         return identificadorPrestamo;
     }
+    public String generarReservacion(Item item) throws SQLException{
+        Reservacion reservacion = new Reservacion(item);
+        reservacion.setIdentificadorUsuario("identificadora1");
+        reservacion.generarIdentificador();
+        String identificador = reservacion.getIdentificadorReservacion();
+        reservaciones.add(reservacion);
+        return identificador;
+    }
     public String verFechaFinPrestamo(String identificadorPrestamo){
         Prestamo prestamo = null;
         for(int i=0;i<prestamos.size();i++) {
@@ -58,6 +69,14 @@ public class Biblioteca {
                 prestamo  =  prestamos.get(i);
         }
         return prestamo.getFechaCaducidadNormal();
+    }
+    public Date verFechaFinReservacion(String identificador){
+        Reservacion reservacion = null;
+        for(int i=0;i<reservaciones.size();i++) {
+            if (reservaciones.get(i).getIdentificadorReservacion().equals(identificador))
+                reservacion  =  reservaciones.get(i);
+        }
+        return reservacion.getFechaLimite();
     }
     public int realizarPrestamo(String identificadorPrestamo, String identificadorAlumno) throws SQLException{
         int estadoPrestamo = 0;
@@ -75,7 +94,15 @@ public class Biblioteca {
         }
         return estadoPrestamo;
     }
-    
+    public int realizarReservacion(String identificador) throws SQLException{
+        Reservacion reservacion =  null;
+        for(int i=0;i<reservaciones.size();i++) {
+            if (reservaciones.get(i).getIdentificadorReservacion().equals(identificador))
+                  reservacion =  reservaciones.get(i);
+        }
+        int estadoReservacion = reservacion.realizarReservacion();
+        return estadoReservacion;
+    }
     public List<Item> getItems()throws SQLException{
         List<Item> items = new ArrayList<>();
         BibliotecaDAOImpl bibliotecaDAO = new BibliotecaDAOImpl();

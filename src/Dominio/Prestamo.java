@@ -21,14 +21,14 @@ public class Prestamo {
     private Date fechaCaducidad;
     private String identificadorPrestamo;
     
-    public Prestamo(Item item) throws SQLException{ //Lanzar un NullPointerException
-        this.item = new Libro();
+    public Prestamo(Item item) throws SQLException{
+        this.item = item;
         Calendar calendario = GregorianCalendar.getInstance();
         fechaPrestamo = new Date(); 
         fechaPrestamo.setTime(calendario.getTimeInMillis());
         this.item.setIdentificador(item.getIdentificador());
+        identificadorPrestamo = Util.generadorDeIdentificador();
         try{
-            identificadorPrestamo = Util.generadorDeIdentificador();
             //La cantidad de días que se presta, se consigue de la BD y se regresa
             calendario.add(Calendar.DAY_OF_WEEK_IN_MONTH, item.getTiempoPrestamo());
             fechaCaducidad = new Date();
