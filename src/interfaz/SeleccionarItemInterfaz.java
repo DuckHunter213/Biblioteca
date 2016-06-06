@@ -88,8 +88,8 @@ public class SeleccionarItemInterfaz extends javax.swing.JFrame implements Actio
             try {
                 reservacion = new ReservacionInterfaz(itemSeleccionado);
             } catch (SQLException ex) {
-                Logger.getLogger(SeleccionarItemInterfaz.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            JOptionPane.showMessageDialog(null, "No hay conexión con la Base de Datos ", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
         reservacion.setVisible(true);
         reservacion.setTitle("Prestar Item");
         dispose();

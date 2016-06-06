@@ -258,7 +258,7 @@ public class ReservacionInterfaz extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Ocurrio algo y la reservación falló ", "Reservacion erronea", JOptionPane.ERROR_MESSAGE);            
             }
         } catch (SQLException ex) {
-                Logger.getLogger(ReservacionInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No hay conexión con la Base de Datos ", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_botonAceptarReservacionActionPerformed
 
