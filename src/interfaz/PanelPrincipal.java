@@ -5,6 +5,10 @@
  */
 package interfaz;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author gerar
@@ -85,9 +89,14 @@ public class PanelPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSeccionReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSeccionReservarActionPerformed
-        ReservacionInterfaz reservacion = new ReservacionInterfaz();
+        SeleccionarItemInterfaz reservacion = null;
+        try {
+            reservacion = new SeleccionarItemInterfaz();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         reservacion.setVisible(true);
-        reservacion.setTitle("Prestar Item");
+        reservacion.setTitle("Seleccione un item");
         dispose();
     }//GEN-LAST:event_botonSeccionReservarActionPerformed
 

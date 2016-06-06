@@ -32,10 +32,10 @@ public class Biblioteca {
         return items;
     }
     
-    public boolean verificarMatricula(String identificadorAlumno){
+    public boolean verificarMatricula(String identificadorAlumno) throws SQLException{
         return Util.verificarIdentificadorAlumno(identificadorAlumno);
     }
-    public boolean verificarItem(String identificadorItem){
+    public boolean verificarItem(String identificadorItem) throws SQLException{
         return Util.verificarIdentificadorItem(identificadorItem);
     }
     public String generarPrestamo(String identificadorItem) throws SQLException{

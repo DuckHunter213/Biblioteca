@@ -7,44 +7,77 @@ package interfaz;
 
 import Dominio.Biblioteca;
 import Dominio.Item;
+import Dominio.Libro;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 /**
  *
  * @author gerar
  */
-public class SeleccionarItemInterfaz extends javax.swing.JFrame {
+public class SeleccionarItemInterfaz extends javax.swing.JFrame implements ActionListener{
+        public static JScrollPane panelItems;
+        public static JPanel panelVistaItems;
         public static Biblioteca biblioteca;
+        public static List<Item> items = new ArrayList<>();
+        public static List<VistaPreviaItem> vistasItems = new ArrayList<>();
 
     /**
      * Creates new form SeleccionarItemInterfaz
+     * @throws java.sql.SQLException
      */
-    public SeleccionarItemInterfaz() {
+    public SeleccionarItemInterfaz() throws SQLException {
         biblioteca = new Biblioteca();
-        initComponents();
+        panelItems = new JScrollPane();
+        panelVistaItems = new JPanel();
+        panelVistaItems.setLayout(new FlowLayout());
+        panelVistaItems.setPreferredSize(new Dimension(420,800));
+        setLayout(new FlowLayout());
         setLocationRelativeTo(null);
-        setResizable(false);
         setTitle("Selecciona Item");
+        setSize(500, 400);
+        mostrarItems();
+        panelItems.getViewport().setView(panelVistaItems);
+        panelItems.getViewport().add(panelVistaItems);
+        panelItems.setPreferredSize(new Dimension(440,310));
+        this.getContentPane().add(panelItems);
+        initComponents();
+        this.pack();
+        validate();
     }
     public void mostrarItems() throws SQLException{
-        List<Item> items = new ArrayList<>();
         items = biblioteca.getItems();
-        for (int i=0;i<=items.size();i++){
-            vistaPreviaItem vistaItem = new vistaPreviaItem(items.get(i));
-            vistaItem.elegirItemBoton.addActionListener((ActionListener) this);//escucha eventos
-            this.add(vistaItem);
-            this.validate();
+        VistaPreviaItem vistaItem = null;
+        for (int i=0;i<items.size();i++){
+            vistaItem = new VistaPreviaItem(items.get(i),i);
+            vistasItems.add(vistaItem);
+            vistaItem.elegirItemBoton.addActionListener(this);
+            //panelItems.getViewport().setView(vistaItem);
+            panelVistaItems.add(vistaItem);
         }
     }
     
+        @Override
     public void actionPerformed(ActionEvent e) {
-        //se obtiene el comando ejecutado
-        String comando = e.getActionCommand();
-        ReservacionInterfaz reservacion = new ReservacionInterfaz();
+        String numeroDeItem = e.getActionCommand();
+        Item itemSeleccionado = null;
+        for(int i = 0;i <= vistasItems.size();i++){
+            if (numeroDeItem.equals("ver "+i))
+                itemSeleccionado = items.get(i);
+        }
+        ReservacionInterfaz reservacion = new ReservacionInterfaz(itemSeleccionado);
         reservacion.setVisible(true);
         reservacion.setTitle("Prestar Item");
         dispose();
@@ -64,8 +97,14 @@ public class SeleccionarItemInterfaz extends javax.swing.JFrame {
         botonRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(500, 380));
+        setPreferredSize(new java.awt.Dimension(500, 380));
+        setResizable(false);
+        setSize(new java.awt.Dimension(500, 380));
+        getContentPane().setLayout(new java.awt.FlowLayout());
 
         footer.setBackground(new java.awt.Color(230, 230, 230));
+        footer.setPreferredSize(new java.awt.Dimension(500, 30));
 
         botonRegresar.setText("Regresar");
         botonRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +119,7 @@ public class SeleccionarItemInterfaz extends javax.swing.JFrame {
             footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(footerLayout.createSequentialGroup()
                 .addComponent(botonRegresar)
-                .addGap(0, 323, Short.MAX_VALUE))
+                .addGap(0, 423, Short.MAX_VALUE))
         );
         footerLayout.setVerticalGroup(
             footerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,20 +128,7 @@ public class SeleccionarItemInterfaz extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 277, Short.MAX_VALUE)
-                .addComponent(footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        pack();
+        getContentPane().add(footer);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
@@ -141,7 +167,11 @@ public class SeleccionarItemInterfaz extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SeleccionarItemInterfaz().setVisible(true);
+                try {
+                    new SeleccionarItemInterfaz().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(SeleccionarItemInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

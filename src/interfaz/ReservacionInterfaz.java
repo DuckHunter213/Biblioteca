@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import Dominio.Item;
+
 /**
  *
  * @author gerar
@@ -13,7 +15,18 @@ public class ReservacionInterfaz extends javax.swing.JFrame {
 
     /**
      * Creates new form reservacionInterfaz
+     * @param item
      */
+    public ReservacionInterfaz(Item item) {
+        initComponents();
+        this.autorCampo.setText("Autor: "+item.getAutor());
+        this.tipoMaterialCampo.setText("Tipo: " + item.getClass().getName());
+        this.tituloCampo.setText("Título: " + item.getTitulo());
+        this.calificacionCampo.setText("Calificación: 9.5/10 ");
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Reservación");
+    }
     public ReservacionInterfaz() {
         initComponents();
         setLocationRelativeTo(null);

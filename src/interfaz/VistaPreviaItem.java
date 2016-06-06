@@ -11,22 +11,27 @@ import Dominio.Item;
  *
  * @author gerar
  */
-public class vistaPreviaItem extends javax.swing.JPanel {
-
+public class VistaPreviaItem extends javax.swing.JPanel {
+    private static int identificador;
+    
+    public int getIdentificador(){
+        return identificador;
+    }
     /**
      * Creates new form vistaPreviaItem
      * @param item
+     * @param identificador
      */
-    public vistaPreviaItem(Item item) {
+    public VistaPreviaItem(Item item, int identificador) {
         initComponents();
-        //JPanel
-        setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
-        this.setSize(230, 30);
+        setVisible(true);
+        this.identificador = identificador;
         this.setVisible(true);
         //se agrega un comando al boton
         this.autorCampo.setText("Autor: " + item.getAutor());
-        this.tipoItemCampo.setText("Tipo: " + item.getClass());
-        this.nombreItemCampo.setText("Título: " + item.getAutor());
+        this.tipoItemCampo.setText("Tipo: " + item.getClass().getName());
+        this.nombreItemCampo.setText("Título: " + item.getTitulo());
+        this.elegirItemBoton.setText("ver "+identificador);
     }
 
     /**
@@ -44,8 +49,11 @@ public class vistaPreviaItem extends javax.swing.JPanel {
         autorCampo = new javax.swing.JLabel();
         tipoItemCampo = new javax.swing.JLabel();
         nombreItemCampo = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
-        footer.setBackground(new java.awt.Color(230, 230, 230));
+        setBackground(new java.awt.Color(51, 102, 255));
+
+        footer.setBackground(new java.awt.Color(102, 204, 255));
 
         elegirItemBoton.setText("ver a detalle");
 
@@ -96,13 +104,26 @@ public class vistaPreviaItem extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(footer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(140, 140, 140)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(datosItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -110,7 +131,9 @@ public class vistaPreviaItem extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(datosItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(datosItemPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(29, 29, 29)
                 .addComponent(footer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -122,6 +145,7 @@ public class vistaPreviaItem extends javax.swing.JPanel {
     private javax.swing.JPanel datosItemPanel;
     public javax.swing.JButton elegirItemBoton;
     private javax.swing.JPanel footer;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nombreItemCampo;
     private javax.swing.JLabel tipoItemCampo;
     // End of variables declaration//GEN-END:variables

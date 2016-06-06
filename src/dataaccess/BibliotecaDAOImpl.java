@@ -57,12 +57,29 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
         }
         return items;
     }
-    public boolean verificarAlumno(String matriculaUsuario) throws SQLException{
+    public boolean verificarAlumno(String identificadorUsuario) throws SQLException{
         boolean estado = false;
         try{
             connection = CONEXION.obtenerConexion();
             PreparedStatement sentenciaSQL  = connection.prepareStatement("SELECT * FROM usuarios WHERE identificador = ?");            
-            sentenciaSQL.setString(1, matriculaUsuario);
+            sentenciaSQL.setString(1, identificadorUsuario);
+            resultados = sentenciaSQL.executeQuery();
+            while(resultados.next()){
+                estado = true;
+            }
+        } catch (SQLException ex) {
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
+        }finally{
+            CONEXION.desconecta();
+        }
+        return estado;
+    }
+    public boolean verificarItem(String identificadorItem) throws SQLException{
+        boolean estado = false;
+        try{
+            connection = CONEXION.obtenerConexion();
+            PreparedStatement sentenciaSQL  = connection.prepareStatement("SELECT * FROM items WHERE identificador = ?");            
+            sentenciaSQL.setString(1, identificadorItem);
             resultados = sentenciaSQL.executeQuery();
             while(resultados.next()){
                 estado = true;

@@ -83,14 +83,19 @@ public class Util {
     }
     public static boolean verificarIdentificadorAlumno(String identificador) throws SQLException {
         boolean estado = false;
-            BibliotecaDAOImpl biblioteca = new BibliotecaDAOImpl();
-            if (biblioteca.verificarAlumno(identificador)){
-                estado = identificador.length() == 15 && (identificador.toLowerCase()).startsWith("i");
-            }
+        BibliotecaDAOImpl biblioteca = new BibliotecaDAOImpl();
+        if (biblioteca.verificarAlumno(identificador)){
+            estado = identificador.length() == 15 && (identificador.toLowerCase()).startsWith("i");
+        }
         return estado;
     }
-    public static boolean verificarIdentificadorItem(String identificador){
-        return identificador.length() == 10 && (identificador.toLowerCase()).startsWith("i");
+    public static boolean verificarIdentificadorItem(String identificador) throws SQLException{
+        boolean estado =  false;
+        BibliotecaDAOImpl biblioteca = new BibliotecaDAOImpl();
+        if (biblioteca.verificarItem(identificador)){
+            estado = identificador.length() == 10 && (identificador.toLowerCase()).startsWith("i");
+        }
+        return estado;
     }
     
 }

@@ -151,7 +151,7 @@ public class PrestamoInterfaz extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "La matricula introducide es inválida o no existe ese usuario", "Datos erroneos", JOptionPane.WARNING_MESSAGE);
                     break;
                 case ITEM_INVALIDO:
-                    JOptionPane.showMessageDialog(null, "El identificador del item es inválido", "Datos erroneos", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "El identificador del item es inválido o no existe", "Datos erroneos", JOptionPane.WARNING_MESSAGE);
                     break;
                 case PRESTAMO_EXITOSO:
                     JOptionPane.showMessageDialog(null, "El préstamo se ha realizado con éxito.\n Caduca en la fecha "+biblioteca.verFechaFinPrestamo(identificadorPrestamo), "Préstamo correcto", JOptionPane.INFORMATION_MESSAGE);
