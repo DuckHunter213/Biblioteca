@@ -1,4 +1,4 @@
-package Dominio;
+package dominio;
 
 /**
  * Clase libro que es instanciado de la clase item

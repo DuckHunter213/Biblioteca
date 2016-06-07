@@ -1,8 +1,8 @@
 package reservaciontests;
 
-import Dominio.Item;
-import Dominio.Libro;
-import Dominio.Reservacion;
+import dominio.Item;
+import dominio.Libro;
+import dominio.Reservacion;
 import dataaccess.ReservacionDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;

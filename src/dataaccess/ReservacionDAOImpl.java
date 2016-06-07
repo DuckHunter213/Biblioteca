@@ -1,6 +1,6 @@
 package dataaccess;
 
-import Dominio.Reservacion;
+import dominio.Reservacion;
 import biblioteca.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

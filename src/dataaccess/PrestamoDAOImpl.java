@@ -1,7 +1,7 @@
 package dataaccess;
 
 import biblioteca.Util;
-import Dominio.Prestamo;
+import dominio.Prestamo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

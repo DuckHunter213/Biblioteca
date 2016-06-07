@@ -1,4 +1,4 @@
-package Dominio;
+package dominio;
 
 import biblioteca.Util;
 import dataaccess.ReservacionDAOImpl;

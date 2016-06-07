@@ -1,7 +1,7 @@
 package dataaccess;
 
-import Dominio.Item;
-import Dominio.Libro;
+import dominio.Item;
+import dominio.Libro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

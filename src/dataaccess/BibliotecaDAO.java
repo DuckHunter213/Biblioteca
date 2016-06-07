@@ -1,6 +1,6 @@
 package dataaccess;
 
-import Dominio.Item;
+import dominio.Item;
 import java.sql.SQLException;
 import java.util.List;
 

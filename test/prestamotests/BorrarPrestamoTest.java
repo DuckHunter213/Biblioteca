@@ -1,8 +1,8 @@
 package prestamotests;
 
-import Dominio.Item;
-import Dominio.Libro;
-import Dominio.Prestamo;
+import dominio.Item;
+import dominio.Libro;
+import dominio.Prestamo;
 import dataaccess.PrestamoDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package Dominio;
+package dominio;
 
 import dataaccess.BibliotecaDAOImpl;
 import java.sql.SQLException;

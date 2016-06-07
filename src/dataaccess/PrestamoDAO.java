@@ -1,6 +1,6 @@
 package dataaccess;
 
-import Dominio.Prestamo;
+import dominio.Prestamo;
 import java.sql.SQLException;
 
 /**

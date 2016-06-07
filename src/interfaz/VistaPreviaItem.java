@@ -5,7 +5,7 @@
  */
 package interfaz;
 
-import Dominio.Item;
+import dominio.Item;
 
 /**
  *

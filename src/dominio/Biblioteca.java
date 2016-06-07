@@ -1,4 +1,4 @@
-package Dominio;
+package dominio;
 
 import biblioteca.Util;
 import dataaccess.BibliotecaDAOImpl;
@@ -74,13 +74,13 @@ public class Biblioteca {
     }
     
     /**
-     * Crea un objeto préstamo y le asigna un ítem con todos sus datos completos, si algún dato falta, fallará el préstamo,
+     * Crea un objeto préstamo el cual contiene un objeto ítem extraído de la base de datos,
      * además, crea un identificador de préstamo para poder ser identificado por la clase empleadora
      * @param identificadorItem recibe un identificador de algún ítem el cual debería ser previamente revisado, aun así, si
      * es erroneo, producira un SQLException.
      * @return El identificador del préstamo será generado con base en la fecha, es un String con una longitud de 15 caracteres
      * y es necesario tenerlo para poder realizar el préstamo.
-     * @throws SQLException Si algún dato del identificador del ítem es erroneo o no hay conexión a la base de datos
+     * @throws SQLException Si el identificador no coincide con ningún ítem en la base de datos o no hay conexión a la base de datos
      * se lanzará una SQLException.
      */
     public String generarPrestamo(String identificadorItem) throws SQLException{
@@ -98,10 +98,12 @@ public class Biblioteca {
     }
     
     /**
-     *
-     * @param item
-     * @return
-     * @throws SQLException
+     * Crea un objeto reservación y le asigna un ítem con todos sus datos completos, si algún dato falta, fallará el préstamo,
+     * además, crea un identificador de reservación para poder ser identificado por la clase empleadora
+     * @param item recibe un ítem que debe ser previamente revisado si existe en la base de datos
+     * @return El identificador de la reservación será generado con base en la fecha, es un String con una longitud de 15 caracteres
+     * @throws SQLException Si algún dato del ítem es erroneo o no hay conexión a la base de datos
+     * se lanzará una SQLException.
      */
     public String generarReservacion(Item item) throws SQLException{
         Reservacion reservacion = new Reservacion(item);
@@ -113,7 +115,7 @@ public class Biblioteca {
     }
     
     /**
-     *
+     * 
      * @param identificadorPrestamo
      * @return
      */

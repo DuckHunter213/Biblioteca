@@ -5,7 +5,7 @@
  */
 package interfaz;
 
-import Dominio.Biblioteca;
+import dominio.Biblioteca;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

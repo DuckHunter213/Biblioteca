@@ -5,9 +5,9 @@
  */
 package dominiotest;
 
-import Dominio.Item;
-import Dominio.Libro;
-import Dominio.Prestamo;
+import dominio.Item;
+import dominio.Libro;
+import dominio.Prestamo;
 import dataaccess.PrestamoDAO;
 import dataaccess.PrestamoDAOImpl;
 import java.sql.SQLException;

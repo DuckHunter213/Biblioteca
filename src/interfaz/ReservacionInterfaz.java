@@ -5,8 +5,8 @@
  */
 package interfaz;
 
-import Dominio.Biblioteca;
-import Dominio.Item;
+import dominio.Biblioteca;
+import dominio.Item;
 import biblioteca.Util;
 import java.sql.SQLException;
 import java.util.logging.Level;

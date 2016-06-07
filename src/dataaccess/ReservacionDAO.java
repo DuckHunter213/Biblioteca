@@ -1,6 +1,6 @@
 package dataaccess;
 
-import Dominio.Reservacion;
+import dominio.Reservacion;
 import java.sql.SQLException;
 
 /**

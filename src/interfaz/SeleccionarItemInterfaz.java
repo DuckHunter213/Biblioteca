@@ -5,9 +5,9 @@
  */
 package interfaz;
 
-import Dominio.Biblioteca;
-import Dominio.Item;
-import Dominio.Libro;
+import dominio.Biblioteca;
+import dominio.Item;
+import dominio.Libro;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;

@@ -1,7 +1,7 @@
 package conexiontests;
 
-import Dominio.Item;
-import Dominio.Libro;
+import dominio.Item;
+import dominio.Libro;
 import dataaccess.BibliotecaDAOImpl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
