@@ -1,12 +1,9 @@
 package reservaciontests;
 
 import dominio.Item;
-import dominio.Libro;
 import dominio.Reservacion;
 import dataaccess.ReservacionDAOImpl;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,63 +12,65 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Nombre del programa:   Biblioteca
- * Nombres:               @author Luis Fernando Gomez Alejandre
- *                        @author Francisco Gerardo Mares Solano
- * Fecha:                 @since 20/05/2016
- * Descripción:           Contiene pruebas para borrar registros de la base de datos,
- *                        todas las pruebas son referentes a los items (ItemDAOImpl).
+ * Nombre del programa: Biblioteca
+ * Nombres: @author Luis Fernando Gomez Alejandre
+ *
+ * @author Francisco Gerardo Mares Solano
+ * Fecha: @since 20/05/2016
+ * Descripción: Contiene pruebas para borrar registros de la base de datos,
+ * todas las pruebas son referentes a los items (ItemDAOImpl).
  */
-public class BorrarReservacionTest {    
+public class BorrarReservacionTest{
     //<editor-fold defaultstate="collapse" desc="Definicion de variables">
-    Item item = new Libro();
+    Item item = new Item();
     String identificadorAlumno = "IDENTIFICADORA5";
     String identificadorItemErroneo = "identif010";
     String identificadorItem = "identif005";
     public static final int COSTO_MULTA = 10;
-    public static final int TIEMPO_PRESTAMO= 10;
+    public static final int TIEMPO_PRESTAMO = 10;
     ReservacionDAOImpl instance = new ReservacionDAOImpl();
     int resultado;
     //</editor-fold>
-    
-    public BorrarReservacionTest() {
+
+    public BorrarReservacionTest(){
     }
-    
+
     //<editor-fold defaultstate="collapse" desc="Opciones de la prueba">
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass(){
     }
-    
+
     @AfterClass
-    public static void tearDownClass() {
+    public static void tearDownClass(){
     }
-    
-    @Before 
+
+    @Before
     public void setUp() throws Exception{
         item.setIdentificador(identificadorItem);
         item.setCostoMulta(COSTO_MULTA);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
-        Reservacion reservacion =  new Reservacion(item);
+        Reservacion reservacion = new Reservacion(item);
         reservacion.generarIdentificador();
         reservacion.setIdentificadorUsuario(identificadorAlumno);
         reservacion.realizarReservacion();
         instance.reservarItem(reservacion);
     }
-    
+
     @After
     public void tearDown() throws SQLException{
     }
+
     //</editor-fold>    
     //<editor-fold defaultstate="collapse" desc="Pruebas de unidad">    
     @Test
-    public void testquitarItemDeReservacionExitoso() throws SQLException {
+    public void testquitarItemDeReservacionExitoso() throws SQLException{
         int expResult = 1;
         int result = instance.quitarItemDeReservacion(item.getIdentificador());
         assertEquals(expResult, result);
     }
-    
+
     @Test
-    public void testquitarItemDeReservacionFallido() throws SQLException {
+    public void testquitarItemDeReservacionFallido() throws SQLException{
         int expResult = 0;
         instance.quitarItemDeReservacion(item.getIdentificador());
         item.setIdentificador(identificadorItemErroneo);
@@ -79,4 +78,5 @@ public class BorrarReservacionTest {
         assertEquals(expResult, result);
     }
     //</editor-fold>
+
 }

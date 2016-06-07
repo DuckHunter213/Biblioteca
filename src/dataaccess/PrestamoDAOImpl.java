@@ -36,14 +36,16 @@ public class PrestamoDAOImpl implements PrestamoDAO{
         try{
             connection = CONEXION.obtenerConexion();
             if (Util.itemEstadoDisponibilidad(prestamo.getIdentificadorItem())){
-                if (Util.revisarLimitePrestamos(prestamo.getMatriculaUsuario())){
-                    PreparedStatement sentenciaSQL = connection.prepareStatement("INSERT INTO prestamos VALUES (?,?,?,?,?)");
-                    sentenciaSQL.setDate(1, fechaPrestamoMili);
-                    sentenciaSQL.setString(2, prestamo.getIdentificadorPrestamo());
-                    sentenciaSQL.setString(3, prestamo.getIdentificadorItem());
-                    sentenciaSQL.setString(4, prestamo.getMatriculaUsuario());
-                    sentenciaSQL.setDate(5, fechaFinPrestamoMili);
-                    resultadoDeAgregacion = sentenciaSQL.executeUpdate();
+                if (Util.revisarLimitePrestamos(prestamo.getIdentificadorUsuario())){
+                    if (Util.verificarIdentificadorItem(prestamo.getIdentificadorItem())){
+                        PreparedStatement sentenciaSQL = connection.prepareStatement("INSERT INTO prestamos VALUES (?,?,?,?,?)");
+                        sentenciaSQL.setDate(1, fechaPrestamoMili);
+                        sentenciaSQL.setString(2, prestamo.getIdentificadorPrestamo());
+                        sentenciaSQL.setString(3, prestamo.getIdentificadorItem());
+                        sentenciaSQL.setString(4, prestamo.getIdentificadorUsuario());
+                        sentenciaSQL.setDate(5, fechaFinPrestamoMili);
+                        resultadoDeAgregacion = sentenciaSQL.executeUpdate();
+                    }
                 }else{
                     resultadoDeAgregacion = -1;
                 }
