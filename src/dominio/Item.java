@@ -13,10 +13,11 @@ import java.util.Calendar;
  * @author Francisco Gerardo Mares Solano
  * @since 07/06/2016
  */
-public abstract class Item {
+public class Item {
     private String autor;
     private String titulo;
     private String identificador;
+    private String categoria;
     private final Calendar fechaAdquisicion = Calendar.getInstance();
     private final Calendar fechaPublicación = Calendar.getInstance();
     private final NumberFormat costoMulta = NumberFormat.getInstance();
@@ -30,7 +31,19 @@ public abstract class Item {
     public String getAutor() {
         return autor;
     }
-    
+     /**
+     * Obtiene la categoría del ítem
+     * @return Regresa la categoria a la que pertecene el ítem
+     */
+    public String getCategoria() {
+        return categoria;
+    }
+    /**
+     * @param categoria Una cadena de texto con la categoría del ítem
+     */
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
     /**
      * Establece el nombre del autor para el ítem.
      * @param autor Un String con el nombre completo del autor o autores 

@@ -37,7 +37,7 @@ public class ReservacionInterfaz extends javax.swing.JFrame {
     }
     public void setInformacion(){
         this.autorCampo.setText("Autor: "+item.getAutor());
-        this.tipoMaterialCampo.setText("Tipo: " + item.getClass().getName());
+        this.tipoMaterialCampo.setText("Tipo: " + item.getCategoria());
         this.tituloCampo.setText("Título: " + item.getTitulo());
         this.calificacionCampo.setText("Calificación: 9.5/10 ");        
     }
