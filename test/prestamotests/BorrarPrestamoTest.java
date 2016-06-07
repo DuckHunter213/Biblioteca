@@ -54,7 +54,7 @@ public class BorrarPrestamoTest {
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
         prestamo = new Prestamo(item);
         prestamo.setMatriculaUsuario(identificadorAlumno);
-        instance.prestarItem(prestamo);
+        instance.guardarRegistroDePrestamo(prestamo);
     }
     
     @After
@@ -66,16 +66,16 @@ public class BorrarPrestamoTest {
     @Test
     public void testQuitarItemDePrestamoExitoso() throws SQLException {
         int expResult = 1;
-        int result = instance.quitarItemDePrestamo(item.getIdentificador());
+        int result = instance.quitarPrestamoDeBaseDeDatos(item.getIdentificador());
         assertEquals(expResult, result);
     }    
     
     @Test
     public void testQuitarItemDePrestamoFallido() throws SQLException {
         int expResult = 0;
-        instance.quitarItemDePrestamo(item.getIdentificador());
+        instance.quitarPrestamoDeBaseDeDatos(item.getIdentificador());
         item.setIdentificador(identificadorItemErroneo);
-        int result = instance.quitarItemDePrestamo(item.getIdentificador());
+        int result = instance.quitarPrestamoDeBaseDeDatos(item.getIdentificador());
         assertEquals(expResult, result);
     }
     //</editor-fold>

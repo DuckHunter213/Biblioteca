@@ -28,7 +28,7 @@ public class PrestamoDAOImpl implements PrestamoDAO{
      * @return
      */
     @Override
-    public int prestarItem(Prestamo prestamo) throws SQLException{
+    public int guardarRegistroDePrestamo(Prestamo prestamo) throws SQLException{
         int resultadoDeAgregacion = 0;
         java.sql.Date fechaPrestamoMili = new java.sql.Date(prestamo.getFechaPrestamo());
         java.sql.Date fechaFinPrestamoMili = new java.sql.Date(prestamo.getFechaCaducidad());
@@ -64,7 +64,7 @@ public class PrestamoDAOImpl implements PrestamoDAO{
      * @return regresa un valor de retroaliementación para el usuario
      * //TODO valor de retroalimentación
      */
-    public int quitarItemDePrestamo(String identificadorItem) throws SQLException{
+    public int quitarPrestamoDeBaseDeDatos(String identificadorItem) throws SQLException{
         int resultadoDeLaEliminacion=0;
         try{
             connection = CONEXION.obtenerConexion();

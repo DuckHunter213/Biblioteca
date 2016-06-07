@@ -57,7 +57,7 @@ public class InsercionesPrestamoTest {
     
     @After
     public void tearDown() throws SQLException {
-        instance.quitarItemDePrestamo(identificadorItem);
+        instance.quitarPrestamoDeBaseDeDatos(identificadorItem);
     }
     //</editor-fold>    
     //<editor-fold defaultstate="collapse" desc="Pruebas">
@@ -65,7 +65,7 @@ public class InsercionesPrestamoTest {
     @Test
     public void testPrestarItemExitoso() throws SQLException {
         int expResult = 1;
-        int result = instance.prestarItem(prestamo);
+        int result = instance.guardarRegistroDePrestamo(prestamo);
         assertEquals(expResult, result);
     }
     
@@ -74,15 +74,15 @@ public class InsercionesPrestamoTest {
         int expResult = 0;
         item.setIdentificador(identificadorItemErroneo);
         prestamo.setItem(item);
-        int result = instance.prestarItem(prestamo);
+        int result = instance.guardarRegistroDePrestamo(prestamo);
         assertEquals(expResult, result); 
     }
     
     @Test 
     public void testPrestarItemFallidoRepetido() throws SQLException {
         int expResult = 0;
-        instance.prestarItem(prestamo);
-        int result = instance.prestarItem(prestamo);
+        instance.guardarRegistroDePrestamo(prestamo);
+        int result = instance.guardarRegistroDePrestamo(prestamo);
         assertEquals(expResult, result); 
     }
     //</editor-fold>

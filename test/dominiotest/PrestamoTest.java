@@ -56,7 +56,7 @@ public class PrestamoTest {
     @After
     public void tearDown() throws SQLException {
         PrestamoDAO prestamoDAO = new PrestamoDAOImpl();
-        prestamoDAO.quitarItemDePrestamo(identificadorItem);
+        prestamoDAO.quitarPrestamoDeBaseDeDatos(identificadorItem);
     }
 
     /**

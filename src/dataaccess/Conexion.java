@@ -12,22 +12,19 @@ import java.sql.SQLException;
  * @since 18/04/2016
  */
 public class Conexion {
-    
-    /** 
-     * Seteo de datos en bruto para manejar funcionalidad, sera programable
-     * despues con variables.
-     */
+    //Los datos fueron puestos en bruto para prubas, en siguientes versiones
+    //se asignaran los datos mediante la interfaz
     private Connection conexion;
     private final String DB = "jdbc:mysql://127.0.0.1/Biblioteca";
     private final String USUARIO = "root";
     private final String CONTRASENA = "";
 
     /**
-     *  Funcion que encapsula la conexión, se establecio asi por que es mas 
+     * Funcion que encapsula la conexión, se nombro asi por que es más 
      * fácil leer el código
      * @return Se regresa el estado de la conexion exitoso, de otro modo
-     * arrojara la excepción de conexión
-     * @throws SQLException Se lanza esta excepcion al no poder establecer
+     * arrojara la excepción
+     * @throws SQLException Se lanza esta excepción al no poder establecer
      * conexion a la base de datos 
      */
     public Connection obtenerConexion() throws SQLException {

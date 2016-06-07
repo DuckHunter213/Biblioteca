@@ -10,8 +10,10 @@ import java.sql.SQLException;
  */
 public interface ReservacionDAO {
     /**
-     * Quita el item buscado previamente de una reservación
-     * @param identificador es el parametro por el cual sera quitado el item de
+     * Quita el item buscado previamente de una reservación en dado caso que el
+     * identifiacador no este asociado a un prestamo, mandara una 
+     * SQLException.
+     * @param identificador es el parametro por el cual sera quitado el item de 
      * una reservación
      * @return regresa una retroalimentación //TODO
      * @throws java.sql.SQLException

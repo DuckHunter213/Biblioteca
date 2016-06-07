@@ -10,7 +10,7 @@ import java.sql.Statement;
 
 /**
  * Clase de la implementacion de la clase del DAO reservacón
- * @author Francisco Gerardo Mares Solano
+ * @author Luis Fernando Gomez Alejandre
  * @since 24/05/2016
  */
 public class ReservacionDAOImpl implements ReservacionDAO{
@@ -24,11 +24,10 @@ public class ReservacionDAOImpl implements ReservacionDAO{
     }
     
     /**
-     * Funcion que pone un item en reservación asociado a un usuario
-     * 
-     * @return retorna un valor de retroaliemntación falso o verdadero en caso
-     * de no haber podido capturar el item 
-     * @throws java.sql.SQLException 
+     * Funcion que pone un item en reservación 
+     * @return retorna un valor de retroaliemntación de tipo int //TODO
+     * @throws java.sql.SQLException Lanza SQLException al no poder conectar con
+     * la base de datos o al tener un error.
      */
     @Override
     public int reservarItem(Reservacion reservacion) throws SQLException{

@@ -85,7 +85,7 @@ public class Prestamo {
         PrestamoDAOImpl prestamoDAO = new PrestamoDAOImpl();
         int estadoPrestamo = 0;
         try{
-            estadoPrestamo = prestamoDAO.prestarItem(this);          
+            estadoPrestamo = prestamoDAO.guardarRegistroDePrestamo(this);          
         }catch(SQLException ex){
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }
