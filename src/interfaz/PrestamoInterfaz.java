@@ -175,7 +175,7 @@ public class PrestamoInterfaz extends javax.swing.JFrame {
 
     private static int realizarPrestamo(String identificadorItem, String identificadorAlumno)throws SQLException{
         int estadoPrestamo = -2;
-        if (biblioteca.verificarMatricula(identificadorAlumno)){
+        if (biblioteca.verificarIdentificadorAlumno(identificadorAlumno)){
             if (biblioteca.verificarItem(identificadorItem)){
                 int confirmacionPrestamo = JOptionPane.showConfirmDialog(null, "¿Está seguro?");
                 if (confirmacionPrestamo == 0){
