@@ -29,7 +29,7 @@ public class VistaPreviaItem extends javax.swing.JPanel {
         this.setVisible(true);
         //se agrega un comando al boton
         this.autorCampo.setText("Autor: " + item.getAutor());
-        this.tipoItemCampo.setText("Tipo: " + item.getClass().getName());
+        this.tipoItemCampo.setText("Tipo: " + item.getCategoria());
         this.nombreItemCampo.setText("Título: " + item.getTitulo());
         this.elegirItemBoton.setText("ver "+identificador);
     }
