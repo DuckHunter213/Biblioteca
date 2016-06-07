@@ -51,7 +51,7 @@ public class BorrarPrestamoTest{
         item.setCostoMulta(COSTO_MULTA);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
         prestamo = new Prestamo(item);
-        prestamo.setMatriculaUsuario(identificadorAlumno);
+        prestamo.setIdentificadorUsuario(identificadorAlumno);
         instance.guardarRegistroDePrestamo(prestamo);
     }
 

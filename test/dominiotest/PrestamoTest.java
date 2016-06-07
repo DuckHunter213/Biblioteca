@@ -40,7 +40,7 @@ public class PrestamoTest{
         item.setCostoMulta(COSTO_MULTA);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
         prestamo = new Prestamo(item);
-        prestamo.setMatriculaUsuario(identificadorAlumno);
+        prestamo.setIdentificadorUsuario(identificadorAlumno);
     }
 
     @After
@@ -52,21 +52,21 @@ public class PrestamoTest{
     @Test
     public void testSetMatriculaUsuarioExitoso() throws SQLException{
         boolean expResult = true;
-        boolean result = prestamo.setMatriculaUsuario(identificadorAlumno);
+        boolean result = prestamo.setIdentificadorUsuario(identificadorAlumno);
         assertEquals(expResult, result);
     }
 
     @Test
     public void testSetMatriculaUsuarioFallido() throws SQLException{
         boolean expResult = false;
-        boolean result = prestamo.setMatriculaUsuario("");
+        boolean result = prestamo.setIdentificadorUsuario("");
         assertEquals(expResult, result);
     }
 
     @Test
     public void testGetMatriculaUsuario(){
         String expResult = "IDENTIFICADORA5";
-        String result = prestamo.getMatriculaUsuario();
+        String result = prestamo.getIdentificadorUsuario();
         assertEquals(expResult, result);
     }
 

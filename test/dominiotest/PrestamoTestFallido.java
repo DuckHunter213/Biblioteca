@@ -18,7 +18,7 @@ public class PrestamoTestFallido{
 
     Item item = new Item();
     String identificadorAlumno = "IDENTIFICADORA5";
-    String identificadorItem = "identif005asdaws";
+    String identificadorItem = "identif010";
     public static final int COSTO_MULTA = 10;
     public static final int TIEMPO_PRESTAMO = 10;
     Prestamo prestamo;
@@ -42,7 +42,7 @@ public class PrestamoTestFallido{
         item.setCostoMulta(COSTO_MULTA);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
         prestamo = new Prestamo(item);
-        prestamo.setMatriculaUsuario(identificadorAlumno);
+        prestamo.setIdentificadorUsuario(identificadorAlumno);
     }
 
     @Test(expected = SQLException.class)
