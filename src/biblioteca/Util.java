@@ -113,9 +113,9 @@ public class Util {
      */
     public static boolean verificarIdentificadorAlumno(String identificador) throws SQLException {
         boolean estado = false;
-        BibliotecaDAOImpl biblioteca = new BibliotecaDAOImpl();
-        if (biblioteca.verificarAlumno(identificador)){
-            estado = identificador.length() == 15 && (identificador.toLowerCase()).startsWith("i");
+        if (estado = identificador.length() == 15 && (identificador.toLowerCase()).startsWith("i")){
+            BibliotecaDAOImpl biblioteca = new BibliotecaDAOImpl();
+            estado = biblioteca.verificarAlumno(identificador);
         }
         return estado;
     }
@@ -131,9 +131,9 @@ public class Util {
      */
     public static boolean verificarIdentificadorItem(String identificador) throws SQLException{
         boolean estado =  false;
-        BibliotecaDAOImpl biblioteca = new BibliotecaDAOImpl();
-        if (biblioteca.verificarItem(identificador)){
-            estado = identificador.length() == 10 && (identificador.toLowerCase()).startsWith("i");
+        if ((identificador.length() == 10) && (identificador.toLowerCase()).startsWith("i")){
+            BibliotecaDAOImpl biblioteca = new BibliotecaDAOImpl();
+            estado = biblioteca.verificarItem(identificador);
         }
         return estado;
     }

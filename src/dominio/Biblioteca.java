@@ -14,7 +14,6 @@ import java.util.List;
  * @author Francisco Gerardo Mares Solano
  * @since 06/06/2016
  */
-
 public class Biblioteca {
     public List<Prestamo> prestamos = null;
     public List<Reservacion> reservaciones = null;
@@ -43,7 +42,7 @@ public class Biblioteca {
         BibliotecaDAOImpl bibliotecaDAO = new BibliotecaDAOImpl();
         try{
             items = bibliotecaDAO.buscarItem(identificador);
-        } catch (SQLException ex) {
+        } catch (SQLException ex){
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }
         return items;
@@ -88,7 +87,7 @@ public class Biblioteca {
         String identificadorPrestamo = "";
         try{
             items = buscarItem(identificadorItem);
-            Prestamo prestamo =  new Prestamo((Item) items.get(0));          
+            Prestamo prestamo = new Prestamo((Item) items.get(0));          
             identificadorPrestamo = prestamo.getIdentificadorPrestamo();
             prestamos.add(prestamo);
         }catch(SQLException ex){
@@ -115,46 +114,47 @@ public class Biblioteca {
     }
     
     /**
-     * 
-     * @param identificadorPrestamo
-     * @return
+     * Regresa la fecha en que el préstamo asociado al identificador pasado, caduca.
+     * @param identificadorPrestamo Es un String de 15 caracteres asociado a un préstamo válido.
+     * @return Regresa un texto con la fecha de caducidad del préstamo.
      */
     public String verFechaFinPrestamo(String identificadorPrestamo){
         Prestamo prestamo = null;
-        for(int i=0;i<prestamos.size();i++) {
+        for(int i = 0;i < prestamos.size();i++){
             if (prestamos.get(i).getIdentificadorPrestamo().equals(identificadorPrestamo))
-                prestamo  =  prestamos.get(i);
+                prestamo = prestamos.get(i);
         }
         return prestamo.getFechaCaducidadNormal();
     }
     
     /**
-     *
-     * @param identificador
-     * @return
+     * Regresa la fecha en que la reservación asociado al identificador pasado, caduca.
+     * @param identificador Es un String de 15 caracteres asociado a una reservación válida.
+     * @return Regresa un texto con la fecha de caducidad de la reservación.
      */
     public Date verFechaFinReservacion(String identificador){
         Reservacion reservacion = null;
-        for(int i=0;i<reservaciones.size();i++) {
+        for(int i = 0;i < reservaciones.size();i++){
             if (reservaciones.get(i).getIdentificadorReservacion().equals(identificador))
-                reservacion  =  reservaciones.get(i);
+                reservacion = reservaciones.get(i);
         }
         return reservacion.getFechaLimite();
     }
     
     /**
-     *
-     * @param identificadorPrestamo
-     * @param identificadorAlumno
-     * @return
-     * @throws SQLException
+     * Incluye el préstamo en la base de datos. Requiere ejecutar el método generarPrestamo() de la clase con anterioridad para obtener
+     * del identificador asociado al objeto préstamo
+     * @param identificadorPrestamo Es el identificador generado por el objeto préstamo que será guardado en la base de datos
+     * @param identificadorAlumno Es el identificador del alumno al cual se le asociará el préstamo, debe ser un String de 15 caracteres y existir en la base de datos
+     * @return Regresar un entero de acuerdo al estado del préstamo: 0 si la acción ha fallado y cualquier otro número si fue exitoso
+     * @throws SQLException Si existe un error al conectar con la base de datos, lanza una SQLException.
      */
     public int realizarPrestamo(String identificadorPrestamo, String identificadorAlumno) throws SQLException{
         int estadoPrestamo = 0;
         Prestamo prestamo = null;
-        for(int i=0;i<prestamos.size();i++) {
+        for(int i = 0;i<prestamos.size();i++){
             if (prestamos.get(i).getIdentificadorPrestamo().equals(identificadorPrestamo))
-                prestamo  =  prestamos.get(i);
+                prestamo = prestamos.get(i);
         }
         try{
             boolean estadoMatricula = prestamo.setMatriculaUsuario(identificadorAlumno);
@@ -167,25 +167,26 @@ public class Biblioteca {
     }
     
     /**
-     *
-     * @param identificador
-     * @return
-     * @throws SQLException
+     * Incluye la reservación en la base de datos. Requiere ejecutar el método generarReservación() de la clase con anterioridad para obtener
+     * del identificador asociado al objeto reservación.
+     * @param identificador Es el identificador de la reservación generado por el objeto.
+     * @return Regresar un entero de acuerdo al estado de la reservación: 0 si la acción ha fallado y cualquier otro número si fue exitosa
+     * @throws SQLException Si existe un error al conectar con la base de datos, lanza una SQLException.
      */
     public int realizarReservacion(String identificador) throws SQLException{
-        Reservacion reservacion =  null;
-        for(int i=0;i<reservaciones.size();i++) {
+        Reservacion reservacion = null;
+        for(int i = 0;i < reservaciones.size();i++) {
             if (reservaciones.get(i).getIdentificadorReservacion().equals(identificador))
-                  reservacion =  reservaciones.get(i);
+                  reservacion = reservaciones.get(i);
         }
         int estadoReservacion = reservacion.realizarReservacion();
         return estadoReservacion;
     }
     
     /**
-     *
-     * @return
-     * @throws SQLException
+     * Regresa todos los ítems registrados en la base de datos.
+     * @return Un ArrayList con todos los ítems encontrados, si no existe ningún regresa lista vacia, nunca lsita nula.
+     * @throws SQLException Si hay un error al conectar con la base de datos, lanza una SQLException
      */
     public List<Item> getItems()throws SQLException{
         List<Item> items = new ArrayList<>();
