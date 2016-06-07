@@ -1,7 +1,6 @@
 package dataaccess;
 
 import dominio.Item;
-import dominio.Libro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,7 +45,7 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
                 item = capturarItem(item);
                 items.add(item);
             }
-            if (items.size() == 0){
+            if (items.isEmpty()){
                 return (List<Item>) item;
             }
         }catch (SQLException ex){
@@ -150,9 +149,10 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
      */
     private Item capturarItem(Item item) throws SQLException{
         if (resultados != null){
+            item = new Item();
             String categoria = resultados.getString("categoria");
             if (categoria.equals("Libro")){
-                item = new Libro();
+                item.setCategoria("Libro");
             }
             item.setIdentificador(resultados.getString("identificador"));
             item.setTitulo(resultados.getString("titulo"));
