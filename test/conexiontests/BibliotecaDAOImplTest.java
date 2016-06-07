@@ -49,7 +49,7 @@ public class BibliotecaDAOImplTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException {
         item.setIdentificador(identificadorItem);
         item.setCostoMulta(COSTO_MULTA);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);

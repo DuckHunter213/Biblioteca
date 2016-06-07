@@ -17,11 +17,11 @@ public class PrestamoDAOImpl implements PrestamoDAO{
     private Connection connection;
     private Statement consulta;
     private ResultSet resultados;
-    
+
     public PrestamoDAOImpl(){
         CONEXION = new Conexion();
     }
-    
+
     /**
      *
      * @param prestamo
@@ -32,12 +32,12 @@ public class PrestamoDAOImpl implements PrestamoDAO{
         int resultadoDeAgregacion = 0;
         java.sql.Date fechaPrestamoMili = new java.sql.Date(prestamo.getFechaPrestamo());
         java.sql.Date fechaFinPrestamoMili = new java.sql.Date(prestamo.getFechaCaducidad());
-        
+
         try{
             connection = CONEXION.obtenerConexion();
             if (Util.itemEstadoDisponibilidad(prestamo.getIdentificadorItem())){
                 if (Util.revisarLimitePrestamos(prestamo.getMatriculaUsuario())){
-                    PreparedStatement sentenciaSQL  = connection.prepareStatement("INSERT INTO prestamos VALUES (?,?,?,?,?)");
+                    PreparedStatement sentenciaSQL = connection.prepareStatement("INSERT INTO prestamos VALUES (?,?,?,?,?)");
                     sentenciaSQL.setDate(1, fechaPrestamoMili);
                     sentenciaSQL.setString(2, prestamo.getIdentificadorPrestamo());
                     sentenciaSQL.setString(3, prestamo.getIdentificadorItem());
@@ -49,8 +49,8 @@ public class PrestamoDAOImpl implements PrestamoDAO{
                 }
             }else{
                 resultadoDeAgregacion = 0;
-            }        
-        } catch (SQLException ex) {
+            }
+        }catch (SQLException ex){
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{
             CONEXION.desconecta();
@@ -65,19 +65,19 @@ public class PrestamoDAOImpl implements PrestamoDAO{
      * //TODO valor de retroalimentación
      */
     public int quitarPrestamoDeBaseDeDatos(String identificadorItem) throws SQLException{
-        int resultadoDeLaEliminacion=0;
+        int resultadoDeLaEliminacion = 0;
         try{
             connection = CONEXION.obtenerConexion();
-            PreparedStatement sentenciaSQL  = connection.prepareStatement("DELETE FROM prestamos WHERE identificadorItem = ?");
-            sentenciaSQL.setString(1,identificadorItem);
+            PreparedStatement sentenciaSQL = connection.prepareStatement("DELETE FROM prestamos WHERE identificadorItem = ?");
+            sentenciaSQL.setString(1, identificadorItem);
             resultadoDeLaEliminacion = sentenciaSQL.executeUpdate();
-            
-        } catch (SQLException ex) {
+
+        }catch (SQLException ex){
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{
             CONEXION.desconecta();
         }
         return resultadoDeLaEliminacion;
     }
-        
+
 }

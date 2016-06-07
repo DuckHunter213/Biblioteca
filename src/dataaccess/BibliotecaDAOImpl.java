@@ -14,6 +14,7 @@ import java.util.List;
  * Es la implementación del patrón DAO para el item,sus métodos son genéricos
  * para el interface ItemDAO y mediante polimorfismo resuelve las
  * funcinalidades necesarias.
+ *
  * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
  * @since 20/05/2016
@@ -23,7 +24,7 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
     private Connection connection;
     private Statement consulta;
     private ResultSet resultados;
-    
+
     /**
      * El constructor, crea una conexion para poder entrar a la base de
      * datos
@@ -31,36 +32,38 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
     public BibliotecaDAOImpl(){
         CONEXION = new Conexion();
     }
-    
+
     @Override
     public List<Item> buscarItem(String identificador) throws SQLException{
         List<Item> items = new ArrayList<>();
         try{
             connection = CONEXION.obtenerConexion();
-            PreparedStatement sentenciaSQL  = connection.prepareStatement("SELECT * FROM Items WHERE identificador = ?");            
+            PreparedStatement sentenciaSQL = connection.prepareStatement("SELECT * FROM Items WHERE identificador = ?");
             sentenciaSQL.setString(1, identificador);
             resultados = sentenciaSQL.executeQuery();
             Item item = null;
-            while(resultados.next()){
+            while (resultados.next()){
                 item = capturarItem(item);
                 items.add(item);
             }
-            if (items.size() == 0)
+            if (items.size() == 0){
                 return (List<Item>) item;
-        } catch (SQLException ex){
+            }
+        }catch (SQLException ex){
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
-        } finally{
+        }finally{
             CONEXION.desconecta();
         }
         return items;
     }
-    
+
     /**
      * Método encargado de verificar de que el alumno exista y sea valido
      * en la base de datos
-     * @param identificadorUsuario Indentificador del usuario a verificar si 
+     *
+     * @param identificadorUsuario Indentificador del usuario a verificar si
      * existen y es valido en la base de datos.
-     * @return Regresa el estado del usuario donde si es false el usuario no 
+     * @return Regresa el estado del usuario donde si es false el usuario no
      * existe o no es valido y true en caso de ser valido y existir.
      * @throws SQLException Lanza una SQLException en caso de tener problemas
      * en la base de datos o no poder conectar a la misma.
@@ -69,26 +72,27 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
         boolean estado = false;
         try{
             connection = CONEXION.obtenerConexion();
-            PreparedStatement sentenciaSQL = connection.prepareStatement("SELECT * FROM usuarios WHERE identificador = ?");            
+            PreparedStatement sentenciaSQL = connection.prepareStatement("SELECT * FROM usuarios WHERE identificador = ?");
             sentenciaSQL.setString(1, identificadorUsuario);
             resultados = sentenciaSQL.executeQuery();
-            while(resultados.next()){
+            while (resultados.next()){
                 estado = true;
             }
-        } catch (SQLException ex){
+        }catch (SQLException ex){
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{
             CONEXION.desconecta();
         }
         return estado;
     }
-    
+
     /**
      * Método encargado de verificar de que el item exista y sea valido en la
      * base de datos
-     * @param identificadorItem Indentificador del Ítem a verificar si 
+     *
+     * @param identificadorItem Indentificador del Ítem a verificar si
      * existen y es valido en la base de datos.
-     * @return Regresa el estado del ítem donde si es false el ítem no 
+     * @return Regresa el estado del ítem donde si es false el ítem no
      * existe o no es valido y true en caso de ser valido y existir.
      * @throws SQLException Lanza una SQLException en caso de tener problemas
      * en la base de datos o no poder conectar a la misma.
@@ -97,25 +101,26 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
         boolean estado = false;
         try{
             connection = CONEXION.obtenerConexion();
-            PreparedStatement sentenciaSQL = connection.prepareStatement("SELECT * FROM items WHERE identificador = ?");            
+            PreparedStatement sentenciaSQL = connection.prepareStatement("SELECT * FROM items WHERE identificador = ?");
             sentenciaSQL.setString(1, identificadorItem);
             resultados = sentenciaSQL.executeQuery();
-            while(resultados.next()){
+            while (resultados.next()){
                 estado = true;
             }
-        } catch (SQLException ex){
+        }catch (SQLException ex){
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{
             CONEXION.desconecta();
         }
         return estado;
     }
-    
+
     /**
      * Clase generica que es ocupada por todas las clases que puedan manejar
-     * items 
+     * items
+     *
      * @return Se regresa una lista de items en caso de no encontrar ninguno
-     * regresara la lista vacia 
+     * regresara la lista vacia
      * @throws SQLException Lanza SQLException al no poder conectar con la base
      * de datos o al tener un error.
      */
@@ -126,18 +131,18 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
             PreparedStatement sentenciaSQL = connection.prepareStatement("SELECT * FROM Items");
             resultados = sentenciaSQL.executeQuery();
             Item item = null;
-            while(resultados.next()){
+            while (resultados.next()){
                 item = capturarItem(item);
                 items.add(item);
-            }             
-        } catch (SQLException ex){
+            }
+        }catch (SQLException ex){
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{
             CONEXION.desconecta();
         }
         return items;
     }
-    
+
     /**
      * Seteo de items segun su categoria aplica para la implementación
      * Parametro del item al cual se le va asociar la categoria,
@@ -146,8 +151,9 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
     private Item capturarItem(Item item) throws SQLException{
         if (resultados != null){
             String categoria = resultados.getString("categoria");
-            if (categoria.equals("Libro"))
+            if (categoria.equals("Libro")){
                 item = new Libro();
+            }
             item.setIdentificador(resultados.getString("identificador"));
             item.setTitulo(resultados.getString("titulo"));
             item.setAutor(resultados.getString("autor"));
@@ -156,26 +162,27 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
         }
         return item;
     }
-    
+
     @Override
     public int getTiempoPrestamoDeItem(String identificador) throws SQLException{
         int tiempoPrestamo = 0;
         try{
             connection = CONEXION.obtenerConexion();
             PreparedStatement sentenciaSQL = connection.prepareStatement("SELECT * FROM items WHERE identificador = ?");
-            sentenciaSQL.setString(1,identificador);
+            sentenciaSQL.setString(1, identificador);
             resultados = sentenciaSQL.executeQuery();
-            
+
             Item item = null;
-            while(resultados.next()){
+            while (resultados.next()){
                 item = capturarItem(item);
-            } 
+            }
             tiempoPrestamo = item.getTiempoPrestamo();
-        } catch (SQLException ex){
+        }catch (SQLException ex){
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }finally{
             CONEXION.desconecta();
         }
         return tiempoPrestamo;
     }
+
 }
