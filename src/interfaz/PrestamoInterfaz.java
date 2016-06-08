@@ -54,17 +54,27 @@ public class PrestamoInterfaz extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        matriculaAlumnoCampo.setText("Matrícula");
+        matriculaAlumnoCampo.setText("Identificador usuario");
 
-        identificadorItemCampo.setText("Identiificador del Item");
+        identificadorItemCampo.setText("Identificador del Item");
 
-        matriculaAlumnoTexto.setText("jTextField1");
+        matriculaAlumnoTexto.setText("identificador del usuario");
+        matriculaAlumnoTexto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                matriculaAlumnoTextoFocusGained(evt);
+            }
+        });
 
-        identificadorItemTexto.setText("jTextField2");
+        identificadorItemTexto.setText("identificador del ítem");
+        identificadorItemTexto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                identificadorItemTextoFocusGained(evt);
+            }
+        });
 
         footerPanel.setBackground(new java.awt.Color(230, 230, 230));
 
-        botonRegresar.setText("Regresar/Cancelar");
+        botonRegresar.setText("Regresar");
         botonRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonRegresarActionPerformed(evt);
@@ -100,12 +110,10 @@ public class PrestamoInterfaz extends javax.swing.JFrame{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(footerPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
+                .addContainerGap(55, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(identificadorItemCampo)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(matriculaAlumnoCampo)))
+                    .addComponent(identificadorItemCampo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(matriculaAlumnoCampo, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(identificadorItemTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,6 +175,14 @@ public class PrestamoInterfaz extends javax.swing.JFrame{
             JOptionPane.showMessageDialog(null, "Lo lamentamos, el item no está registrado", "Ocurrió un problema", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonAceptarPrestamoActionPerformed
+
+    private void matriculaAlumnoTextoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_matriculaAlumnoTextoFocusGained
+        matriculaAlumnoTexto.setText("");
+    }//GEN-LAST:event_matriculaAlumnoTextoFocusGained
+
+    private void identificadorItemTextoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_identificadorItemTextoFocusGained
+        identificadorItemTexto.setText("");
+    }//GEN-LAST:event_identificadorItemTextoFocusGained
 
     private static int realizarPrestamo(String identificadorItem, String identificadorUsuario) throws SQLException{
         int estadoPrestamo = ACCION_CANCELADA;

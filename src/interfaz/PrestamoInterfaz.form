@@ -32,13 +32,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="footerPanel" alignment="1" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace pref="55" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="identificadorItemCampo" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Component id="matriculaAlumnoCampo" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="identificadorItemCampo" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="matriculaAlumnoCampo" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -71,23 +68,29 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="matriculaAlumnoCampo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Matr&#xed;cula"/>
+        <Property name="text" type="java.lang.String" value="Identificador usuario"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="identificadorItemCampo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Identiificador del Item"/>
+        <Property name="text" type="java.lang.String" value="Identificador del Item"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="matriculaAlumnoTexto">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
+        <Property name="text" type="java.lang.String" value="identificador del usuario"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="matriculaAlumnoTextoFocusGained"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="identificadorItemTexto">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
+        <Property name="text" type="java.lang.String" value="identificador del &#xed;tem"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="identificadorItemTextoFocusGained"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="footerPanel">
       <Properties>
@@ -118,7 +121,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="botonRegresar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Regresar/Cancelar"/>
+            <Property name="text" type="java.lang.String" value="Regresar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonRegresarActionPerformed"/>

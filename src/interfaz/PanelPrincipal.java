@@ -31,14 +31,24 @@ public class PanelPrincipal extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tituloSeccionCampo = new javax.swing.JLabel();
+        tituloBibliotecaCampo = new javax.swing.JLabel();
+        sistemaCampo = new javax.swing.JLabel();
+        panelContenedorOpciones = new javax.swing.JPanel();
         botonSeccionReservar = new javax.swing.JButton();
         botonSeccionPrestar = new javax.swing.JButton();
+        panelAyuda = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 204));
 
-        tituloSeccionCampo.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
-        tituloSeccionCampo.setText("Biblioteca \"The happy book\"");
+        tituloBibliotecaCampo.setFont(new java.awt.Font("Raleway", 0, 18)); // NOI18N
+        tituloBibliotecaCampo.setText("Universidad Veracruzana");
+
+        sistemaCampo.setText("Sistema Bibliotecario");
+
+        panelContenedorOpciones.setBackground(new java.awt.Color(255, 255, 255));
+        panelContenedorOpciones.setForeground(new java.awt.Color(255, 255, 255));
 
         botonSeccionReservar.setText("Reservar Item");
         botonSeccionReservar.addActionListener(new java.awt.event.ActionListener() {
@@ -54,32 +64,79 @@ public class PanelPrincipal extends javax.swing.JFrame{
             }
         });
 
+        javax.swing.GroupLayout panelContenedorOpcionesLayout = new javax.swing.GroupLayout(panelContenedorOpciones);
+        panelContenedorOpciones.setLayout(panelContenedorOpcionesLayout);
+        panelContenedorOpcionesLayout.setHorizontalGroup(
+            panelContenedorOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelContenedorOpcionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(botonSeccionReservar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(botonSeccionPrestar, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                .addGap(11, 11, 11))
+        );
+        panelContenedorOpcionesLayout.setVerticalGroup(
+            panelContenedorOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelContenedorOpcionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelContenedorOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonSeccionReservar)
+                    .addComponent(botonSeccionPrestar))
+                .addContainerGap(131, Short.MAX_VALUE))
+        );
+
+        panelAyuda.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panelAyudaLayout = new javax.swing.GroupLayout(panelAyuda);
+        panelAyuda.setLayout(panelAyudaLayout);
+        panelAyudaLayout.setHorizontalGroup(
+            panelAyudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelAyudaLayout.setVerticalGroup(
+            panelAyudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/Logo120x120.jpg"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelAyuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(tituloSeccionCampo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(botonSeccionReservar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonSeccionPrestar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(89, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(tituloBibliotecaCampo)
+                        .addGap(53, 53, 53))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(sistemaCampo)
+                        .addGap(112, 112, 112))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(panelContenedorOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(tituloSeccionCampo)
-                .addGap(33, 33, 33)
-                .addComponent(botonSeccionReservar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonSeccionPrestar)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tituloBibliotecaCampo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sistemaCampo)
+                        .addGap(18, 18, 18)
+                        .addComponent(panelContenedorOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(7, 7, 7)
+                        .addComponent(panelAyuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -148,6 +205,10 @@ public class PanelPrincipal extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSeccionPrestar;
     private javax.swing.JButton botonSeccionReservar;
-    private javax.swing.JLabel tituloSeccionCampo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel panelAyuda;
+    private javax.swing.JPanel panelContenedorOpciones;
+    private javax.swing.JLabel sistemaCampo;
+    private javax.swing.JLabel tituloBibliotecaCampo;
     // End of variables declaration//GEN-END:variables
 }

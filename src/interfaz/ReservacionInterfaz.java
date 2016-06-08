@@ -28,7 +28,8 @@ public class ReservacionInterfaz extends javax.swing.JFrame{
     public ReservacionInterfaz(Item itemSeleccionado) throws SQLException{
         item = itemSeleccionado;
         biblioteca = new Biblioteca();
-        initComponents();
+        initComponents();        
+        setSize(660, 450);
         try{
             setInformacion();
             checarDisponibilidad();
@@ -86,10 +87,11 @@ public class ReservacionInterfaz extends javax.swing.JFrame{
         informacionPanel = new javax.swing.JPanel();
         panelNavegacion = new javax.swing.JPanel();
         nombreUsuario = new javax.swing.JLabel();
+        nombreBibliotecaCampo = new javax.swing.JLabel();
+        tipoSistemaCampo = new javax.swing.JLabel();
+        logoUv = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(440, 370));
-        setPreferredSize(new java.awt.Dimension(440, 370));
         setSize(new java.awt.Dimension(440, 370));
         getContentPane().setLayout(null);
 
@@ -107,7 +109,7 @@ public class ReservacionInterfaz extends javax.swing.JFrame{
         );
 
         getContentPane().add(imagenPanel);
-        imagenPanel.setBounds(10, 30, 100, 100);
+        imagenPanel.setBounds(200, 110, 100, 100);
 
         footerPanel.setBackground(new java.awt.Color(230, 230, 230));
 
@@ -131,8 +133,9 @@ public class ReservacionInterfaz extends javax.swing.JFrame{
             footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(footerPanelLayout.createSequentialGroup()
                 .addComponent(botonRegresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
-                .addComponent(botonAceptarReservacion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 496, Short.MAX_VALUE)
+                .addComponent(botonAceptarReservacion)
+                .addContainerGap())
         );
         footerPanelLayout.setVerticalGroup(
             footerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +147,7 @@ public class ReservacionInterfaz extends javax.swing.JFrame{
         );
 
         getContentPane().add(footerPanel);
-        footerPanel.setBounds(0, 310, 435, 30);
+        footerPanel.setBounds(0, 390, 660, 30);
 
         panelDatos.setBackground(new java.awt.Color(230, 230, 230));
 
@@ -184,7 +187,7 @@ public class ReservacionInterfaz extends javax.swing.JFrame{
         );
 
         getContentPane().add(panelDatos);
-        panelDatos.setBounds(120, 30, 305, 100);
+        panelDatos.setBounds(310, 110, 305, 100);
 
         informacionTabPanel.setPreferredSize(new java.awt.Dimension(430, 144));
 
@@ -192,7 +195,7 @@ public class ReservacionInterfaz extends javax.swing.JFrame{
         comentarioPanel.setLayout(comentarioPanelLayout);
         comentarioPanelLayout.setHorizontalGroup(
             comentarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 615, Short.MAX_VALUE)
         );
         comentarioPanelLayout.setVerticalGroup(
             comentarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,17 +208,17 @@ public class ReservacionInterfaz extends javax.swing.JFrame{
         informacionPanel.setLayout(informacionPanelLayout);
         informacionPanelLayout.setHorizontalGroup(
             informacionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 615, Short.MAX_VALUE)
         );
         informacionPanelLayout.setVerticalGroup(
             informacionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 116, Short.MAX_VALUE)
         );
 
-        informacionTabPanel.addTab("Información", informacionPanel);
+        informacionTabPanel.addTab("Descripción", informacionPanel);
 
         getContentPane().add(informacionTabPanel);
-        informacionTabPanel.setBounds(10, 150, 415, 144);
+        informacionTabPanel.setBounds(20, 230, 620, 144);
 
         panelNavegacion.setBackground(new java.awt.Color(230, 230, 230));
 
@@ -228,7 +231,7 @@ public class ReservacionInterfaz extends javax.swing.JFrame{
         panelNavegacionLayout.setHorizontalGroup(
             panelNavegacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNavegacionLayout.createSequentialGroup()
-                .addContainerGap(261, Short.MAX_VALUE)
+                .addContainerGap(481, Short.MAX_VALUE)
                 .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -240,7 +243,21 @@ public class ReservacionInterfaz extends javax.swing.JFrame{
         );
 
         getContentPane().add(panelNavegacion);
-        panelNavegacion.setBounds(0, 0, 440, 20);
+        panelNavegacion.setBounds(0, 0, 660, 20);
+
+        nombreBibliotecaCampo.setFont(new java.awt.Font("Raleway", 0, 36)); // NOI18N
+        nombreBibliotecaCampo.setText("Universidad Veracruzana");
+        getContentPane().add(nombreBibliotecaCampo);
+        nombreBibliotecaCampo.setBounds(200, 30, 430, 50);
+
+        tipoSistemaCampo.setFont(new java.awt.Font("Raleway", 0, 14)); // NOI18N
+        tipoSistemaCampo.setText("Sistema Bibliotecario");
+        getContentPane().add(tipoSistemaCampo);
+        tipoSistemaCampo.setBounds(320, 80, 150, 18);
+
+        logoUv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/Logo120x120.jpg"))); // NOI18N
+        getContentPane().add(logoUv);
+        logoUv.setBounds(40, 70, 90, 120);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -325,10 +342,13 @@ public class ReservacionInterfaz extends javax.swing.JFrame{
     private javax.swing.JPanel imagenPanel;
     private javax.swing.JPanel informacionPanel;
     private javax.swing.JTabbedPane informacionTabPanel;
+    private javax.swing.JLabel logoUv;
+    private javax.swing.JLabel nombreBibliotecaCampo;
     private javax.swing.JLabel nombreUsuario;
     private javax.swing.JPanel panelDatos;
     private javax.swing.JPanel panelNavegacion;
     private javax.swing.JLabel tipoMaterialCampo;
+    private javax.swing.JLabel tipoSistemaCampo;
     private javax.swing.JLabel tituloCampo;
     // End of variables declaration//GEN-END:variables
 }
