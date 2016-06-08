@@ -163,7 +163,7 @@ public class Util{
      * Revisa si el usuario que pide un préstamo de un ítem no disponible, es el mismo que está
      * asociado a la reservación del ítem en la base de datos.
      *
-     * @Param El identificadora del usuario que busca reservar el ítem
+     * @param identificador identificador El identificadora del usuario que busca reservar el ítem
      * @return Regresa un boolean, true si el usuario es quien pidió la reservación
      * y false si no es así.
      * @throws SQLException Lanza SQLException al no poder conectar con la base

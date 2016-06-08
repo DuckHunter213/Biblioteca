@@ -45,7 +45,8 @@ public class Item{
 
     /**
      * @param categoria Una cadena de texto con la categoría del ítem
-     * @return 
+     * @return Regresa un booleano, false si no fue posible encontrar la categoría o agregarla
+     * y true si fue exitoso
      */
     public boolean setCategoria(String categoria){
         boolean estadoAgregacion = false;

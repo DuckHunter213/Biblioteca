@@ -118,7 +118,7 @@ public class Prestamo{
 
     /**
      *
-     * @return
+     * @return Regresa una cadena, un identificador de 10 caracteres
      */
     public String getIdentificadorItem(){
         return this.item.getIdentificador();

@@ -31,9 +31,9 @@ public class Reservacion{
     }
 
     /**
-     * @param identificadorUsuario
-     * @return
-     * @throws java.sql.SQLException
+     * @param identificadorUsuario Recibe un identificadorUsuario tipo String con 15 caracteres de longitud
+     * @return Si no es posible agregar el identificador por ser inválido, regresa false, si todo sale bien, regresa true
+     * @throws java.sql.SQLException Lanza una SQLException si no es posible conectar con la base de datos
      */
     public boolean setIdentificadorUsuario(String identificadorUsuario) throws SQLException{
         boolean estadoSetIdentificador = false;

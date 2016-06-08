@@ -148,7 +148,7 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
      * Checa si existe en la base de datos una reservación válida asociada a la matrícula
      * del usuario que quiere realizar el préstamo, si es así, el préstamo puede ser autorizado.
      *
-     * @Param El identificadora del usuario que busca reservar el ítem
+     * @param identificadorUsuario El identificadora del usuario que busca reservar el ítem
      * @return Regresa un boolean, true si el usuario es quien pidió la reservación
      * y false si no es así.
      * @throws SQLException Lanza SQLException al no poder conectar con la base
