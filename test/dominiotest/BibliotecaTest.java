@@ -5,8 +5,12 @@
  */
 package dominiotest;
 
+import dataaccess.PrestamoDAOImpl;
+import dataaccess.ReservacionDAOImpl;
 import dominio.Biblioteca;
 import dominio.Item;
+import dominio.Prestamo;
+import dominio.Reservacion;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,12 +29,16 @@ import static org.junit.Assert.*;
 public class BibliotecaTest{
     Item item =  new Item();
     String identificadorItemErroneo = "identif010";
+    String identificadorUsuario = "IDENTIFICADORA5";
     String identificadorItem = "identif005";
     String nombreAutor = "joy Beatty";
     String nombreLibro = "Planning elicitation";
     String categoria = "Libro";
+    Prestamo prestamo;
     public static final int COSTO_MULTA = 10;
     public static final int TIEMPO_PRESTAMO = 10;
+    Reservacion reservacion;
+    int resultado;
     Biblioteca biblioteca = new Biblioteca();
     
     public BibliotecaTest() throws SQLException{
@@ -53,11 +61,21 @@ public class BibliotecaTest{
     }
     
     @Before
-    public void setUp(){
+    public void setUp() throws SQLException{
+        item.setIdentificador(identificadorItem);
+        item.setCostoMulta(COSTO_MULTA);
+        item.setTiempoPrestamo(TIEMPO_PRESTAMO);
+        reservacion = new Reservacion(item);
+        prestamo = new Prestamo(item);
+        prestamo.setIdentificadorUsuario(identificadorUsuario);
     }
     
     @After
-    public void tearDown(){
+    public void tearDown() throws SQLException{
+        PrestamoDAOImpl prestamo = new PrestamoDAOImpl();
+        prestamo.quitarPrestamoDeBD(identificadorItem);
+        ReservacionDAOImpl reservacion = new ReservacionDAOImpl();
+        reservacion.quitarReservacionDeBD(identificadorItem);
     }
 
     /**
@@ -124,44 +142,22 @@ public class BibliotecaTest{
      */
     @Test
     public void testRealizarPrestamo() throws Exception{
-        System.out.println("realizarPrestamo");
-        String identificadorPrestamo = "";
-        String identificadorAlumno = "";
-        Biblioteca instance = new Biblioteca();
-        int expResult = 0;
-        int result = instance.realizarPrestamo(identificadorPrestamo, identificadorAlumno);
+        String idPrestamo = biblioteca.generarPrestamo(identificadorItem);
+        int expResult = 1;
+        int result = biblioteca.realizarPrestamo(idPrestamo, identificadorUsuario);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of realizarReservacion method, of class Biblioteca.
+     * @throws java.lang.Exception
      */
     @Test
     public void testRealizarReservacion() throws Exception{
-        System.out.println("realizarReservacion");
-        String identificador = "";
-        Biblioteca instance = new Biblioteca();
-        int expResult = 0;
-        int result = instance.realizarReservacion(identificador);
+        String id = biblioteca.generarReservacion(item);
+        int expResult = 1;
+        int result = biblioteca.realizarReservacion(id);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getItems method, of class Biblioteca.
-     */
-    @Test
-    public void testGetItems() throws Exception{
-        System.out.println("getItems");
-        Biblioteca instance = new Biblioteca();
-        List<Item> expResult = null;
-        List<Item> result = instance.getItems();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
