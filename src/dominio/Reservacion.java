@@ -6,11 +6,10 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- * Encapsula y valida los datos para hacer una reservación válida e informar a las clases empleadoras
+ * Encapsula y valida los datos para hacer una reservación válida e informar a
+ * las clases empleadoras
  *
  * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
@@ -24,7 +23,8 @@ public class Reservacion{
 
     //<editor-fold defaultstate="collapsed" desc=" Get´s & Set´s ">
     /**
-     * @return Regresa un identificador tipo String de 15 caracteres para el usuario
+     * @return Regresa un identificador tipo String de 15 caracteres para el
+     * usuario
      */
     public String getIdentificadorUsuario(){
         return identificadorUsuario;
@@ -56,14 +56,16 @@ public class Reservacion{
     }
 
     /**
-     * @return Regresa una fecha con formato para poder ser guardado en una base de datos
+     * @return Regresa una fecha con formato para poder ser guardado en una base
+     * de datos
      */
     public Long getFechaLimiteBD(){
         return fechaLimite.getTime();
     }
 
     /**
-     * @return Regresa un String de 15 caracteres para identificar la reservación
+     * @return Regresa un String de 15 caracteres para identificar la
+     * reservación
      */
     public String getIdentificadorReservacion(){
         return identificadorReservacion;
@@ -95,8 +97,10 @@ public class Reservacion{
 
     //</editor-fold>
     /**
-     * @param item Recibe un ítem válido y configura la fecha límite para pedirlo
-     * @throws SQLException Si hay un error al conectar con la base de datos, regresa una SQLexception
+     * @param item Recibe un ítem válido y configura la fecha límite para
+     * pedirlo
+     * @throws SQLException Si hay un error al conectar con la base de datos,
+     * regresa una SQLexception
      */
     public Reservacion(Item item) throws SQLException{
         this.item = item;
@@ -109,7 +113,8 @@ public class Reservacion{
     /**
      * genera un identificador unico para las reservaciones
      *
-     * @return Regresa el identificador generado por el sistema, un String de 15 caracteres
+     * @return Regresa el identificador generado por el sistema, un String de 15
+     * caracteres
      */
     public String generarIdentificador(){
         identificadorReservacion = Util.generadorDeIdentificador();
@@ -119,8 +124,10 @@ public class Reservacion{
     /**
      * Registra la reservación en la base de datos.
      *
-     * @return Regresa un entero de acuerdo al estado de la reservación, 0 si no es posible y un entero positivo si lo fue
-     * @throws SQLException Si hay problemas al conectar con la base de datos, regresa una SQLException
+     * @return Regresa un entero de acuerdo al estado de la reservación, 0 si no
+     * es posible y un entero positivo si lo fue
+     * @throws SQLException Si hay problemas al conectar con la base de datos,
+     * regresa una SQLException
      */
     public int realizarReservacion() throws SQLException{
         ReservacionDAOImpl reservacionDAO = new ReservacionDAOImpl();

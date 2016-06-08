@@ -9,7 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Implementación de PrestamoDAO para poder realizar accesos y transacciones en la base de datos
+ * Implementación de PrestamoDAO para poder realizar accesos y transacciones en
+ * la base de datos
  *
  * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
@@ -22,7 +23,8 @@ public class PrestamoDAOImpl implements PrestamoDAO{
     private ResultSet resultados;
 
     /**
-     * Inicia una instancia de Connection para realizar las consultas a la base de datos
+     * Inicia una instancia de Connection para realizar las consultas a la base
+     * de datos
      */
     public PrestamoDAOImpl(){
         CONEXION = new Conexion();

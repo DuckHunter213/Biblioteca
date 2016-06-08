@@ -9,7 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Interface con las generalidades para poder registrar una reservación en la base de datos.
+ * Interface con las generalidades para poder registrar una reservación en la
+ * base de datos.
  *
  * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
@@ -22,7 +23,8 @@ public class ReservacionDAOImpl implements ReservacionDAO{
     private ResultSet resultados;
 
     /**
-     * Inicia una instancia de Connection para realizar las consultas a la base de datos
+     * Inicia una instancia de Connection para realizar las consultas a la base
+     * de datos
      */
     public ReservacionDAOImpl(){
         CONEXION = new Conexion();

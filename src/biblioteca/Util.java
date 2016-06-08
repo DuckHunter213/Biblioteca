@@ -11,8 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Clase de utilerias donde se encontraran muchas funciones útiles en múltiples funcionalidades del sistema
- * provee funcionas básicas de validación de datos y generación de identificadores.
+ * Clase de utilerias donde se encontraran muchas funciones útiles en múltiples
+ * funcionalidades del sistema provee funcionas básicas de validación de datos y
+ * generación de identificadores.
  *
  * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
@@ -55,9 +56,10 @@ public class Util{
     /**
      * Se encarga de revisar si el usuario superó su límite de préstamos.
      *
-     * @param identificador indetificador del usuario del cual se quiere saber si
-     * es apto para realiza más préstamos o no
-     * @return regresa el estado true si es que todavia puede pedir prestado los libros y false si superó su límite
+     * @param identificador indetificador del usuario del cual se quiere saber
+     * si es apto para realiza más préstamos o no
+     * @return regresa el estado true si es que todavia puede pedir prestado los
+     * libros y false si superó su límite
      * @throws SQLException Lanza la exepcion si no puede conectar a la base de
      * datos
      */
@@ -91,8 +93,10 @@ public class Util{
     }
 
     /**
-     * Esta clase genera un identificador que tiene formato YYYMMDDHHmmSS se (año, mes, día, hora, minuto y segundo).
-     * Se eligió ésta estructura pues garantiza que sean datos únicos e imposibles de recrear debido a su exactitud, además, otorga información extra de su registro
+     * Esta clase genera un identificador que tiene formato YYYMMDDHHmmSS se
+     * (año, mes, día, hora, minuto y segundo). Se eligió ésta estructura pues
+     * garantiza que sean datos únicos e imposibles de recrear debido a su
+     * exactitud, además, otorga información extra de su registro
      *
      * @return se regresa un String del identificador ya generado
      */
@@ -105,16 +109,17 @@ public class Util{
     }
 
     /**
-     * Verifica si existe el usuario y si es valido en la base de datos. El modo de comprobación inicial es
-     * es verificar la longitud para disminuir chequeos en la base de datos, y que empiece con el caracter "i"
-     * como indicio de que podría ser válido.
+     * Verifica si existe el usuario y si es valido en la base de datos. El modo
+     * de comprobación inicial es es verificar la longitud para disminuir
+     * chequeos en la base de datos, y que empiece con el caracter "i" como
+     * indicio de que podría ser válido.
      *
      * @param identificador indentificador del usuario para corroborar que esté
      * registrado.
-     * @return se regresa el estado del usuario false en caso de que no exista
-     * o no sea válido y true si es correcto.
-     * @throws SQLException se lanza la exepción si tiene error al conectar a
-     * la base de datos
+     * @return se regresa el estado del usuario false en caso de que no exista o
+     * no sea válido y true si es correcto.
+     * @throws SQLException se lanza la exepción si tiene error al conectar a la
+     * base de datos
      */
     public static boolean verificarIdentificadorUsuario(String identificador) throws SQLException{
         boolean estado = false;
@@ -130,15 +135,16 @@ public class Util{
     }
 
     /**
-     * Verifica la existencia del ítem y que sea válido en la base de datos. El modo de comprobación inicial es
-     * es verificar la longitud para disminuir chequeos en la base de datos, y que empiece con el caracter "i"
-     * como indicio de que podría ser válido.
+     * Verifica la existencia del ítem y que sea válido en la base de datos. El
+     * modo de comprobación inicial es es verificar la longitud para disminuir
+     * chequeos en la base de datos, y que empiece con el caracter "i" como
+     * indicio de que podría ser válido.
      *
      * @param identificador identificador del item. Un String de 10 caracteres
-     * @return regresa el booleano false en caso de no existir o de no
-     * ser valido y true si es correcto.
-     * @throws SQLException lanza la exepcion si no se puede conectar a la
-     * base de datos
+     * @return regresa el booleano false en caso de no existir o de no ser
+     * valido y true si es correcto.
+     * @throws SQLException lanza la exepcion si no se puede conectar a la base
+     * de datos
      */
     public static boolean verificarIdentificadorItem(String identificador) throws SQLException{
         boolean estado = false;

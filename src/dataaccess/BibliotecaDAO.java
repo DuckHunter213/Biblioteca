@@ -27,11 +27,13 @@ public interface BibliotecaDAO{
     public List<Item> buscarItem(String identificador) throws SQLException;
 
     /**
-     * Método que consulta en la base de datos, el tiempo de préstamo que puede tener un ítem
+     * Método que consulta en la base de datos, el tiempo de préstamo que puede
+     * tener un ítem
      *
-     * @param identificador Identificador del ítem del cual se obtendrá su tiempo de
-     * prestamo.
-     * @return se regrea un entero el cual expresa la cantidad de días que va a poder ser prestado el item
+     * @param identificador Identificador del ítem del cual se obtendrá su
+     * tiempo de prestamo.
+     * @return se regrea un entero el cual expresa la cantidad de días que va a
+     * poder ser prestado el item
      * @throws SQLException Lanza SQLException al no poder conectar con la base
      * de datos o al tener un error
      */

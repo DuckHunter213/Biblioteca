@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Clase encargada de hacer conexiones a la base de datos. De igual manera
- * es la encargada de liberar los recursos de la conexión
+ * Clase encargada de hacer conexiones a la base de datos. De igual manera es la
+ * encargada de liberar los recursos de la conexión
  *
  * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
@@ -21,8 +21,8 @@ public class Conexion{
     private final String CONTRASENA = "";
 
     /**
-     * Funcion que encapsula la conexión, se nombro asi por que es más
-     * fácil leer el código
+     * Funcion que encapsula la conexión, se nombro asi por que es más fácil
+     * leer el código
      *
      * @return Se regresa el estado de la conexion exitoso, de otro modo
      * arrojara la excepción
@@ -41,7 +41,8 @@ public class Conexion{
     /**
      * Funcion que termina la conexion y libera el recurso de conexión
      *
-     * @throws java.sql.SQLException Lanza la excepcion en caso de fallar al realizar la acción.
+     * @throws java.sql.SQLException Lanza la excepcion en caso de fallar al
+     * realizar la acción.
      */
     public void desconecta() throws SQLException{
         if (conexion != null){

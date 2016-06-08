@@ -63,7 +63,8 @@ public class Prestamo{
     }
 
     /**
-     * @return Regresa el identificador del préstamo como un String de 15 caracteres
+     * @return Regresa el identificador del préstamo como un String de 15
+     * caracteres
      */
     public String getIdentificadorPrestamo(){
         return this.identificadorPrestamo;
@@ -72,8 +73,10 @@ public class Prestamo{
     /**
      * Guarda el identificador del usuario validando si es correcto
      *
-     * @param identificadorUsuario Un String de 15 caracteres que será validado si existe en la base de datos.
-     * @return Regresa true si el identificador es válido y pudo ser guardado y false si no es posible
+     * @param matriculaUsuario Un String de 15 caracteres que será validado si
+     * existe en la base de datos.
+     * @return Regresa true si el identificador es válido y pudo ser guardado y
+     * false si no es posible
      * @throws SQLException Si no es posible comprobar
      */
     public boolean setIdentificadorUsuario(String matriculaUsuario) throws SQLException{
@@ -125,8 +128,10 @@ public class Prestamo{
     /**
      * Registra el préstamo en el base de datos haciendo validaciones internas
      *
-     * @return Estado del préstamo, regresa -1 si la matrícula no existe, 0 si el préstamo no es posible y un 1 si la inserción fue adecuada
-     * @throws SQLException Si no hay conexión con la base de datos, lanza una SQLException
+     * @return Estado del préstamo, regresa -1 si la matrícula no existe, 0 si
+     * el préstamo no es posible y un 1 si la inserción fue adecuada
+     * @throws SQLException Si no hay conexión con la base de datos, lanza una
+     * SQLException
      */
     public int realizarPrestamo() throws SQLException{
         PrestamoDAOImpl prestamoDAO = new PrestamoDAOImpl();
