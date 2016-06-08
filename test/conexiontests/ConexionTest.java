@@ -43,7 +43,6 @@ public class ConexionTest{
 
     //</editor-fold>
     //<editor-fold defaultstate="collapse" desc="Pruebas">
-
     @Test
     public void pruebaConexionExitosa() throws SQLException{
         Connection connection = conexion.obtenerConexion();

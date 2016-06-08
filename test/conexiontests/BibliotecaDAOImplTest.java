@@ -13,16 +13,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Nombre del programa: Biblioteca
- * Nombres: @author Luis Fernando Gomez Alejandre
+ * Pruebas de la implementación de la clase biblioteca
  *
+ * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
- * Fecha: @since 20/05/2016
- * Descripción: Contiene pruebas generales de busqueda de registros de la base de datos,
- * todas las pruebas son referentes a los items (ItemDAOImpl).
- */
-public class BibliotecaDAOImplTest{
-    //<editor-fold defaultstate="collapse" desc="Declaración de varaibles
+ * @since 06/06/2016
+ */public class BibliotecaDAOImplTest{
+    //<editor-fold defaultstate="collapse" desc="Declaración de varaibles">
     Item item = new Item();
     List<Item> items = new ArrayList<>();
     String identificadorAlumno = "IDENTIFICADORA5";
