@@ -74,7 +74,8 @@ public class InsercionesPrestamoDAOTest{
         item.setCostoMulta(COSTO_MULTA);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
         int expResult = 0;
-        prestamo.setItem(item);
+        prestamo = new Prestamo(item);
+        prestamo.setIdentificadorUsuario(identificadorAlumno);
         int result = instance.guardarRegistroDePrestamo(prestamo);
         assertEquals(expResult, result);
     }

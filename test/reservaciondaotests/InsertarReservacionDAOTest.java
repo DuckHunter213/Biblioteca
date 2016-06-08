@@ -77,7 +77,9 @@ public class InsertarReservacionDAOTest{
         item.setCostoMulta(COSTO_MULTA);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
         int expResult = 0;
-        reservacion.setItem(item);
+        reservacion = new Reservacion(item);
+        reservacion.setIdentificadorUsuario(identificadorAlumno);
+        reservacion.generarIdentificador();
         int result = instance.guardarRegistroReservacion(reservacion);
         assertEquals(expResult, result);
     }
