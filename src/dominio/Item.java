@@ -45,9 +45,15 @@ public class Item{
 
     /**
      * @param categoria Una cadena de texto con la categoría del ítem
+     * @return 
      */
-    public void setCategoria(String categoria){
-        this.categoria = categoria;
+    public boolean setCategoria(String categoria){
+        boolean estadoAgregacion = false;
+        if (autor.length() >= 2){
+            this.categoria = categoria;
+            estadoAgregacion = true;
+        }
+        return estadoAgregacion;
     }
 
     /**
@@ -55,9 +61,15 @@ public class Item{
      *
      * @param autor Un String con el nombre completo del autor o autores
      * separados por comas.
+     * @return Regresa true si pudo agregar el valor y false sino.
      */
-    public void setAutor(String autor){
-        this.autor = autor;
+    public boolean setAutor(String autor){
+        boolean estadoAgregacion = false;
+        if (autor.length() >= 2){
+            estadoAgregacion = true;
+            this.autor = autor;
+        }
+        return estadoAgregacion;
     }
 
     /**
@@ -74,9 +86,15 @@ public class Item{
      * Almacena el título del ítem
      *
      * @param titulo Recibe una cadena de longitud máxima de 255 caracteres.
+     * @return Regresa true si pudo agregar el valor y false sino.
      */
-    public void setTitulo(String titulo){
-        this.titulo = titulo;
+    public boolean setTitulo(String titulo){
+        boolean estadoAgregacion = false;
+        if (titulo.length() >= 2){
+            estadoAgregacion = true;
+            this.titulo = titulo;
+        }
+        return estadoAgregacion;
     }
 
     /**
@@ -171,9 +189,15 @@ public class Item{
 
     /**
      * @param dias Recibe un entero indicando la cantidad de días que el ítem será prestado.
+     * @return Regresa true si pudo agregar el valor y false sino.
      */
-    public void setTiempoPrestamo(int dias){
-        this.tiempoPrestamo = dias;
+    public boolean setTiempoPrestamo(int dias){
+        boolean estadoAgregacion = false;
+        if (autor.length() >= 2){
+            this.tiempoPrestamo = dias;
+            estadoAgregacion = true;
+        }
+        return estadoAgregacion;
     }
     //</editor-fold>
 
