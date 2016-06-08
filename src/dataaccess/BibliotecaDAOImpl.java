@@ -143,11 +143,40 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
         return items;
     }
 
+
+    /**
+     * Checa si existe en la base de datos una reservación válida asociada a la matrícula
+     * del usuario que quiere realizar el préstamo, si es así, el préstamo puede ser autorizado.
+     *
+     * @Param El identificadora del usuario que busca reservar el ítem
+     * @return Regresa un boolean, true si el usuario es quien pidió la reservación
+     * y false si no es así.
+     * @throws SQLException Lanza SQLException al no poder conectar con la base
+     * de datos o al tener un error.
+     */
+    public boolean verificarPosiblePrestamo(String identificadorUsuario) throws SQLException{
+        boolean coinciden = false;
+        try{
+            connection = CONEXION.obtenerConexion();
+            PreparedStatement sentenciaSQL = connection.prepareStatement("SELECT * FROM reservados WHERE identificadorUsuario = ?");
+            sentenciaSQL.setString(1, identificadorUsuario);
+            resultados = sentenciaSQL.executeQuery();
+            while (resultados.next()){
+                coinciden = true;
+            }
+        }catch (SQLException ex){
+            coinciden = false;
+        }finally{
+            CONEXION.desconecta();
+        }
+        return coinciden;
+    }
+
     /**
      * Recibe un ítem vacio y le asigna los valores hallados en una consulta de
      * base de datos. Es necesario tener el ítem en un ResultSet.
      *
-     * @Param El item que almacenará los datos obetnidos de la base de datos
+     * @Param El item que almacenará los datos obtenidos de la base de datos
      * @throws SQLException Lanza SQLException al no poder conectar con la base
      * de datos o al tener un error.
      */
