@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dominiotest;
 
 import dominio.Item;
@@ -15,11 +10,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Pruebas para los métodos de la clase test
  *
- * @author gerar
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 07/06/2016
  */
 public class ItemTest{
-    Item item =  new Item();
+    Item item = new Item();
     String identificadorItemErroneo = "identif010";
     String identificadorItem = "identif005";
     String nombreAutor = "Wiegers";
@@ -27,18 +25,18 @@ public class ItemTest{
     String categoria = "Libro";
     public static final int COSTO_MULTA = 10;
     public static final int TIEMPO_PRESTAMO = 10;
-    
+
     public ItemTest(){
     }
-    
+
     @BeforeClass
     public static void setUpClass(){
     }
-    
+
     @AfterClass
     public static void tearDownClass(){
     }
-    
+
     @Before
     public void setUp() throws SQLException{
         item.setAutor(nombreAutor);
@@ -50,7 +48,7 @@ public class ItemTest{
         item.setFechaPublicación(2010, 8, 15);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
     }
-    
+
     @After
     public void tearDown(){
     }
@@ -84,6 +82,7 @@ public class ItemTest{
         boolean result = item.setCategoria("Revista");
         assertEquals(expResult, result);
     }
+
     /**
      * Test of setCategoria method, of class Item.
      */
@@ -103,6 +102,7 @@ public class ItemTest{
         boolean result = item.setAutor("Carls");
         assertEquals(expResult, result);
     }
+
     /**
      * Test of setAutor method, of class Item.
      */
@@ -132,6 +132,7 @@ public class ItemTest{
         boolean result = item.setTitulo("100 piedras");
         assertEquals(expResult, result);
     }
+
     /**
      * Test of setTitulo method, of class Item.
      */
@@ -144,6 +145,7 @@ public class ItemTest{
 
     /**
      * Test of getIdentificador method, of class Item.
+     *
      * @throws java.sql.SQLException
      */
     @Test
@@ -155,6 +157,7 @@ public class ItemTest{
 
     /**
      * Test of setIdentificador method, of class Item.
+     *
      * @throws java.lang.Exception
      */
     @Test
@@ -163,8 +166,10 @@ public class ItemTest{
         boolean result = item.setTitulo("identif006");
         assertEquals(expResult, result);
     }
+
     /**
      * Test of setIdentificador method, of class Item.
+     *
      * @throws java.lang.Exception
      */
     @Test
@@ -184,6 +189,7 @@ public class ItemTest{
         boolean result = item.equals(item2);
         assertEquals(expResult, result);
     }
+
     /**
      * Test of equals method, of class Item.
      */
@@ -194,5 +200,5 @@ public class ItemTest{
         boolean result = item.equals(item2);
         assertEquals(expResult, result);
     }
-    
+
 }

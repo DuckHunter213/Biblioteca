@@ -12,13 +12,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Nombre del programa: Biblioteca
- * Nombres: @author Luis Fernando Gomez Alejandre
+ * Pruebas para los métodos de prestamoDAOImpl
  *
+ * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
- * Fecha: @since 20/05/2016
- * Descripción: Contiene pruebas para borrar registros de la base de datos,
- * todas las pruebas son referentes a los items (ItemDAOImpl).
+ * @since 07/06/2016
  */
 public class BorrarPrestamoDAOTest{
     //<editor-fold defaultstate="collapse" desc="Definicion de variables">

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dominiotest;
 
 import dataaccess.PrestamoDAOImpl;
@@ -22,11 +17,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Pruebas para los métodos de la clase biblioteca
  *
- * @author gerar
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 07/06/2016
  */
 public class BibliotecaTest{
-    Item item =  new Item();
+    Item item = new Item();
     String identificadorItemErroneo = "identif010";
     String identificadorUsuario = "IDENTIFICADORA5";
     String identificadorItem = "identif005";
@@ -39,7 +37,7 @@ public class BibliotecaTest{
     Reservacion reservacion;
     int resultado;
     Biblioteca biblioteca = new Biblioteca();
-    
+
     public BibliotecaTest() throws SQLException{
         item.setAutor(nombreAutor);
         item.setCategoria(categoria);
@@ -50,15 +48,15 @@ public class BibliotecaTest{
         item.setFechaPublicación(2010, 8, 15);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
     }
-    
+
     @BeforeClass
     public static void setUpClass(){
     }
-    
+
     @AfterClass
     public static void tearDownClass(){
     }
-    
+
     @Before
     public void setUp() throws SQLException{
         item.setIdentificador(identificadorItem);
@@ -68,7 +66,7 @@ public class BibliotecaTest{
         prestamo = new Prestamo(item);
         prestamo.setIdentificadorUsuario(identificadorUsuario);
     }
-    
+
     @After
     public void tearDown() throws SQLException{
         PrestamoDAOImpl prestamo = new PrestamoDAOImpl();
@@ -79,6 +77,7 @@ public class BibliotecaTest{
 
     /**
      * Test of buscarItem method, of class Biblioteca.
+     *
      * @throws java.lang.Exception
      */
     @Test
@@ -89,7 +88,7 @@ public class BibliotecaTest{
         List<Item> result = biblioteca.buscarItem(identificadorItem);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testBuscarItemFallido() throws Exception{
         item.setIdentificador(identificadorItemErroneo);
@@ -110,7 +109,7 @@ public class BibliotecaTest{
         boolean result = biblioteca.verificarIdentificadorUsuario(identificadorAlumno);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testVerificarIdentificadorUsuarioExitoso() throws Exception{
         String identificadorAlumno = "IDENTIFICADORA1";
@@ -128,7 +127,7 @@ public class BibliotecaTest{
         boolean result = biblioteca.verificarItem(identificadorItem);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testVerificarItemFallido() throws Exception{
         boolean expResult = false;
@@ -149,6 +148,7 @@ public class BibliotecaTest{
 
     /**
      * Test of realizarReservacion method, of class Biblioteca.
+     *
      * @throws java.lang.Exception
      */
     @Test
@@ -158,5 +158,5 @@ public class BibliotecaTest{
         int result = biblioteca.realizarReservacion(id);
         assertEquals(expResult, result);
     }
-    
+
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dominiotest;
 
 import dataaccess.ReservacionDAO;
@@ -18,8 +13,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Pruebas para los métodos del módulo reservación
  *
- * @author gerar
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 07/06/2016
  */
 public class ReservacionTest{
     //<editor-fold defaultstate="collapse" desc="Declaración de varaibles ">
@@ -31,18 +29,18 @@ public class ReservacionTest{
     public static final int TIEMPO_PRESTAMO = 10;
     Reservacion reservacion;
     int resultado;
-    
+
     public ReservacionTest(){
     }
-    
+
     @BeforeClass
     public static void setUpClass(){
     }
-    
+
     @AfterClass
     public static void tearDownClass(){
     }
-    
+
     @Before
     public void setUp() throws SQLException{
         item.setIdentificador(identificadorItem);
@@ -52,7 +50,7 @@ public class ReservacionTest{
         reservacion.generarIdentificador();
         reservacion.setIdentificadorUsuario(identificadorUsuario);
     }
-    
+
     @After
     public void tearDown() throws SQLException{
         ReservacionDAO prestamoDAO = new ReservacionDAOImpl();
@@ -63,32 +61,32 @@ public class ReservacionTest{
     public void testSetItemExitoso(){
         boolean expResult = true;
         boolean result = reservacion.setItem(item);
-        assertEquals(expResult, result);        
+        assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testSetItemFallido() throws SQLException{
         item.setIdentificador(identificadorItemErroneo);
         reservacion.setItem(item);
         boolean expResult = true;
         boolean result = reservacion.setItem(item);
-        assertEquals(expResult, result);        
+        assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testSetIdentificadorUsuarioExitoso() throws SQLException{
         boolean expResult = true;
         boolean result = reservacion.setIdentificadorUsuario(identificadorUsuario);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testSetIdentificadorUsuarioFallidoNulo() throws SQLException{
         boolean expResult = false;
         boolean result = reservacion.setIdentificadorUsuario("");
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testSetIdentificadorUsuarioFallidoFalse() throws SQLException{
         boolean expResult = false;
@@ -116,7 +114,7 @@ public class ReservacionTest{
         int result = reservacion.realizarReservacion();
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testRealizarPrestamoFallidoIdItem() throws Exception{
         item = new Item();
@@ -130,7 +128,7 @@ public class ReservacionTest{
         int result = reservacion.realizarReservacion();
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testRealizarPrestamoFallidoIdUsuario() throws Exception{
         reservacion = new Reservacion(item);
@@ -141,5 +139,5 @@ public class ReservacionTest{
         int result = reservacion.realizarReservacion();
         assertEquals(expResult, result);
     }
-    
+
 }

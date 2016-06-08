@@ -12,6 +12,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Pruebas para los métodos fallidos del módulo préstamo
+ *
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 07/06/2016
+ */
 public class PrestamoTest{
     //<editor-fold defaultstate="collapse" desc="Declaración de varaibles ">
     Item item = new Item();
@@ -53,18 +60,18 @@ public class PrestamoTest{
     public void testSetItemExitoso(){
         boolean expResult = true;
         boolean result = prestamo.setItem(item);
-        assertEquals(expResult, result);        
+        assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testSetItemFallido() throws SQLException{
         item.setIdentificador(identificadorItemErroneo);
         prestamo.setItem(item);
         boolean expResult = true;
         boolean result = prestamo.setItem(item);
-        assertEquals(expResult, result);        
+        assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testSetIdentificadorUsuarioExitoso() throws SQLException{
         boolean expResult = true;
@@ -119,7 +126,7 @@ public class PrestamoTest{
         int result = prestamo.realizarPrestamo();
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testRealizarPrestamoFallidoIdUsuario() throws Exception{
         prestamo = new Prestamo(item);

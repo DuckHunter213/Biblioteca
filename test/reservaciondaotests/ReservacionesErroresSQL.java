@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reservaciondaotests;
 
 import dataaccess.ReservacionDAOImpl;
@@ -16,8 +11,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * Pruebas para los métodos fallidos del módulo reservación
  *
- * @author gerar
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 07/06/2016
  */
 public class ReservacionesErroresSQL{
     Item item = new Item();
@@ -29,27 +27,27 @@ public class ReservacionesErroresSQL{
     Reservacion reservacion;
     ReservacionDAOImpl instance = new ReservacionDAOImpl();
     int resultado;
-    
+
     public ReservacionesErroresSQL(){
     }
-    
+
     @BeforeClass
     public static void setUpClass(){
     }
-    
+
     @AfterClass
     public static void tearDownClass(){
     }
-    
+
     @Before
     public void setUp(){
     }
-    
+
     @After
     public void tearDown(){
     }
 
-    @Test (expected = SQLException.class)
+    @Test(expected = SQLException.class)
     public void testInsertarErrorSQL() throws SQLException{
         item.setIdentificador(identificadorItem);
         item.setCostoMulta(COSTO_MULTA);
@@ -59,4 +57,5 @@ public class ReservacionesErroresSQL{
         reservacion.setIdentificadorUsuario(identificadorAlumno);
         reservacion.realizarReservacion();
     }
+
 }

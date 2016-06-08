@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dominiotest;
 
 import biblioteca.Util;
@@ -21,11 +16,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Pruebas para los errores SQL de todas las pruebas del paquete dominio
  *
- * @author gerar
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 07/06/2016
  */
 public class ErroresSqlDominio{
-    Item item =  new Item();
+    Item item = new Item();
     String identificadorUsuario = "IDENTIFICADORA5";
     String identificadorUsuarioErroneo = "IDENTIFICADORA15";
     String identificadorItemErroneo = "identif010";
@@ -39,72 +37,71 @@ public class ErroresSqlDominio{
     Reservacion reservacion;
     Biblioteca biblioteca = new Biblioteca();
     int resultado;
-    
+
     public ErroresSqlDominio(){
     }
-    
+
     @BeforeClass
     public static void setUpClass(){
     }
-    
+
     @AfterClass
     public static void tearDownClass(){
     }
-    
+
     @Before
     public void setUp() throws SQLException{
         prestamo = new Prestamo(item);
         reservacion = new Reservacion(item);
     }
-    
+
     @After
     public void tearDown(){
     }
 
-    
     @Test
     public void testRealizarPrestamo() throws SQLException{
         int expResult = 0;
         int result = prestamo.realizarPrestamo();
         assertEquals(expResult, result);
     }
-    
-    @Test (expected = SQLException.class)
+
+    @Test(expected = SQLException.class)
     public void testSetIdentificadorUsuarioPrestamo() throws SQLException{
         boolean expResult = false;
         boolean result = prestamo.setIdentificadorUsuario(identificadorUsuario);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testSetItemPrestamo(){
         boolean expResult = false;
         boolean result = prestamo.setItem(item);
-        assertEquals(expResult, result);        
+        assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testSetItemReserva(){
         boolean expResult = false;
         boolean result = reservacion.setItem(item);
-        assertEquals(expResult, result);        
+        assertEquals(expResult, result);
     }
-    
-    @Test (expected = SQLException.class)
+
+    @Test(expected = SQLException.class)
     public void testSetIdentificadorUsuarioReserva() throws SQLException{
         boolean expResult = false;
         boolean result = reservacion.setIdentificadorUsuario(identificadorUsuario);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testRealizarReservacion() throws Exception{
         int expResult = 0;
         int result = reservacion.realizarReservacion();
         assertEquals(expResult, result);
     }
-    
-    @Test (expected = SQLException.class)
+
+    @Test(expected = SQLException.class)
     public void testBuscarItemExitoso() throws Exception{
         List<Item> items = new ArrayList<>();
         items.add(item);
@@ -112,7 +109,7 @@ public class ErroresSqlDominio{
         List<Item> result = biblioteca.buscarItem(identificadorItem);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testVerificarIdentificadorUsuarioFallido() throws Exception{
         String identificadorAlumno = "";
@@ -120,11 +117,8 @@ public class ErroresSqlDominio{
         boolean result = biblioteca.verificarIdentificadorUsuario(identificadorAlumno);
         assertEquals(expResult, result);
     }
-   
-    
-    
-    
-    @Test (expected = SQLException.class)
+
+    @Test(expected = SQLException.class)
     public void testItemEstadoDisponibilidadExitoso() throws Exception{
         boolean expResult = true;
         boolean result = Util.itemEstadoDisponibilidad(identificadorItem);
@@ -134,7 +128,7 @@ public class ErroresSqlDominio{
     /**
      * Test of revisarLimitePrestamos method, of class Util.
      */
-    @Test (expected = SQLException.class)
+    @Test(expected = SQLException.class)
     public void testRevisarLimitePrestamosExitoso() throws Exception{
         boolean expResult = true;
         boolean result = Util.revisarLimitePrestamos(identificadorUsuario);
@@ -144,7 +138,7 @@ public class ErroresSqlDominio{
     /**
      * Test of verificarIdentificadorUsuario method, of class Util.
      */
-    @Test (expected = SQLException.class)
+    @Test(expected = SQLException.class)
     public void testVerificarIdentificadorUsuarioExitoso() throws Exception{
         boolean expResult = true;
         boolean result = Util.verificarIdentificadorUsuario(identificadorUsuario);
@@ -160,14 +154,13 @@ public class ErroresSqlDominio{
         boolean result = Util.verificarIdentificadorItem(item.getIdentificador());
         assertEquals(expResult, result);
     }
-    
-    @Test (expected = SQLException.class)
+
+    @Test(expected = SQLException.class)
     public void testVerificarIdentificadorItemFallido() throws Exception{
         boolean expResult = true;
         item.setIdentificador(identificadorItemErroneo);
         boolean result = Util.verificarIdentificadorItem(item.getIdentificador());
         assertEquals(expResult, result);
     }
-    
 
 }

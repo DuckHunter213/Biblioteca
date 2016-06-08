@@ -12,13 +12,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Nombre del programa: Biblioteca
- * Nombres: @author Luis Fernando Gomez Alejandre
+ * Pruebas para los métodos de reservacionDAOImpl
  *
+ * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
- * Fecha: @since 20/05/2016
- * Descripción: Contiene pruebas para registrar registros de la base de datos,
- * todas las pruebas son referentes a los items (ItemDAOImpl).
+ * @since 07/06/2016
  */
 public class InsertarReservacionDAOTest{
     //<editor-fold defaultstate="collapse" desc="Declaración de varaibles">
@@ -62,7 +60,6 @@ public class InsertarReservacionDAOTest{
 
     //</editor-fold>    
     //<editor-fold defaultstate="collapse" desc="Pruebas">    
-
     @Test
     public void testReservarItemExitoso() throws Exception{
         int expResult = 1;
@@ -83,7 +80,7 @@ public class InsertarReservacionDAOTest{
         int result = instance.guardarRegistroReservacion(reservacion);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testReservarItemFallidoRepetido() throws SQLException{
         int expResult = 0;
