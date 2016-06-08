@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Es la implementación del patrón DAO para el item,sus métodos son genéricos
+ * Es la implementación del patrón DAO para el item, sus métodos son genéricos
  * para el interface ItemDAO y mediante polimorfismo resuelve las
- * funcinalidades necesarias.
+ * funcinalidades generales del acceso a la base de datos.
  *
  * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
- * @since 20/05/2016
+ * @since 07/06/2016
  */
 public class BibliotecaDAOImpl implements BibliotecaDAO{
     private final Conexion CONEXION;
@@ -25,7 +25,7 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
     private ResultSet resultados;
 
     /**
-     * El constructor, crea una conexion para poder entrar a la base de
+     * El constructor, inicia una instacia de Connection para acceder a la base de
      * datos
      */
     public BibliotecaDAOImpl(){
@@ -61,7 +61,7 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
      * en la base de datos
      *
      * @param identificadorUsuario Indentificador del usuario a verificar si
-     * existen y es valido en la base de datos.
+     * existen y es valido en la base de datos. Debe ser una cadena de 15 caracteres.
      * @return Regresa el estado del usuario donde si es false el usuario no
      * existe o no es valido y true en caso de ser valido y existir.
      * @throws SQLException Lanza una SQLException en caso de tener problemas
@@ -87,7 +87,7 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
 
     /**
      * Método encargado de verificar de que el item exista y sea valido en la
-     * base de datos
+     * base de datos. Debe ser una cadena de 10 caracteres.
      *
      * @param identificadorItem Indentificador del Ítem a verificar si
      * existen y es valido en la base de datos.
@@ -115,11 +115,10 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
     }
 
     /**
-     * Clase generica que es ocupada por todas las clases que puedan manejar
-     * items
+     * Método para enlistar todos los ítems que estén registrados en la base de datos
      *
-     * @return Se regresa una lista de items en caso de no encontrar ninguno
-     * regresara la lista vacia
+     * @return Se regresa un ArrayList de item. En caso de no encontrar ninguno
+     * regresara la lista vacia y nunca habrá lista nula.
      * @throws SQLException Lanza SQLException al no poder conectar con la base
      * de datos o al tener un error.
      */
@@ -143,17 +142,17 @@ public class BibliotecaDAOImpl implements BibliotecaDAO{
     }
 
     /**
-     * Seteo de items segun su categoria aplica para la implementación
-     * Parametro del item al cual se le va asociar la categoria,
-     * Excepción al tener error en la base de datos o no poder conectar con ella
+     * Recibe un ítem vacio y le asigna los valores hallados en una consulta de base de datos.
+     * Es necesario tener el ítem en un ResultSet.
+     *
+     * @Param El item que almacenará los datos obetnidos de la base de datos
+     * @throws SQLException Lanza SQLException al no poder conectar con la base
+     * de datos o al tener un error.
      */
     private Item capturarItem(Item item) throws SQLException{
         if (resultados != null){
             item = new Item();
-            String categoria = resultados.getString("categoria");
-            if (categoria.equals("Libro")){
-                item.setCategoria("Libro");
-            }
+            item.setCategoria(resultados.getString("Categoria"));
             item.setIdentificador(resultados.getString("identificador"));
             item.setTitulo(resultados.getString("titulo"));
             item.setAutor(resultados.getString("autor"));

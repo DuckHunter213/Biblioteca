@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Interface para generar el patrón DAO esta se encarga de buscar los items en
+ * Interface para generar el patrón DAO esta se encarga de buscar los ítems en
  * la base de datos y también se encarga de ver el tiempo que pueden ser
  * prestados los items
  *
@@ -16,10 +16,10 @@ import java.util.List;
 public interface BibliotecaDAO{
 
     /**
-     * Funcion que busca en todas las clases que puedan manejar items
+     * Este método realiza una consulta en la base de datos para buscar un ítem
      *
      * @param identificador identificador con el que sera buscado el item
-     * @return Regresa una lista con los items encontrados en dado caso de no
+     * @return Regresa un ArrayList con los items encontrados. En caso de no
      * encontrar ninguno regresa la lista vacia
      * @throws SQLException Lanza SQLException al no poder conectar con la base
      * de datos o al tener un error.
@@ -27,11 +27,11 @@ public interface BibliotecaDAO{
     public List<Item> buscarItem(String identificador) throws SQLException;
 
     /**
-     * Función que regresa el tiempo que podran ser prestado los items
+     * Método que consulta en la base de datos, el tiempo de préstamo que puede tener un ítem
      *
-     * @param identificador Identificador a cual se le sacara el tiempo de
-     * prestamo ya que todos los ítems tienen un valor deferente de prestamo
-     * @return se regrea la cantidad de dias que va a poder ser prestado el item
+     * @param identificador Identificador del ítem del cual se obtendrá su tiempo de
+     * prestamo.
+     * @return se regrea un entero el cual expresa la cantidad de días que va a poder ser prestado el item
      * @throws SQLException Lanza SQLException al no poder conectar con la base
      * de datos o al tener un error
      */

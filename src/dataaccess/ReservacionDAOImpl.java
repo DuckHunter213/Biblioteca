@@ -9,10 +9,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Clase de la implementacion de la clase del DAO reservacón
+ * Interface con las generalidades para poder registrar una reservación en la base de datos.
  *
  * @author Luis Fernando Gomez Alejandre
- * @since 24/05/2016
+ * @author Francisco Gerardo Mares Solano
+ * @since 07/06/2016
  */
 public class ReservacionDAOImpl implements ReservacionDAO{
     private final Conexion CONEXION;
@@ -20,17 +21,13 @@ public class ReservacionDAOImpl implements ReservacionDAO{
     private Statement consulta;
     private ResultSet resultados;
 
+    /**
+     * Inicia una instancia de Connection para realizar las consultas a la base de datos
+     */
     public ReservacionDAOImpl(){
         CONEXION = new Conexion();
     }
 
-    /**
-     * Funcion que pone un item en reservación
-     *
-     * @return retorna un valor de retroaliemntación de tipo int //TODO
-     * @throws java.sql.SQLException Lanza SQLException al no poder conectar con
-     * la base de datos o al tener un error.
-     */
     @Override
     public int reservarItem(Reservacion reservacion) throws SQLException{
         int resultadoDeAgregacion = 0;
@@ -53,12 +50,6 @@ public class ReservacionDAOImpl implements ReservacionDAO{
         return resultadoDeAgregacion;
     }
 
-    /**
-     *
-     * @param identificadorItem quitar un item de una reservación pasando por
-     * referencia el item
-     * @return regresa valor de retroalimntación
-     */
     @Override
     public int quitarItemDeReservacion(String identificadorItem) throws SQLException{
         int resultadoDeLaEliminacion = 0;

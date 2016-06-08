@@ -9,8 +9,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
+ * Implementación de PrestamoDAO para poder realizar accesos y transacciones en la base de datos
  *
+ * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
+ * @since 07/06/2016
  */
 public class PrestamoDAOImpl implements PrestamoDAO{
     private final Conexion CONEXION;
@@ -18,15 +21,13 @@ public class PrestamoDAOImpl implements PrestamoDAO{
     private Statement consulta;
     private ResultSet resultados;
 
+    /**
+     * Inicia una instancia de Connection para realizar las consultas a la base de datos
+     */
     public PrestamoDAOImpl(){
         CONEXION = new Conexion();
     }
 
-    /**
-     *
-     * @param prestamo
-     * @return
-     */
     @Override
     public int guardarRegistroDePrestamo(Prestamo prestamo) throws SQLException{
         int resultadoDeAgregacion = 0;
@@ -60,12 +61,7 @@ public class PrestamoDAOImpl implements PrestamoDAO{
         return resultadoDeAgregacion;
     }
 
-    /**
-     *
-     * @param identificadorItem item a retirar con el identificador buscado
-     * @return regresa un valor de retroaliementación para el usuario
-     * //TODO valor de retroalimentación
-     */
+    @Override
     public int quitarPrestamoDeBaseDeDatos(String identificadorItem) throws SQLException{
         int resultadoDeLaEliminacion = 0;
         try{

@@ -178,7 +178,7 @@ public class Item{
     //</editor-fold>
 
     /**
-     * Sobreescribe el hashCode de la clase para poder comprar objetos de ésta clase
+     * Sobreescribe el hashCode de la clase para poder comparar objetos de ésta clase
      *
      * @return regresa el hashCode generado por el objeto
      */

@@ -76,7 +76,7 @@ public class Prestamo{
      */
     public boolean setIdentificadorUsuario(String matriculaUsuario) throws SQLException{
         boolean estadoSetMatricula = false;
-        if (Util.verificarIdentificadorAlumno(matriculaUsuario)){
+        if (Util.verificarIdentificadorUsuario(matriculaUsuario)){
             this.matriculaUsuario = matriculaUsuario;
             estadoSetMatricula = true;
         }

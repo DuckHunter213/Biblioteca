@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package interfaz;
 
 import dominio.Biblioteca;
@@ -14,38 +9,54 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
+ * Interfaz visual que sirve para agregar préstamos a la base de datos
  *
- * @author gerar
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 06/06/2016
  */
-public class ReservacionInterfaz extends javax.swing.JFrame {
+public class ReservacionInterfaz extends javax.swing.JFrame{
     Item item;
     Biblioteca biblioteca;
+
     /**
-     * Creates new form reservacionInterfaz
-     * @param itemSeleccionado
-     * @throws java.sql.SQLException
+     * Crea una nueva instancia de ReservacionInterfaz
+     *
+     * @param itemSeleccionado Recibe un Item para poder realizar la reservación enlazada a ese ítem
+     * @throws java.sql.SQLException Informa que hay un error al conectar con la base de datos al usuario.
      */
-    public ReservacionInterfaz(Item itemSeleccionado) throws SQLException {
+    public ReservacionInterfaz(Item itemSeleccionado) throws SQLException{
         item = itemSeleccionado;
         biblioteca = new Biblioteca();
         initComponents();
         setInformacion();
-        checarDisponibilidad();
+        try{
+            checarDisponibilidad();
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "No hay conexión con la Base de Datos ", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Reservación");
     }
+
+    /**
+     * Muestra en la interfaz la información del ítem que se recibió. Esto es,
+     * el autor del ítem, tipo de ítem, su título y la calificación que tiene.
+     */
     public void setInformacion(){
-        this.autorCampo.setText("Autor: "+item.getAutor());
+        this.autorCampo.setText("Autor: " + item.getAutor());
         this.tipoMaterialCampo.setText("Tipo: " + item.getCategoria());
         this.tituloCampo.setText("Título: " + item.getTitulo());
-        this.calificacionCampo.setText("Calificación: 9.5/10 ");        
+        this.calificacionCampo.setText("Calificación: 9.5/10 ");
     }
-    public void checarDisponibilidad() throws SQLException{
+
+    private void checarDisponibilidad() throws SQLException{
         boolean disponibilidad = Util.itemEstadoDisponibilidad(item.getIdentificador());
         botonAceptarReservacion.setEnabled(disponibilidad);
     }
-    public ReservacionInterfaz() {
+
+    public ReservacionInterfaz(){
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -236,9 +247,9 @@ public class ReservacionInterfaz extends javax.swing.JFrame {
 
     private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
         SeleccionarItemInterfaz seleccionarInterfaz = null;
-        try {
+        try{
             seleccionarInterfaz = new SeleccionarItemInterfaz();
-        } catch (SQLException ex) {
+        }catch (SQLException ex){
             Logger.getLogger(ReservacionInterfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
         seleccionarInterfaz.setVisible(true);
@@ -247,54 +258,60 @@ public class ReservacionInterfaz extends javax.swing.JFrame {
 
     private void botonAceptarReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarReservacionActionPerformed
         int estadoReservacion = 0;
-        String identificadorReservacion="";
-        try {
+        String identificadorReservacion = "";
+        try{
             identificadorReservacion = biblioteca.generarReservacion(item);
             estadoReservacion = biblioteca.realizarReservacion(identificadorReservacion);
             if (estadoReservacion == 1){
                 botonAceptarReservacion.setEnabled(false);
-                JOptionPane.showMessageDialog(null, "La reservación ha sido exitosa. \nPasa por el item en la fecha "+biblioteca.verFechaFinReservacion(identificadorReservacion), "Exito", JOptionPane.INFORMATION_MESSAGE);            
-            } else {
-                JOptionPane.showMessageDialog(null, "Ocurrio algo y la reservación falló ", "Reservacion erronea", JOptionPane.ERROR_MESSAGE);            
+                JOptionPane.showMessageDialog(null, "La reservación ha sido exitosa. \nPasa por el item en la fecha " + biblioteca.verFechaFinReservacion(identificadorReservacion), "Exito", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Ocurrio algo y la reservación falló ", "Reservacion erronea", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (SQLException ex) {
+        }catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "No hay conexión con la Base de Datos ", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_botonAceptarReservacionActionPerformed
 
     /**
-     * @param args the command line arguments
+     * @param args posibles parámetros al main de la función
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+    public static void main(String args[]){
+        /*
+         * Set the Nimbus look and feel
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try{
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()){
+                if ("Nimbus".equals(info.getName())){
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        }catch (ClassNotFoundException ex){
             java.util.logging.Logger.getLogger(ReservacionInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        }catch (InstantiationException ex){
             java.util.logging.Logger.getLogger(ReservacionInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        }catch (IllegalAccessException ex){
             java.util.logging.Logger.getLogger(ReservacionInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        }catch (javax.swing.UnsupportedLookAndFeelException ex){
             java.util.logging.Logger.getLogger(ReservacionInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        /*
+         * Create and display the form
+         */
+        java.awt.EventQueue.invokeLater(new Runnable(){
+            public void run(){
                 new ReservacionInterfaz().setVisible(true);
             }
+
         });
     }
 

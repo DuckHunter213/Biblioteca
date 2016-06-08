@@ -37,7 +37,7 @@ public class Reservacion{
     }
 
     /**
-     * @return Retorna una fecha con el formato por defecto de Date
+     * @return Retorna una fecha con el formato por defecto de la clase Date
      */
     public Date getFechaLimite(){
         return fechaLimite;

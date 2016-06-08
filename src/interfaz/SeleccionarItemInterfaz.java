@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package interfaz;
 
 import dominio.Biblioteca;
@@ -21,81 +16,92 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 /**
+ * Interfaz visual que sirve para seleccionar un ítem. Actualmente, a partir de la selección
+ * sólo se puede visualizar la información de manera incompleta y realizar una reservación si es posible.
  *
- * @author gerar
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 06/06/2016
  */
 public class SeleccionarItemInterfaz extends javax.swing.JFrame implements ActionListener{
-        public static JScrollPane panelItems;
-        public static JPanel panelVistaItems;
-        public static Biblioteca biblioteca;
-        public static List<Item> items;
-        public static List<VistaPreviaItem> vistasItems;
+    public static JScrollPane panelItems;
+    public static JPanel panelVistaItems;
+    public static Biblioteca biblioteca;
+    public static List<Item> items;
+    public static List<VistaPreviaItem> vistasItems;
 
     /**
-     * Creates new form SeleccionarItemInterfaz
-     * @throws java.sql.SQLException
+     * Crea una nueva instancia de SeleccionarItemInterfaz
+     *
+     * @throws java.sql.SQLException Informa al usuario que no hay conexión con la base de datos con una cuadro de diálogo.
+     * Aun así, se continúa mostrando lo posible.
      */
-    public SeleccionarItemInterfaz() throws SQLException {
+    public SeleccionarItemInterfaz() throws SQLException{
         biblioteca = new Biblioteca();
         panelItems = new JScrollPane();
         items = new ArrayList<>();
         vistasItems = new ArrayList<>();
         panelVistaItems = new JPanel();
         panelVistaItems.setLayout(new FlowLayout());
-        panelVistaItems.setPreferredSize(new Dimension(770,800));
+        panelVistaItems.setPreferredSize(new Dimension(800, 800));
         setLayout(new FlowLayout());
         setLocationRelativeTo(null);
         setTitle("Selecciona Item");
-        setSize(830, 400);
+        setSize(870, 400);
         try{
             mostrarItems();
-        } catch (SQLException ex){
+        }catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "No hay conexión con la Base de Datos ", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
         panelItems.getViewport().setView(panelVistaItems);
         panelItems.getViewport().add(panelVistaItems);
-        panelItems.setPreferredSize(new Dimension(810,310));
+        panelItems.setPreferredSize(new Dimension(825, 310));
         this.getContentPane().add(panelItems);
         initComponents();
         this.pack();
         validate();
     }
-    public void mostrarItems() throws SQLException{
+
+    private void mostrarItems() throws SQLException{
         items = biblioteca.getItems();
         VistaPreviaItem vistaItem = null;
-        for (int i=0;i<items.size();i++){
-            vistaItem = new VistaPreviaItem(items.get(i),i);
+        for (int i = 0; i < items.size(); i++){
+            vistaItem = new VistaPreviaItem(items.get(i), i);
             vistasItems.add(vistaItem);
             vistaItem.elegirItemBoton.addActionListener(this);
             //panelItems.getViewport().setView(vistaItem);
             panelVistaItems.add(vistaItem);
         }
     }
-    
-        @Override
-    public void actionPerformed(ActionEvent e) {
+
+    /**
+     * Al hacer clic en uno de los botones relacionados a algún ítem, se generará
+     * una nueva pantalla tipo ReservacionInterfaz con el ítem seleccionado.
+     * @param e El evento ocurrido
+     */
+    @Override
+    public void actionPerformed(ActionEvent e){
         String numeroDeItem = e.getActionCommand();
         Item itemSeleccionado = null;
-        for(int i = 0;i <= vistasItems.size();i++){
-            if (numeroDeItem.equals("ver "+i))
+        for (int i = 0; i <= vistasItems.size(); i++){
+            if (numeroDeItem.equals("ver " + i)){
                 itemSeleccionado = items.get(i);
+            }
         }
-        ReservacionInterfaz reservacion=null;
-            try {
-                reservacion = new ReservacionInterfaz(itemSeleccionado);
-            } catch (SQLException ex) {
+        ReservacionInterfaz reservacion = null;
+        try{
+            reservacion = new ReservacionInterfaz(itemSeleccionado);
+        }catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "No hay conexión con la Base de Datos ", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
         reservacion.setVisible(true);
         reservacion.setTitle("Prestar Item");
         dispose();
-        
+
     }
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+     * Controla toda la ubicación de la interfaz gráfica, es generada por Netbeans
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -146,41 +152,47 @@ public class SeleccionarItemInterfaz extends javax.swing.JFrame implements Actio
     }//GEN-LAST:event_botonRegresarActionPerformed
 
     /**
-     * @param args the command line arguments
+     * @param args Posibles argumentos que puede recibir
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+    public static void main(String args[]){
+        /*
+         * Controla el aspecto visual de cada elemento 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try{
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()){
+                if ("Nimbus".equals(info.getName())){
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        }catch (ClassNotFoundException ex){
             java.util.logging.Logger.getLogger(SeleccionarItemInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        }catch (InstantiationException ex){
             java.util.logging.Logger.getLogger(SeleccionarItemInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        }catch (IllegalAccessException ex){
             java.util.logging.Logger.getLogger(SeleccionarItemInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        }catch (javax.swing.UnsupportedLookAndFeelException ex){
             java.util.logging.Logger.getLogger(SeleccionarItemInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
+        /*
+         * Create and display the form
+         */
+        java.awt.EventQueue.invokeLater(new Runnable(){
+            public void run(){
+                try{
                     new SeleccionarItemInterfaz().setVisible(true);
-                } catch (SQLException ex) {
+                }catch (SQLException ex){
                     Logger.getLogger(SeleccionarItemInterfaz.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+
         });
     }
 

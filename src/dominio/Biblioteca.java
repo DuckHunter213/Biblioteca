@@ -59,8 +59,8 @@ public class Biblioteca{
      * @throws SQLException La verificación requiere revisar la base de datos, si no es posible el acceso a ella,
      * u ocurre un error durante la consulta, se lanza una SQLException.
      */
-    public boolean verificarIdentificadorAlumno(String identificadorAlumno) throws SQLException{
-        return Util.verificarIdentificadorAlumno(identificadorAlumno);
+    public boolean verificarIdentificadorUsuario(String identificadorAlumno) throws SQLException{
+        return Util.verificarIdentificadorUsuario(identificadorAlumno);
     }
 
     /**
