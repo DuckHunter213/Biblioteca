@@ -1,4 +1,4 @@
-package demoDAO;
+package main;
 
 import interfaz.PanelPrincipal;
 
