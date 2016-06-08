@@ -193,7 +193,7 @@ public class Item{
      */
     public boolean setTiempoPrestamo(int dias){
         boolean estadoAgregacion = false;
-        if (autor.length() >= 2){
+        if (tiempoPrestamo > 0){
             this.tiempoPrestamo = dias;
             estadoAgregacion = true;
         }
