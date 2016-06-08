@@ -1,4 +1,4 @@
-package prestamotests;
+package prestamodaotests;
 
 import dominio.Item;
 import dominio.Prestamo;
@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
  * @author Francisco Gerardo Mares Solano
  * @since 20/05/2016
  */
-public class InsercionesPrestamoTest{
+public class InsercionesPrestamoDAOTest{
     //<editor-fold defaultstate="collapse" desc="Declaración de varaibles ">
     Item item = new Item();
     String identificadorAlumno = "IDENTIFICADORA5";
@@ -32,7 +32,7 @@ public class InsercionesPrestamoTest{
     int resultado;
     //</editor-fold>
 
-    public InsercionesPrestamoTest(){
+    public InsercionesPrestamoDAOTest(){
     }
 
     //<editor-fold defaultstate="collapse" desc="Opciones de la prueba">
@@ -55,7 +55,7 @@ public class InsercionesPrestamoTest{
 
     @After
     public void tearDown() throws SQLException{
-        instance.quitarPrestamoDeBaseDeDatos(identificadorItem);
+        instance.quitarPrestamoDeBD(identificadorItem);
     }
     //</editor-fold>    
     //<editor-fold defaultstate="collapse" desc="Pruebas">
@@ -67,10 +67,13 @@ public class InsercionesPrestamoTest{
         assertEquals(expResult, result);
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testPrestarItemFallidoId() throws SQLException{
-        int expResult = 0;
+        item = new Item();
         item.setIdentificador(identificadorItemErroneo);
+        item.setCostoMulta(COSTO_MULTA);
+        item.setTiempoPrestamo(TIEMPO_PRESTAMO);
+        int expResult = 0;
         prestamo.setItem(item);
         int result = instance.guardarRegistroDePrestamo(prestamo);
         assertEquals(expResult, result);

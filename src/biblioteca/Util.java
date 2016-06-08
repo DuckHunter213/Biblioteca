@@ -54,6 +54,7 @@ public class Util{
 
     /**
      * Se encarga de revisar si el usuario superó su límite de préstamos.
+     *
      * @param identificador indetificador del usuario del cual se quiere saber si
      * es apto para realiza más préstamos o no
      * @return regresa el estado true si es que todavia puede pedir prestado los libros y false si superó su límite
@@ -117,9 +118,13 @@ public class Util{
      */
     public static boolean verificarIdentificadorUsuario(String identificador) throws SQLException{
         boolean estado = false;
-        if (estado = identificador.length() == 15 && (identificador.toLowerCase()).startsWith("i")){
-            BibliotecaDAOImpl biblioteca = new BibliotecaDAOImpl();
-            estado = biblioteca.verificarAlumno(identificador);
+        try{
+            if (estado = identificador.length() == 15 && (identificador.toLowerCase()).startsWith("i")){
+                BibliotecaDAOImpl biblioteca = new BibliotecaDAOImpl();
+                estado = biblioteca.verificarAlumno(identificador);
+            }
+        }catch (NullPointerException ex){
+            estado = false;
         }
         return estado;
     }
@@ -137,9 +142,13 @@ public class Util{
      */
     public static boolean verificarIdentificadorItem(String identificador) throws SQLException{
         boolean estado = false;
-        if ((identificador.length() == 10) && (identificador.toLowerCase()).startsWith("i")){
-            BibliotecaDAOImpl biblioteca = new BibliotecaDAOImpl();
-            estado = biblioteca.verificarItem(identificador);
+        try{
+            if ((identificador.length() == 10) && (identificador.toLowerCase()).startsWith("i")){
+                BibliotecaDAOImpl biblioteca = new BibliotecaDAOImpl();
+                estado = biblioteca.verificarItem(identificador);
+            }
+        }catch (NullPointerException ex){
+            estado = false;
         }
         return estado;
     }

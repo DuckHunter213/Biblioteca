@@ -15,8 +15,9 @@ import static org.junit.Assert.*;
 public class PrestamoTest{
     //<editor-fold defaultstate="collapse" desc="Declaración de varaibles ">
     Item item = new Item();
-    String identificadorAlumno = "IDENTIFICADORA5";
+    String identificadorUsuario = "IDENTIFICADORA5";
     String identificadorItem = "identif005";
+    String identificadorItemErroneo = "identif105";
     public static final int COSTO_MULTA = 10;
     public static final int TIEMPO_PRESTAMO = 10;
     Prestamo prestamo;
@@ -40,26 +41,49 @@ public class PrestamoTest{
         item.setCostoMulta(COSTO_MULTA);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
         prestamo = new Prestamo(item);
-        prestamo.setIdentificadorUsuario(identificadorAlumno);
+        prestamo.setIdentificadorUsuario(identificadorUsuario);
     }
 
     @After
     public void tearDown() throws SQLException{
         PrestamoDAO prestamoDAO = new PrestamoDAOImpl();
-        prestamoDAO.quitarPrestamoDeBaseDeDatos(identificadorItem);
+        prestamoDAO.quitarPrestamoDeBD(identificadorItem);
     }
 
     @Test
-    public void testSetMatriculaUsuarioExitoso() throws SQLException{
+    public void testSetItemExitoso(){
         boolean expResult = true;
-        boolean result = prestamo.setIdentificadorUsuario(identificadorAlumno);
+        boolean result = prestamo.setItem(item);
+        assertEquals(expResult, result);        
+    }
+    
+    @Test
+    public void testSetItemFallido() throws SQLException{
+        item.setIdentificador(identificadorItemErroneo);
+        prestamo.setItem(item);
+        boolean expResult = true;
+        boolean result = prestamo.setItem(item);
+        assertEquals(expResult, result);        
+    }
+    
+    @Test
+    public void testSetIdentificadorUsuarioExitoso() throws SQLException{
+        boolean expResult = true;
+        boolean result = prestamo.setIdentificadorUsuario(identificadorUsuario);
         assertEquals(expResult, result);
     }
 
     @Test
-    public void testSetMatriculaUsuarioFallido() throws SQLException{
+    public void testSetIdentificadorUsuarioFallidoNulo() throws SQLException{
         boolean expResult = false;
         boolean result = prestamo.setIdentificadorUsuario("");
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testSetIdentificadorUsuarioFallidoFalso() throws SQLException{
+        boolean expResult = false;
+        boolean result = prestamo.setIdentificadorUsuario("IDENTIFICADORA16");
         assertEquals(expResult, result);
     }
 
@@ -80,6 +104,28 @@ public class PrestamoTest{
     @Test
     public void testRealizarPrestamoExitoso() throws SQLException{
         int expResult = 1;
+        int result = prestamo.realizarPrestamo();
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testRealizarPrestamoFallidoIdItem() throws Exception{
+        item = new Item();
+        item.setCostoMulta(COSTO_MULTA);
+        item.setTiempoPrestamo(TIEMPO_PRESTAMO);
+        item.setIdentificador(identificadorItemErroneo);
+        prestamo = new Prestamo(item);
+        prestamo.setIdentificadorUsuario(identificadorUsuario);
+        int expResult = 0;
+        int result = prestamo.realizarPrestamo();
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testRealizarPrestamoFallidoIdUsuario() throws Exception{
+        prestamo = new Prestamo(item);
+        prestamo.setIdentificadorUsuario("identificadora9");
+        int expResult = 0;
         int result = prestamo.realizarPrestamo();
         assertEquals(expResult, result);
     }

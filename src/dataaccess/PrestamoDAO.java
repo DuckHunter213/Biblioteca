@@ -24,7 +24,7 @@ public interface PrestamoDAO{
      * @throws java.sql.SQLException Lanza SQLException al no poder conectar con
      * la base de datos o al tener un error.
      */
-    public int quitarPrestamoDeBaseDeDatos(String identificador) throws SQLException;
+    public int quitarPrestamoDeBD(String identificador) throws SQLException;
 
     /**
      * Método que realiza el registro del préstamo en la base de datos

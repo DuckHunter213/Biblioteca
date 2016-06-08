@@ -1,4 +1,4 @@
-package prestamotests;
+package prestamodaotests;
 
 import dominio.Item;
 import dominio.Prestamo;
@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
  * Descripción: Contiene pruebas para borrar registros de la base de datos,
  * todas las pruebas son referentes a los items (ItemDAOImpl).
  */
-public class BorrarPrestamoTest{
+public class BorrarPrestamoDAOTest{
     //<editor-fold defaultstate="collapse" desc="Definicion de variables">
     Item item = new Item();
     String identificadorAlumno = "IDENTIFICADORA5";
@@ -33,7 +33,7 @@ public class BorrarPrestamoTest{
     int resultado;
     //</editor-fold>
 
-    public BorrarPrestamoTest(){
+    public BorrarPrestamoDAOTest(){
     }
 
     //<editor-fold defaultstate="collapse" desc="Opciones de la prueba">
@@ -64,16 +64,16 @@ public class BorrarPrestamoTest{
     @Test
     public void testQuitarItemDePrestamoExitoso() throws SQLException{
         int expResult = 1;
-        int result = instance.quitarPrestamoDeBaseDeDatos(item.getIdentificador());
+        int result = instance.quitarPrestamoDeBD(item.getIdentificador());
         assertEquals(expResult, result);
     }
 
     @Test
     public void testQuitarItemDePrestamoFallido() throws SQLException{
         int expResult = 0;
-        instance.quitarPrestamoDeBaseDeDatos(item.getIdentificador());
+        instance.quitarPrestamoDeBD(item.getIdentificador());
         item.setIdentificador(identificadorItemErroneo);
-        int result = instance.quitarPrestamoDeBaseDeDatos(item.getIdentificador());
+        int result = instance.quitarPrestamoDeBD(item.getIdentificador());
         assertEquals(expResult, result);
     }
     //</editor-fold>

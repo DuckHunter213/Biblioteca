@@ -62,7 +62,7 @@ public class PrestamoDAOImpl implements PrestamoDAO{
     }
 
     @Override
-    public int quitarPrestamoDeBaseDeDatos(String identificadorItem) throws SQLException{
+    public int quitarPrestamoDeBD(String identificadorItem) throws SQLException{
         int resultadoDeLaEliminacion = 0;
         try{
             connection = CONEXION.obtenerConexion();

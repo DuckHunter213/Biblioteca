@@ -29,18 +29,20 @@ public class ReservacionDAOImpl implements ReservacionDAO{
     }
 
     @Override
-    public int reservarItem(Reservacion reservacion) throws SQLException{
+    public int guardarRegistroReservacion(Reservacion reservacion) throws SQLException{
         int resultadoDeAgregacion = 0;
         java.sql.Date fechaPrestamoMili = new java.sql.Date(reservacion.getFechaLimiteBD());
         try{
             connection = CONEXION.obtenerConexion();
             if (Util.itemEstadoDisponibilidad(reservacion.getIdentificadorItem())){
-                PreparedStatement sentenciaSQL = connection.prepareStatement("INSERT INTO reservados VALUES (?,?,?,?)");
-                sentenciaSQL.setDate(1, fechaPrestamoMili);
-                sentenciaSQL.setString(2, reservacion.getIdentificadorReservacion());
-                sentenciaSQL.setString(3, reservacion.getIdentificadorUsuario());
-                sentenciaSQL.setString(4, reservacion.getIdentificadorItem());
-                resultadoDeAgregacion = sentenciaSQL.executeUpdate();
+                if (Util.verificarIdentificadorItem(reservacion.getIdentificadorItem())){
+                    PreparedStatement sentenciaSQL = connection.prepareStatement("INSERT INTO reservados VALUES (?,?,?,?)");
+                    sentenciaSQL.setDate(1, fechaPrestamoMili);
+                    sentenciaSQL.setString(2, reservacion.getIdentificadorReservacion());
+                    sentenciaSQL.setString(3, reservacion.getIdentificadorUsuario());
+                    sentenciaSQL.setString(4, reservacion.getIdentificadorItem());
+                    resultadoDeAgregacion = sentenciaSQL.executeUpdate();
+                }
             }
         }catch (SQLException ex){
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
@@ -51,7 +53,7 @@ public class ReservacionDAOImpl implements ReservacionDAO{
     }
 
     @Override
-    public int quitarItemDeReservacion(String identificadorItem) throws SQLException{
+    public int quitarReservacionDeBD(String identificadorItem) throws SQLException{
         int resultadoDeLaEliminacion = 0;
         try{
             connection = CONEXION.obtenerConexion();

@@ -24,7 +24,7 @@ public interface ReservacionDAO{
      * @throws java.sql.SQLException Lanza SQLException al no poder conectar con
      * la base de datos o al tener un error.
      */
-    public int quitarItemDeReservacion(String identificador) throws SQLException;
+    public int quitarReservacionDeBD(String identificador) throws SQLException;
 
     /**
      * Método que realiza el registro de la reservación en la base de datos
@@ -37,6 +37,6 @@ public interface ReservacionDAO{
      * @throws java.sql.SQLException Lanza SQLException al no poder conectar
      * con la base de datos o al tener un error.
      */
-    public int reservarItem(Reservacion reservacion) throws SQLException;
+    public int guardarRegistroReservacion(Reservacion reservacion) throws SQLException;
 
 }

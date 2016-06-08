@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Encapsula y valida los datos para hacer una reservación válida e informar a las clases empleadoras
@@ -21,19 +23,29 @@ public class Reservacion{
     private String identificadorReservacion;
 
     //<editor-fold defaultstate="collapsed" desc=" Get´s & Set´s ">
-
     /**
-     * @return Regresa un identificador tipo String de 15 caracteres  para el usuario
+     * @return Regresa un identificador tipo String de 15 caracteres para el usuario
      */
     public String getIdentificadorUsuario(){
         return identificadorUsuario;
     }
 
     /**
-     * @param identificador Recibe una cadena de 15 caracteres para el usuario
+     * @param identificadorUsuario
+     * @return
+     * @throws java.sql.SQLException
      */
-    public void setIdentificadorUsuario(String identificador){
-        this.identificadorUsuario = identificador;
+    public boolean setIdentificadorUsuario(String identificadorUsuario) throws SQLException{
+        boolean estadoSetIdentificador = false;
+        try{
+            if (Util.verificarIdentificadorUsuario(identificadorUsuario)){
+                this.identificadorUsuario = identificadorUsuario;
+                estadoSetIdentificador = true;
+            }
+        }catch (NullPointerException ex){
+            estadoSetIdentificador = false;
+        }
+        return estadoSetIdentificador;
     }
 
     /**
@@ -63,8 +75,25 @@ public class Reservacion{
     public String getIdentificadorItem(){
         return item.getIdentificador();
     }
-    //</editor-fold>
 
+    /**
+     * @param item Guarda un ítem verificado previamente
+     * @return Regresa un boolean, true si es correcto y false sino.
+     */
+    public boolean setItem(Item item){
+        boolean estadoItem = false;
+        try{
+            if (Util.verificarIdentificadorItem(item.getIdentificador())){
+                this.item = item;
+                estadoItem = true;
+            }
+        }catch (SQLException ex){
+            return estadoItem;
+        }
+        return estadoItem;
+    }
+
+    //</editor-fold>
     /**
      * @param item Recibe un ítem válido y configura la fecha límite para pedirlo
      * @throws SQLException Si hay un error al conectar con la base de datos, regresa una SQLexception
@@ -88,6 +117,8 @@ public class Reservacion{
     }
 
     /**
+     * Registra la reservación en la base de datos.
+     *
      * @return Regresa un entero de acuerdo al estado de la reservación, 0 si no es posible y un entero positivo si lo fue
      * @throws SQLException Si hay problemas al conectar con la base de datos, regresa una SQLException
      */
@@ -95,7 +126,11 @@ public class Reservacion{
         ReservacionDAOImpl reservacionDAO = new ReservacionDAOImpl();
         int estadoReservacion = 0;
         try{
-            estadoReservacion = reservacionDAO.reservarItem(this);
+            if (Util.verificarIdentificadorUsuario(identificadorUsuario) && Util.verificarIdentificadorItem(item.getIdentificador())){
+                estadoReservacion = reservacionDAO.guardarRegistroReservacion(this);
+            }else{
+                estadoReservacion = 0;
+            }
         }catch (SQLException ex){
             throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }

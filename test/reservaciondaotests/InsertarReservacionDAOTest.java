@@ -1,4 +1,4 @@
-package reservaciontests;
+package reservaciondaotests;
 
 import dominio.Item;
 import dominio.Reservacion;
@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
  * Descripción: Contiene pruebas para registrar registros de la base de datos,
  * todas las pruebas son referentes a los items (ItemDAOImpl).
  */
-public class InsertarReservacionTest{
+public class InsertarReservacionDAOTest{
     //<editor-fold defaultstate="collapse" desc="Declaración de varaibles">
     Item item = new Item();
     String identificadorAlumno = "IDENTIFICADORA5";
@@ -33,7 +33,7 @@ public class InsertarReservacionTest{
     int resultado;
     //</editor-fold>
 
-    public InsertarReservacionTest(){
+    public InsertarReservacionDAOTest(){
     }
 
     //<editor-fold defaultstate="collapse" desc="Opciones de la prueba">
@@ -57,7 +57,7 @@ public class InsertarReservacionTest{
 
     @After
     public void tearDown() throws SQLException{
-        instance.quitarItemDeReservacion(identificadorItem);
+        instance.quitarReservacionDeBD(identificadorItem);
     }
 
     //</editor-fold>    
@@ -66,15 +66,27 @@ public class InsertarReservacionTest{
     @Test
     public void testReservarItemExitoso() throws Exception{
         int expResult = 1;
-        int result = instance.reservarItem(reservacion);
+        int result = instance.guardarRegistroReservacion(reservacion);
         assertEquals(expResult, result);
     }
 
-    @Test(expected = SQLException.class)
-    public void testReservarItemFallidoSQL() throws Exception{
-        int expResult = 0;
+    @Test
+    public void testReservarItemFallidoId() throws Exception{
+        item = new Item();
         item.setIdentificador(identificadorItemErroneo);
-        int result = instance.reservarItem(reservacion);
+        item.setCostoMulta(COSTO_MULTA);
+        item.setTiempoPrestamo(TIEMPO_PRESTAMO);
+        int expResult = 0;
+        reservacion.setItem(item);
+        int result = instance.guardarRegistroReservacion(reservacion);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testReservarItemFallidoRepetido() throws SQLException{
+        int expResult = 0;
+        instance.guardarRegistroReservacion(reservacion);
+        int result = instance.guardarRegistroReservacion(reservacion);
         assertEquals(expResult, result);
     }
     //</editor-fold>

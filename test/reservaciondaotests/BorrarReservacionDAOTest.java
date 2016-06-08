@@ -1,4 +1,4 @@
-package reservaciontests;
+package reservaciondaotests;
 
 import dominio.Item;
 import dominio.Reservacion;
@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
  * Descripción: Contiene pruebas para borrar registros de la base de datos,
  * todas las pruebas son referentes a los items (ItemDAOImpl).
  */
-public class BorrarReservacionTest{
+public class BorrarReservacionDAOTest{
     //<editor-fold defaultstate="collapse" desc="Definicion de variables">
     Item item = new Item();
     String identificadorAlumno = "IDENTIFICADORA5";
@@ -32,7 +32,7 @@ public class BorrarReservacionTest{
     int resultado;
     //</editor-fold>
 
-    public BorrarReservacionTest(){
+    public BorrarReservacionDAOTest(){
     }
 
     //<editor-fold defaultstate="collapse" desc="Opciones de la prueba">
@@ -53,7 +53,7 @@ public class BorrarReservacionTest{
         reservacion.generarIdentificador();
         reservacion.setIdentificadorUsuario(identificadorAlumno);
         reservacion.realizarReservacion();
-        instance.reservarItem(reservacion);
+        instance.guardarRegistroReservacion(reservacion);
     }
 
     @After
@@ -65,16 +65,16 @@ public class BorrarReservacionTest{
     @Test
     public void testquitarItemDeReservacionExitoso() throws SQLException{
         int expResult = 1;
-        int result = instance.quitarItemDeReservacion(item.getIdentificador());
+        int result = instance.quitarReservacionDeBD(item.getIdentificador());
         assertEquals(expResult, result);
     }
 
     @Test
     public void testquitarItemDeReservacionFallido() throws SQLException{
         int expResult = 0;
-        instance.quitarItemDeReservacion(item.getIdentificador());
+        instance.quitarReservacionDeBD(item.getIdentificador());
         item.setIdentificador(identificadorItemErroneo);
-        int result = instance.quitarItemDeReservacion(item.getIdentificador());
+        int result = instance.quitarReservacionDeBD(item.getIdentificador());
         assertEquals(expResult, result);
     }
     //</editor-fold>
