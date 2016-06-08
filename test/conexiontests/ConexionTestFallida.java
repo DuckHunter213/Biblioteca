@@ -11,13 +11,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Nombre del programa: Biblioteca
- * Nombres: @author Luis Fernando Gomez Alejandre
+ * Pruebas de unidad cuando falla la conexión a la base de datos
  *
+ * @author Luis Fernando Gomez Alejandre
  * @author Francisco Gerardo Mares Solano
- * Fecha: @since 20/05/2016
- * Descripción: Contiene pruebas para la conexión con la base de datos del sistema,
- * todas las pruebas son referentes a la clase Conexion.
+ * @since 06/06/2016
  */
 public class ConexionTestFallida{
     private final Conexion conexion;
@@ -45,7 +43,6 @@ public class ConexionTestFallida{
 
     //</editor-fold>
     //<editor-fold defaultstate="collapse" desc="Pruebas">
-
     @Test(expected = SQLException.class)
     public void pruebaConexionExitosa() throws SQLException{
         Connection connection = conexion.obtenerConexion();

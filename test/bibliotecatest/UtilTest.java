@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bibliotecatest;
 
 import biblioteca.Util;
@@ -16,11 +11,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Pruebas donde se prueban los métodos de la clase Util
  *
- * @author gerar
+ * @author Luis Fernando Gomez Alejandre
+ * @author Francisco Gerardo Mares Solano
+ * @since 06/06/2016
  */
 public class UtilTest{
-    Item item =  new Item();
+    Item item = new Item();
     String identificadorItemErroneo = "identif010";
     String identificadorUsuario = "IDENTIFICADORA5";
     String identificadorUsuarioErroneo = "IDENTIFICADORA15";
@@ -30,18 +28,18 @@ public class UtilTest{
     String categoria = "Libro";
     public static final int COSTO_MULTA = 10;
     public static final int TIEMPO_PRESTAMO = 10;
-    
+
     public UtilTest(){
     }
-    
+
     @BeforeClass
     public static void setUpClass(){
     }
-    
+
     @AfterClass
     public static void tearDownClass(){
     }
-    
+
     @Before
     public void setUp() throws SQLException{
         item.setAutor(nombreAutor);
@@ -53,7 +51,7 @@ public class UtilTest{
         item.setFechaPublicación(2010, 8, 15);
         item.setTiempoPrestamo(TIEMPO_PRESTAMO);
     }
-    
+
     @After
     public void tearDown(){
     }
@@ -87,7 +85,7 @@ public class UtilTest{
         boolean result = Util.verificarIdentificadorUsuario(identificadorUsuario);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testVerificarIdentificadorUsuarioFallido() throws Exception{
         boolean expResult = false;
@@ -104,7 +102,7 @@ public class UtilTest{
         boolean result = Util.verificarIdentificadorItem(item.getIdentificador());
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testVerificarIdentificadorItemFallido() throws Exception{
         boolean expResult = true;
@@ -112,5 +110,5 @@ public class UtilTest{
         boolean result = Util.verificarIdentificadorItem(item.getIdentificador());
         assertEquals(expResult, result);
     }
-    
+
 }
