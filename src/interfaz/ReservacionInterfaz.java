@@ -29,11 +29,11 @@ public class ReservacionInterfaz extends javax.swing.JFrame{
         item = itemSeleccionado;
         biblioteca = new Biblioteca();
         initComponents();
-        setInformacion();
         try{
+            setInformacion();
             checarDisponibilidad();
         }catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "No hay conexión con la Base de Datos ", "Error", JOptionPane.INFORMATION_MESSAGE);
+            throw new SQLException("Hubo un error con la BD: " + ex.getMessage());
         }
         setLocationRelativeTo(null);
         setResizable(false);

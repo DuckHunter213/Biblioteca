@@ -49,7 +49,7 @@ public class Item{
      */
     public boolean setCategoria(String categoria){
         boolean estadoAgregacion = false;
-        if (autor.length() >= 2){
+        if (categoria.length() >= 2){
             this.categoria = categoria;
             estadoAgregacion = true;
         }

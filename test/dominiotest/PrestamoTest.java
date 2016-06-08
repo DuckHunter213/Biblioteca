@@ -21,7 +21,6 @@ public class PrestamoTest{
     public static final int COSTO_MULTA = 10;
     public static final int TIEMPO_PRESTAMO = 10;
     Prestamo prestamo;
-    PrestamoDAOImpl instance = new PrestamoDAOImpl();
     int resultado;
 
     public PrestamoTest(){
