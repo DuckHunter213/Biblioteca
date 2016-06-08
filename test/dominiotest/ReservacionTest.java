@@ -5,14 +5,11 @@
  */
 package dominiotest;
 
-import dataaccess.PrestamoDAOImpl;
 import dataaccess.ReservacionDAO;
 import dataaccess.ReservacionDAOImpl;
 import dominio.Item;
-import dominio.Prestamo;
 import dominio.Reservacion;
 import java.sql.SQLException;
-import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

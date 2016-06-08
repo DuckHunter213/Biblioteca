@@ -13,7 +13,6 @@ import dominio.Prestamo;
 import dominio.Reservacion;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;

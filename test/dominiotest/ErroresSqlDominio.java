@@ -6,12 +6,10 @@
 package dominiotest;
 
 import biblioteca.Util;
-import dataaccess.PrestamoDAOImpl;
 import dominio.Biblioteca;
 import dominio.Item;
 import dominio.Prestamo;
 import dominio.Reservacion;
-import static interfaz.PrestamoInterfaz.biblioteca;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

@@ -7,9 +7,6 @@ package bibliotecatest;
 
 import biblioteca.Util;
 import dominio.Item;
-import dominio.Prestamo;
-import static dominiotest.ItemTest.COSTO_MULTA;
-import static dominiotest.ItemTest.TIEMPO_PRESTAMO;
 import java.sql.SQLException;
 import org.junit.After;
 import org.junit.AfterClass;
