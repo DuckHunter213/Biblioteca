@@ -81,7 +81,7 @@ public class ItemTest{
     @Test
     public void testSetCategoriaExitosa(){
         boolean expResult = true;
-        boolean result = item.setCategoria("");
+        boolean result = item.setCategoria("Revista");
         assertEquals(expResult, result);
     }
     /**
@@ -89,8 +89,8 @@ public class ItemTest{
      */
     @Test
     public void testSetCategoriaFallido(){
-        boolean expResult = true;
-        boolean result = item.setCategoria("Revista");
+        boolean expResult = false;
+        boolean result = item.setCategoria("");
         assertEquals(expResult, result);
     }
 

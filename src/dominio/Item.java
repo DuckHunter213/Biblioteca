@@ -193,7 +193,7 @@ public class Item{
      */
     public boolean setTiempoPrestamo(int dias){
         boolean estadoAgregacion = false;
-        if (tiempoPrestamo > 0){
+        if (dias > 0){
             this.tiempoPrestamo = dias;
             estadoAgregacion = true;
         }
